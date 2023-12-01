@@ -20,6 +20,8 @@ const Home = () => {
         console.log(user);
     }
 
+    console.log("hello");
+
     const logout = async() => {
         await axios.get('http://localhost:5000/auth/logout',
         {
