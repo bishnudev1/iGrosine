@@ -6,11 +6,16 @@ import Navbar from './Components/Navbar';
 import Profile from './Screens/Profile';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserData } from './Redux/user/user_action';
+import Home from './Screens/Home';
+import { ProtectedRoute } from "protected-route-react";
+import Cart from './Screens/Cart';
+import Orders from './Screens/Orders';
 
 const App = () => {
 
-  const user = useSelector(state => state.user);
+  const {user, isAuth} = useSelector(state => state.user);
 
+  const [data, setData] = useState({});
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -21,15 +26,47 @@ const App = () => {
     setData(user);
   }, [user]);
 
-
-  const [data, setData] = useState({});
-
   return (
     <BrowserRouter>
     <Navbar />
       <Routes>
-        <Route exact path='/profile' element={<Profile user={data} />}/>
-        <Route path='/' element={<Login />}/>
+      <Route exact path='/' element={<Home />}/>
+      <Route exact path='/my-carts' element={<Cart />}/>
+      <Route
+                  exact
+                  path="/my-orders"
+                  element={
+                    <ProtectedRoute
+                      isAuthenticated={isAuth}
+                      redirect="/login"
+                    >
+                      <Orders />
+                    </ProtectedRoute>
+                  }
+                />
+        <Route
+                  exact
+                  path="/profile"
+                  element={
+                    <ProtectedRoute
+                      isAuthenticated={isAuth}
+                      redirect="/login"
+                    >
+                      <Profile user={data} />
+                    </ProtectedRoute>
+                  }
+                />
+        <Route
+                  path="/login"
+                  element={
+                    <ProtectedRoute
+                      isAuthenticated={!isAuth}
+                      redirect="/profile"
+                    >
+                      <Login />
+                    </ProtectedRoute>
+                  }
+                />
       </Routes>
     </BrowserRouter>
   )

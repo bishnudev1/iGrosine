@@ -16,13 +16,13 @@ const Navbar = () => {
                     <>
                     <Link to='/'>Home</Link>
                     <Link to='/profile'>Profile</Link>
-                    <Link to='/cart'>Cart</Link>
+                    <Link to='/my-carts'>Cart</Link>
                     <a href='http://localhost:5000/auth/logout'>Sign Out</a>
                     </>
                     :
                     <>
                     <Link to='/'>Home</Link>
-                    <Link to='/cart'>Cart</Link>
+                    <Link to='/my-carts'>Cart</Link>
                     <a href='http://localhost:5000/auth/google'>Login</a>
                     </>
                 }
