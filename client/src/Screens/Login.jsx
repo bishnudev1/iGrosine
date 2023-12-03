@@ -1,22 +1,16 @@
 import React from 'react'
-import axios from 'axios';
+import { FaGoogle } from "react-icons/fa";
+
 
 const Login = () => {
 
 
-    const login = async() => {
-        await axios.get('http://localhost:5000/auth/google',
-        {
-            withCredentials: true
-        }
-        );
-    }
-
   return (
-    <>
-        <a href='http://localhost:5000/auth/google'>Sign In</a>
-        <button onClick={login}>Sign In</button>
-    </>
+    <div className='login-container'>
+        <div className='login-btn'>
+        <a href='http://localhost:5000/auth/google'>Login with <FaGoogle color='white' size={"20px"}/></a>
+        </div>
+    </div>
   )
 }
 
