@@ -4,18 +4,11 @@ import axios from 'axios';
 const Login = () => {
 
 
-    const login = async() => {
-        await axios.get('http://localhost:5000/auth/google',
-        {
-            withCredentials: true
-        }
-        );
-    }
-
   return (
     <>
         <a href='http://localhost:5000/auth/google'>Sign In</a>
-        <button onClick={login}>Sign In</button>
+        <h1 className='my-text'>
+        "A Boy"</h1>
     </>
   )
 }
