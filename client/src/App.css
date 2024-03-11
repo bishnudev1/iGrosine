@@ -61,6 +61,49 @@
 
 .heading-line{
   position: flex;
-  display: block;
+  display: flex;
+  margin: auto;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   color: rgb(0, 191, 255);
+}
+
+.format{
+  position: flex;
+  display: flex;
+  margin: auto;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: black;
+}
+
+.login{
+  position: flex;
+  display: flex;
+  margin: auto;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.login-container{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.login-sub-container{
+  height: 500px;
+  width: 500px;
+  background-color: lightblue;
+  border-radius: 10px solid blue;
+  border: 1px solid rgb(180, 218, 231);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
