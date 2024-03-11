@@ -6,9 +6,8 @@ const Login = () => {
 
   return (
     <>
+        <h1 className='heading-line'>I-Grocine</h1>
         <a href='http://localhost:5000/auth/google'>Sign In</a>
-        <h1 className='my-text'>
-        "A Boy"</h1>
     </>
   )
 }

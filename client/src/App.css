@@ -59,6 +59,8 @@
   }
 }
 
-.my-text{
-  color: red;
+.heading-line{
+  position: flex;
+  display: block;
+  color: rgb(0, 191, 255);
 }
