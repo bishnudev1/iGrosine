@@ -2,15 +2,17 @@ import React, {useEffect, useState} from 'react'
 import axios from "axios";
 import { backendURL } from '../App.js';
 
+
 const Home = () => {
 
 
     const dummyData = [
         {
             id: "1",
-            image: "dettol.webp",
+            image: "grocery1.png",
             name: "Grocery",
-            desc: "This is product 1"
+            info: "for 2 ",
+            desc: "In this part all user can buy Grocery items"
         },
         {
             id: "2",
@@ -64,6 +66,7 @@ const Home = () => {
                     <p>{item.id ?? "Loading"}</p>
                     <h1>{item.name ?? "Loading"}</h1>
                     <h2>{item.desc ?? "Loading"}</h2>
+                    <h3>{item.info ?? "Loading"}</h3>
                 </div>
             })
         }
