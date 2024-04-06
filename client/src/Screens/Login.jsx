@@ -1,6 +1,6 @@
 import React from 'react'
 import axios from 'axios';
-import Logo from '../Assests/Logo.png';
+import Logo from '../Assets/Logo.png';
 
 const Login = () => {
 

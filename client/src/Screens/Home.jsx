@@ -4,6 +4,31 @@ import { backendURL } from '../App.js';
 
 const Home = () => {
 
+
+    const dummyData = [
+        {
+            id: "1",
+            image: "dettol.webp",
+            name: "Grocery",
+            desc: "This is product 1"
+        },
+        {
+            id: "2",
+            name: "Medicine",
+            desc: "This is product 2"
+        },
+        {
+            id: "3",
+            name: "Product 3",
+            desc: "This is product 3"
+        },
+        {
+            id: "4",
+            name: "Product 4",
+            desc: "This is product 4"
+        },
+    ];
+
     useEffect(() => {
         getUserData();
     },[]);
@@ -31,12 +56,18 @@ const Home = () => {
     }
 
   return (
-    <>
-        <h3>Name: {data.displayName ?? "Loading..."}</h3>
-        <h3>Email: {data.email ?? "Loading..."}</h3>
-        <h3>Google Login ID: {data.googleId ?? "Loading..."}</h3>
-        <a href='http://localhost:5000/auth/logout'>Sign Out</a>
-    </>
+
+    <div className='cart'>
+        {
+            dummyData.map((item,index) => {
+                return <div className='product' key={index}>
+                    <p>{item.id ?? "Loading"}</p>
+                    <h1>{item.name ?? "Loading"}</h1>
+                    <h2>{item.desc ?? "Loading"}</h2>
+                </div>
+            })
+        }
+    </div>
   )
 }
 
