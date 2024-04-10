@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import axios from "axios";
 import { backendURL } from '../App.js';
-
+import products from '../Assets/Background.jpg';
 
 const Home = () => {
 
@@ -9,7 +9,7 @@ const Home = () => {
     const dummyData = [
         {
             id: "1",
-            image: "grocery1.png",
+            image: "",
             name: "Grocery",
             info: "for 2 ",
             desc: "In this part all user can buy Grocery items"

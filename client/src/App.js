@@ -2,6 +2,7 @@ import React from 'react'
 import { BrowserRouter,Routes, Route } from 'react-router-dom'
 import Home from './Screens/Home'
 import Login from './Screens/Login'
+import Cart from './Cart'
 import './App.css'
 
 const App = () => {
@@ -10,6 +11,7 @@ const App = () => {
       <Routes>
         <Route exact path='/log' element={<Home />}/>
         <Route path='/' element={<Login />}/>
+        <Route path='/your-cart' element={<Cart />}/>
       </Routes>
     </BrowserRouter>
   )
