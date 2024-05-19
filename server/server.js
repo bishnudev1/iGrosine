@@ -57,6 +57,13 @@ const AuthRoute = require("./routes/auth");
 app.use("/auth",AuthRoute);
 
 
+const Razorpay = require('razorpay');
+
+export const razorpayInstance = new Razorpay({
+    key_id: '',
+    key_secret: ''
+});
+
 app.listen(port, () => {
     console.log(`Server has listening on http://localhost:${port}/`);
 });
