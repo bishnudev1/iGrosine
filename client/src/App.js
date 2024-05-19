@@ -3,13 +3,13 @@ import { BrowserRouter,Routes, Route } from 'react-router-dom'
 import Login from './Screens/Login'
 import './App.css';
 import Navbar from './Components/Navbar';
-import Profile from './Screens/Profile';
+import Profile from './Screens/me/Profile';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserData } from './Redux/user/user_action';
 import Home from './Screens/Home';
 import { ProtectedRoute } from "protected-route-react";
 import Cart from './Screens/Cart';
-import Orders from './Screens/Orders';
+import MyOrders from './Screens/me/MyOrders';
 
 const App = () => {
 
@@ -40,7 +40,7 @@ const App = () => {
                       isAuthenticated={isAuth}
                       redirect="/login"
                     >
-                      <Orders />
+                      <MyOrders />
                     </ProtectedRoute>
                   }
                 />
