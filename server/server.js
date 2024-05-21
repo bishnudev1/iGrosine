@@ -59,9 +59,9 @@ app.use("/auth",AuthRoute);
 
 const Razorpay = require('razorpay');
 
-export const razorpayInstance = new Razorpay({
-    key_id: '',
-    key_secret: ''
+module.export = razorpayInstance = new Razorpay({
+    key_id: 'rzp_test_NH7DutCORAH6gm',
+    key_secret: 'ON7sNQcvMc1YaNXdBFjd4wTs'
 });
 
 app.listen(port, () => {

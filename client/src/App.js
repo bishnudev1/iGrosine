@@ -8,8 +8,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getUserData } from './Redux/user/user_action';
 import Home from './Screens/Home';
 import { ProtectedRoute } from "protected-route-react";
-import Cart from './Screens/Cart';
+import Cart from './Screens/order/MyCart';
 import MyOrders from './Screens/me/MyOrders';
+import MyCart from './Screens/order/MyCart';
+import CheckOut from './Screens/order/CheckOut';
+import OrderSuccess from './Screens/order/OrderSuccess';
+import Footer from './Components/Footer';
 
 const App = () => {
 
@@ -31,7 +35,9 @@ const App = () => {
     <Navbar />
       <Routes>
       <Route exact path='/' element={<Home />}/>
-      <Route exact path='/my-carts' element={<Cart />}/>
+      <Route exact path='/my-carts' element={<MyCart />}/>
+      <Route exact path='/order-success' element={<OrderSuccess />}/>
+      <Route exact path='/checkout-order' element={<CheckOut />}/>
       <Route
                   exact
                   path="/my-orders"
@@ -68,6 +74,7 @@ const App = () => {
                   }
                 />
       </Routes>
+      <Footer />
     </BrowserRouter>
   )
 }
