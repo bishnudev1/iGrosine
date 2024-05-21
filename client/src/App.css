@@ -151,11 +151,15 @@
 .footer{
   height: 40px;
   text-align: center;
+    background-color: green;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .footer-desc{
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-}
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;}
 
 /* *****Profile.jsx CSS***** */
 
@@ -498,4 +502,68 @@ a{
 .place-details input[type='text']:focus {
   outline: none;
   border-color: #007bff;
+}
+
+
+/* Home */
+
+.home-container{
+  height: 100vh;
+}
+
+.best-of-medicines, .best-of-grossery {
+  padding-inline: 10px;
+  padding-block: 15px;
+  /* display: grid; */
+}
+
+.sub-best-of-medicine, .sub-best-of-grossery{
+  
+  display: grid;
+  grid-template-columns: repeat(6, 1fr); 
+  
+}
+
+
+.best-of-medicines-title, .best-of-grossery-title{
+  font-size: 23px;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-weight: bold;
+  padding-bottom: 30px;
+}
+
+.best-of-medicines-card, .best-of-grossery-card{
+  text-align: center;
+  border: .5px solid grey;
+  padding: 10px;
+  width: 180px;
+  border-radius: 7px;
+}
+
+.best-of-medicines-card-image, .best-of-grossery-card-image{
+  height: 140px;
+  width: 140px;
+  padding-bottom: 20px;
+  padding-top: 10px;
+  border-radius: 7px;
+}
+
+.best-of-medicines-card-title, .best-of-grossery-card-title{
+  font-size: 14px;
+}
+
+.best-of-medicines-card-price, .best-of-grossery-card-price{
+  font-size: 18px;
+  padding-bottom: 8px;
+}
+
+.add-to-cart{
+  padding-block: 5px;
+  padding-inline: 8px;
+  background-color: green;
+  border: none;
+  width: 100%;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
 }
