@@ -76,8 +76,13 @@ const Home = () => {
 
   const navigate = useNavigate();
 
-  const viewItem = () => {
-    navigate('/view-item')
+  const viewItem = (item) => {
+
+    console.log(item.name);
+
+    if(item.name !== undefined){
+      navigate('/view-item',{state:{name: item.name, price: item.price, image: item.image}})
+    }
   }
 
   return (
@@ -102,7 +107,10 @@ const Home = () => {
             <img src={item.image} className='best-of-medicines-card-image'/>
             <p className='best-of-medicines-card-title'>{item.name}</p>
             <p className='best-of-medicines-card-price'>₹{item.price}</p>
-            <button className='add-to-cart'>Add to cart</button>
+            <div className='best-of-medicines-card-buttons'>
+            <button onClick={() => {navigate('/my-carts')}} className='add-to-cart'>Add to cart</button>
+            <button onClick={() => viewItem(item)} className='view-item'>View item</button>
+            </div>
           </div>
           })
         }
@@ -118,7 +126,10 @@ const Home = () => {
             <img src={item.image} className='best-of-grossery-card-image'/>
               <p className='best-of-grossery-card-title'>{item.name}</p>
               <p className='best-of-grossery-card-price'>₹{item.price}</p>
-              <button className='add-to-cart'>Add to cart</button>
+              <div className='best-of-medicines-card-buttons'>
+            <button onClick={() => {navigate('/my-carts')}} className='add-to-cart'>Add to cart</button>
+            <button onClick={() => viewItem(item)} className='view-item'>View item</button>
+            </div>
             </div>
           })
         }

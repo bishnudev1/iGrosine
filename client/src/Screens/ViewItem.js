@@ -1,10 +1,15 @@
 import React from 'react'
 import { FaCartPlus, FaBuyNLarge, FaCheckCircle } from 'react-icons/fa'
-import {useNavigate} from 'react-router-dom'
+import {useNavigate, useLocation} from 'react-router-dom'
 
 const ViewItem = () => {
-
+   
     const navigate = useNavigate();
+    const location = useLocation();
+
+    const { name, price, image } = location.state || {};
+
+  console.log(name, price, image); 
 
     const dummyReviews = [
         {
@@ -28,18 +33,18 @@ const ViewItem = () => {
     <div className='view-item-container'>
         <div className='sub-left-view-item-container'>
             <div className='sub-left-view-sub-item-container'>
-            <img src='https://techcrunch.com/wp-content/uploads/2020/11/2020-11-16-074520097.jpg?w=1024' className='sub-left-view-item-image' />
+            <img src={image ?? ""} className='sub-left-view-item-image' />
                 <div className='sub-left-view-sub-item-button-container'>
-                <button onClick={() => {navigate('/checkout-order')}} className='add-to-cart-button-view-item-container'><FaCartPlus/> ADD TO CART</button>
+                <button onClick={() => {navigate('/my-carts')}} className='add-to-cart-button-view-item-container'><FaCartPlus/> ADD TO CART</button>
             <button onClick={() => {}} className='buy-now-button-view-item-container'><FaBuyNLarge/> BUY NOW</button>
                 </div>
             </div>
         </div>
         <div className='sub-right-view-item-container'>
-            <p className='sub-right-view-item-container-title'>Apple 2020 Macbook Air Apple M1 - (8 GB/256 GB SSD/Mac OS Big Sur) MGN63HN/A  (13.3 inch, Space Grey, 1.29 kg)</p>
+            <p className='sub-right-view-item-container-title'>{name ?? "Loading..."}</p>
             <p className='spacial-price'>Spacial prize</p>
             <div className='view-item-price'>
-                <p className='discounted-price'>₹65,990</p>
+                <p className='discounted-price'>₹{price ?? ""}</p>
                 <p className='real-price'>₹89,990</p>
                 <p className='percent-off'>26% off</p>
             </div>

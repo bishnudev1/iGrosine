@@ -656,6 +656,13 @@ a{
   border-radius: 7px;
 }
 
+.best-of-medicines-card-buttons{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .best-of-medicines-card-image, .best-of-grossery-card-image{
   height: 140px;
   width: 140px;
@@ -680,6 +687,18 @@ a{
   border: none;
   width: 100%;
   color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+.view-item{
+  padding-block: 5px;
+  padding-inline: 8px;
+  background-color: wheat;
+  border: none;
+  width: 100%;
+  color: green;
   border-radius: 5px;
   cursor: pointer;
 }
@@ -723,19 +742,22 @@ a{
 }
 
 .add-to-cart-button-view-item-container{
-  padding-block: 15px;
-  padding-inline: 45px;
+  /* padding-inline: 45px; */
   background-color: green;
   color: white;
   border: none;
+  margin-right: 10px;
+  width: 150px;
 }
 
 .buy-now-button-view-item-container{
-  padding-block: 15px;
-  padding-inline: 45px;
+  padding-block: 10px;
+  /* padding-inline: 45px; */
   background-color: darkblue;
   color: white;
   border: none;
+  height: 40px;
+  width: 150px;
 }
 
 .sub-left-view-sub-item-button-container{
