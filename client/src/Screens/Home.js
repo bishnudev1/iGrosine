@@ -4,6 +4,7 @@ import { Carousel } from 'react-responsive-carousel';
 import Picture1 from '../Assets/picture1.jpg';
 import Picture2 from '../Assets/picture2.jpg';
 import Picture3 from '../Assets/picture3.png';
+import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
 
@@ -42,26 +43,42 @@ const Home = () => {
 
   const dummyGroceryData = [
     {
-      image: 'https://d1s24u4ln0wd0i.cloudfront.net/mk-p/websiteV2/newly-launched-generic-medicines-1711545109.webp',
-      name: 'Paracetamal',
-      price: '29'
+      image: 'https://www.jiomart.com/images/product/original/rvduzcik7k/goodness-grocery-premium-flax-seeds-for-hair-growth-seeds-for-eating-alsi-seeds-250gm-product-images-orvduzcik7k-p595135258-0-202211080844.jpg?im=Resize=(420,420)',
+      name: 'Flex Seeds',
+      price: '228'
     },
     {
-      image: 'https://d1s24u4ln0wd0i.cloudfront.net/mk-p/websiteV2/newly-launched-generic-medicines-1711545109.webp',
-      name: 'Paracetamal',
-      price: '29'
+      image: 'https://m.media-amazon.com/images/I/61XnH090DJS._AC_UF1000,1000_QL80_.jpg',
+      name: 'Soya Chunk',
+      price: '65'
     },
     {
-      image: 'https://d1s24u4ln0wd0i.cloudfront.net/mk-p/websiteV2/newly-launched-generic-medicines-1711545109.webp',
-      name: 'Paracetamal',
-      price: '29'
+      image: 'https://cdn.zeptonow.com/production///tr:w-600,ar-3000-3000,pr-true,f-auto,q-80/cms/product_variant/0106346e-a7ef-497b-a9ff-18da5cb8d602.jpeg',
+      name: 'Ladies Finger',
+      price: '75'
     },
     {
-      image: 'https://d1s24u4ln0wd0i.cloudfront.net/mk-p/websiteV2/newly-launched-generic-medicines-1711545109.webp',
-      name: 'Paracetamal',
-      price: '29'
+      image: 'https://5.imimg.com/data5/QX/FQ/MY-68428614/lemon.jpeg',
+      name: 'Green Lemon',
+      price: '8'
+    },
+    {
+      image: 'https://5.imimg.com/data5/AN/TT/YF/SELLER-107321628/gram-flour.jpg',
+      name: 'Gram Flour',
+      price: '239'
+    },
+    {
+      image: 'https://cdn.britannica.com/08/194708-050-56FF816A/potatoes.jpg',
+      name: 'Fresh Potato',
+      price: '48'
     },
   ];
+
+  const navigate = useNavigate();
+
+  const viewItem = () => {
+    navigate('/view-item')
+  }
 
   return (
     <div className='home-container'>
@@ -76,7 +93,7 @@ const Home = () => {
           <img src={Picture3} alt='picture3'/>
         </Carousel>
       </div>
-      <div className='best-of-medicines'>
+      <div onClick={viewItem} className='best-of-medicines'>
         <p className='best-of-medicines-title'>Best of Medicines</p>
         <div className='sub-best-of-medicine'>
         {
@@ -90,6 +107,7 @@ const Home = () => {
           })
         }
         </div>
+        <p className='show-all-medicines'>Show all</p>
       </div>
       <div className='best-of-grossery'>
       <p className='best-of-grossery-title'>Best of Grocery</p>
@@ -105,6 +123,7 @@ const Home = () => {
           })
         }
       </div>
+      <p className='show-all-grossery'>Show all</p>
       </div>
     </div>
   )

@@ -1,6 +1,13 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const MyCart = () => {
+
+  const navigate = useNavigate();
+
+  const placeOrderCall = () => {
+    navigate('/checkout-order')
+  }
 
   const items = 
   
@@ -67,7 +74,7 @@ const MyCart = () => {
             <p className='total-items'>Total Items: {items.length}</p>
             <p className='total-amount'>Total Amount: ₹{calculateTotal()}</p>
           </div>
-          <button className='place-order'>Place Order</button>
+          <button onClick={placeOrderCall} className='place-order'>Place Order</button>
         </div>
       )}
     </div>

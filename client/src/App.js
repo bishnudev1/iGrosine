@@ -14,6 +14,7 @@ import MyCart from './Screens/order/MyCart';
 import CheckOut from './Screens/order/CheckOut';
 import OrderSuccess from './Screens/order/OrderSuccess';
 import Footer from './Components/Footer';
+import ViewItem from './Screens/ViewItem';
 
 const App = () => {
 
@@ -39,6 +40,7 @@ const App = () => {
       <Route exact path='/my-carts' element={<MyCart />}/>
       <Route exact path='/order-success' element={<OrderSuccess />}/>
       <Route exact path='/checkout-order' element={<CheckOut />}/>
+      <Route exact path='/view-item' element={<ViewItem />}/>
       <Route
                   exact
                   path="/my-orders"
@@ -75,7 +77,7 @@ const App = () => {
                   }
                 />
       </Routes>
-      <Footer />
+      {/* <Footer /> */}
     </BrowserRouter>
   )
 }

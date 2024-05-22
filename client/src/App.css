@@ -111,19 +111,33 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: rgb(48, 176, 80);
-  color: white;
+  background-color: transparent;
+  color: rgb(48, 176, 80);
   padding-block: 10px;
+}
+
+.navbar-title-container{
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
 }
 
 
 .navbar-title{
   margin-left: 20px;
-  font-size: 25px;
+  font-size: 22px;
   font-weight: bold;
   text-decoration: none;
-  color: white;
+  color: rgb(48, 176, 80);
+  font-family:sans-serif;
+}
+
+.navbar-title-desc{
+  margin-left: 20px;
+  font-size: 12px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: rgb(48, 176, 80);
 }
 
 .navbar-links{
@@ -134,15 +148,15 @@
 }
 
 .navbar-links a{
-  color: white;
+  color: rgb(48, 176, 80);
   text-decoration: none;
   margin-left: 20px;
   font-size: 15px;
 }
 
 .navbar-links a:hover{
-  color: rgb(48, 176, 80);
-  background-color: white;
+  color: green;
+  background-color: lightgreen;
   border-radius: 5px;
   padding: 5px;
   transition: all 0.3s ease-in-out;
@@ -165,22 +179,76 @@
 
 .profile-container {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: space-evenly;
+  padding: 20px;
+  /* align-items: center; */
   height: 100vh;
+}
+
+.sub-left-profile-container{
+  display: flex;
+  flex-direction: column;
+}
+
+.sub-right-profile-container{
+  padding-top: 20px;
+}
+
+.details-container-personal-information-title{
+  font-size: 25px;
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  padding-bottom: 20px;
+}
+
+.profile-cart-details-container{
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-cart-details-container-button{
+  border: none;
+  padding-block: 8px;
+  padding-inline: 14px;
+  margin-bottom: 10px;
+  /* text-align: left; */
+  border-radius: 10px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .image-container {
   margin-right: 20px;
   border: 1px solid white;
-  border-radius: 150px; 
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 20px;
+  justify-content: space-between;
+  /* align-items: center; */
+}
+
+.header-profile-details{
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.profile-hello-text{
+  font-size: 16;
+  font-weight: 300;
+  padding-bottom: 5px;
+}
+
+.profile-header-name{
+  font-weight: bold;
+  font-size: 20;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 #profile{
-  height: 250px;
-  width: 250px;
-  border-radius: 150px;
-  box-sizing: border-box;
+  height: 50px;
+  border-radius: 150%;
+  margin-right: 15px;
+  /* box-sizing: border-box; */
 }
 
 .details-container {
@@ -189,8 +257,10 @@
 }
 
 .details-text{
-  font-size: 15px;
+  font-size: 18px;
   margin-bottom: 10px;
+  font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-weight: 100;
 
 }
 
@@ -249,6 +319,52 @@ a{
   transition: all 0.3s ease-in-out;
 }
 
+.faq-sub-right-profile-container{
+  padding-top: 20px;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+}
+
+.faq-sub-right-profile-container-title{
+  font-size: 25px;
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  padding-bottom: 20px;
+}
+
+.faq-sub-right-profile-container-qa{
+  display: flex;
+  justify-content: flex-start;
+  /* align-items: center; */
+  flex-direction: column;
+  padding-bottom: 27px;
+}
+
+.faq-sub-right-profile-container-questions{
+  font-size: 15px;
+  font-weight: bold;
+  padding-bottom: 10px;
+}
+
+.faq-sub-right-profile-container-answers{
+  font-size: 15px;
+}
+
+.deactive-account{
+  padding-block: 7px;
+  padding-inline: 14px;
+  border-radius: 10px;
+  border: none;
+  background: skyblue;
+  color: white;
+  cursor: pointer;
+  font-size: 12;
+}
+
+.deactive-account:hover{
+  background-color: white;
+  color: skyblue;
+}
 
 .cart-container {
   display: flex;
@@ -566,4 +682,180 @@ a{
   color: white;
   border-radius: 5px;
   cursor: pointer;
+}
+
+.show-all-medicines, .show-all-grossery{
+  text-align: right;
+  padding: 15px;
+  font-size: 16px;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.view-item-container{
+  display: flex;
+  /* justify-content: space-between; */
+  align-items: flex-start;
+  height: 100vh;
+  padding-block: 30px;
+  padding-inline: 20px;
+}
+
+.sub-left-view-item-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding-right: 40px;
+}
+
+.sub-left-view-sub-item-container{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sub-left-view-item-image{
+  height: 300px;
+  padding: 15px;
+  border: .5px solid rgb(188, 186, 186);
+  margin-bottom: 25px;
+}
+
+.add-to-cart-button-view-item-container{
+  padding-block: 15px;
+  padding-inline: 45px;
+  background-color: green;
+  color: white;
+  border: none;
+}
+
+.buy-now-button-view-item-container{
+  padding-block: 15px;
+  padding-inline: 45px;
+  background-color: darkblue;
+  color: white;
+  border: none;
+}
+
+.sub-left-view-sub-item-button-container{
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.sub-right-view-item-container{
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  padding-top: 20px;
+}
+
+.sub-right-view-item-container-title{
+  font-size: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding-bottom: 15px;
+}
+
+.spacial-price{
+  font-size: 16px;
+  color: green;
+  padding-bottom: 10px;
+}
+
+.view-item-price{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.discounted-price{
+  font-weight: bold;
+  color: black;
+  font-size: 26px;
+  padding-right: 10px;
+}
+
+.real-price{
+  color: grey;
+  font-size: 19px;
+  text-decoration:line-through;
+  padding-right: 10px;
+}
+
+.percent-off{
+  font-size: 19px;
+  color: green;
+  font-weight: bold;
+}
+
+.sub-right-view-item-container-product-details{
+  padding-top: 20px;
+}
+
+.sub-right-view-item-container-product-details-seller,.sub-right-view-item-container-product-details-description{
+  padding-block: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.sub-right-view-item-container-seller-title{
+  font-size: 14px;
+  color: grey;
+  font-weight: bold;
+  padding-right: 40px;
+}
+
+.sub-right-view-item-container-product-reviews{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.sub-right-view-item-container-seller-desc{
+  font-size: 14px;
+  color: black;
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.sub-right-view-item-container-product-reviews-title{
+  font-size: 15px;
+  font-weight: bold;
+  padding-bottom: 10px;
+}
+
+.sub-right-view-item-container-product-reviews-desc{
+  font-size: 13px;
+  letter-spacing: 1;
+}
+
+.sub-right-view-item-container-product-reviews-buyers-details{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-top: 5px;
+}
+
+.sub-right-view-item-container-product-reviews-buyers-details-name{
+  font-size: 10px;
+  font-weight: bold;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  padding-right: 5px;
+}
+
+.sub-right-view-item-container-product-reviews-buyers-details-date{
+  font-size: 10px;
+}
+
+.sub-right-view-item-container-product-reviews-header{
+  font-size: 25px;
+  font-weight: bold;
+  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  padding-bottom: 20px;
+  padding-top: 20px;
+}
+
+.sub-right-view-item-container-product-reviews-sub-map{
+  padding-block: 10px;
 }
