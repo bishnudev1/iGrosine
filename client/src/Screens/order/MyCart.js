@@ -62,22 +62,22 @@ const MyCart = () => {
   return (
     <div className="cart-container">
       <div className="items-container">
-        {items.length === 0 ? (
+        {carts.length === 0 ? (
           <div className='empty-cart'>
             <img className='empty-cart-image' src='https://png.pngtree.com/png-clipart/20190117/ourmid/pngtree-hand-painted-trolley-empty-cart-daily-supplies-png-image_441612.jpg' alt='empty-cart' />
             <p className='your-cart-is-empty'>Your cart is empty!</p>
             <p className='add-items-to-it-now'>Add items to it now.</p>
-            <button id='shop-now'>Shop now</button>
+            <button onClick={() => navigate('/')} id='shop-now'>Shop now</button>
           </div>
         ) : (
           renderItems()
         )}
       </div>
-      {items.length > 0 && (
+      {carts.length > 0 && (
         <div className="checkout-details">
           <h2 className='price-details'>Price Details</h2>
           <div className='checkout-desc'>
-            <p className='total-items'>Total Items: {items.length}</p>
+            <p className='total-items'>Total Items: {carts.length}</p>
             <p className='total-amount'>Total Amount: ₹{calculateTotal()}</p>
           </div>
           <button onClick={placeOrderCall} className='place-order'>Place Order</button>
