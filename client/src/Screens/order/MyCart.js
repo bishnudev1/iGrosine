@@ -1,7 +1,13 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const MyCart = () => {
+
+  const { carts } = useSelector(state => state.user);
+
+  console.log("Carts:", carts);
+
 
   const navigate = useNavigate();
 
@@ -34,7 +40,7 @@ const MyCart = () => {
 
   // Function to render individual items
   const renderItems = () => {
-    return items.map((item, index) => (
+    return carts.map((item, index) => (
       <div key={index} className="item">
         <img className='item-image' src={item.image} alt={item.name} />
         <div className='item-desc'>
@@ -49,7 +55,7 @@ const MyCart = () => {
 
   // Calculate total amount
   const calculateTotal = () => {
-    return items.reduce((total, item) => total + parseFloat(item.price), 0);
+    return carts.reduce((total, item) => total + parseFloat(item.price), 0);
   };
   
 

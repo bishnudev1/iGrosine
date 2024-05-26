@@ -18,3 +18,17 @@ export const getUserData = () => (dispatch) => {
         console.log(err);
     })
 }
+
+export const addToCart = ({name,price,image,seller}) => (dispatch) => {
+    console.log(`Item name:${name}`);
+    const data = {
+        name: name,
+        price: price,
+        seller: seller,
+        image: image
+      };
+    dispatch({
+        type: ActionType.ADD_TO_CART,
+        payload: data
+    })
+}
