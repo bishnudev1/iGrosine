@@ -17,6 +17,7 @@ import Footer from './Components/Footer';
 import ViewItem from './Screens/ViewItem';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { getMyOrdersAction } from './Redux/order/order_action';
 // import { ProtectedRoute } from 'protected-route-react';
 
 const App = () => {
@@ -29,6 +30,10 @@ const App = () => {
   useEffect(() => {
     dispatch(getUserData());
   },[dispatch]);
+
+  // useEffect(() => {
+  //   dispatch(getMyOrdersAction());
+  // },[dispatch]);
 
   useEffect(() => {
     setData(user);

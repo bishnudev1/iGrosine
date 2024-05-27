@@ -2,22 +2,33 @@ import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { onlineOrder } from '../../Redux/order/order_action';
+import { toast } from 'react-toastify';
 
 const CheckOut = () => {
 
   const dispatch = useDispatch()
 
   const location = useLocation();
+  const [selectedFullName, setSelectedFullName] = useState('');
   const [selectedState, setSelectedState] = useState('');
   const [selectedCity, setSelectedCity] = useState('');
+  const [selectedEmail, setSelectedEmail] = useState('');
   const [mobileNo, setMobileNo] = useState('');
 
   const { id,name, price, image } = location.state || {};
 
   console.log(name,price,id);
 
+  const handleFullNameChange = (event) => {
+    setSelectedFullName(event.target.value);
+  };
+
   const handleStateChange = (event) => {
     setSelectedState(event.target.value);
+  };
+
+  const handleEmailChange = (event) => {
+    setSelectedEmail(event.target.value);
   };
 
   const handleCityChange = (event) => {
@@ -29,10 +40,28 @@ const CheckOut = () => {
   };
 
   const handleConfirmOrder = () => {
+    // Check if any field is empty
+    if (!selectedFullName || !selectedState || !selectedCity || !mobileNo) {
+      toast('Please fill out all fields before confirming the order.');
+      return; // Exit the function if any field is empty
+    }
+  
     // Implement your logic for confirming the order here
     console.log('Order confirmed!');
-    dispatch(onlineOrder(price))
+    dispatch(
+      onlineOrder(
+        price,
+        selectedFullName,
+        name,
+        selectedEmail,
+        id,
+        mobileNo,
+        selectedCity,
+        selectedState
+      )
+    );
   };
+  
 
   return (
     <div className='checkout-container'>
@@ -55,13 +84,13 @@ const CheckOut = () => {
 
       <div className='place-details'>
         <p className='enter-delivary-address'>Enter Delivery Address</p>
-        <input type='text' placeholder='Full name' value={selectedState} onChange={handleStateChange} />
+        <input type='text' placeholder='Full name' value={selectedFullName} onChange={handleFullNameChange} />
         <br />
         <input type='text' placeholder='State' value={selectedState} onChange={handleStateChange} />
         <br />
         <input type='text' placeholder='City' value={selectedCity} onChange={handleCityChange} />
         <br />
-        <input type='text' placeholder='Email' value={selectedState} onChange={handleStateChange} />
+        <input type='text' placeholder='Email' value={selectedEmail} onChange={handleEmailChange} />
         <br />
         <input type='text' placeholder='Mobile Number' value={mobileNo} onChange={handleMobileNoChange} />
         <br />

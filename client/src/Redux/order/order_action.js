@@ -1,8 +1,28 @@
 import axios from "axios";
 import * as ActionType from "./order_types";
 import { toast } from "react-toastify";
+import { backendURL } from "../prodiver";
 
-export const onlineOrder = (price) => async (dispatch) => {
+
+export const getMyOrdersAction = () => async (dispatch) => {
+    try {
+        let resp = await axios.get(`http://localhost:5000/api/get-my-orders`,{
+            withCredentials:true
+        });
+
+        console.log(resp.data.data);
+
+        dispatch({
+            type: ActionType.GET_MY_ORDERS,
+            payload: resp.data.data
+        })
+
+    } catch (error) {
+        toast(error.message)
+    }
+}
+
+export const onlineOrder = (price, buyerName,itemName, buyerEmail,itemId,number,city,state) => async (dispatch) => {
     try {
 
         const { data: { key } }
@@ -11,7 +31,7 @@ export const onlineOrder = (price) => async (dispatch) => {
             });
 
         const { data: { order } } = await axios.post(`http://localhost:5000/api/order-item`, {
-            price
+            price, itemName, buyerName, buyerEmail,itemId,number,city,state
             
         }, {
             withCredentials: true
@@ -21,17 +41,17 @@ export const onlineOrder = (price) => async (dispatch) => {
 
         const options = {
             key: key,
-            amount: order.amount,
+            amount: price,
             currency: "INR",
-            name: "Acme Corp",
+            name: itemName,
             description: "Test Transaction",
             image: "https://example.com/your_logo",
             order_id: order.id,
             callback_url: `http://localhost:5000/api/verify-payment`,
             prefill: {
-                name: "Bishnudev Khutia",
-                email: "khutia.bishnudev@example.com",
-                contact: "9000090000"
+                name: buyerName,
+                email: buyerEmail,
+                contact: number
             },
             notes: {
                 address: "Razorpay Corporate Office"
