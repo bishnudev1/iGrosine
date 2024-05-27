@@ -1,9 +1,20 @@
 import React, { useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { onlineOrder } from '../../Redux/order/order_action';
 
 const CheckOut = () => {
+
+  const dispatch = useDispatch()
+
+  const location = useLocation();
   const [selectedState, setSelectedState] = useState('');
   const [selectedCity, setSelectedCity] = useState('');
   const [mobileNo, setMobileNo] = useState('');
+
+  const { id,name, price, image } = location.state || {};
+
+  console.log(name,price,id);
 
   const handleStateChange = (event) => {
     setSelectedState(event.target.value);
@@ -20,6 +31,7 @@ const CheckOut = () => {
   const handleConfirmOrder = () => {
     // Implement your logic for confirming the order here
     console.log('Order confirmed!');
+    dispatch(onlineOrder(price))
   };
 
   return (
@@ -34,8 +46,8 @@ const CheckOut = () => {
         <label htmlFor='cod'>Cash on Delivery (COD)</label>
       </div>
       <div className='grand-total-details'>
-        <p className='items-no'>Total items: 3</p>
-        <p className='grand-total-amount'>Grand Total: 340000/- only</p>
+        <p className='items-no'>Total items: 1</p>
+        <p className='grand-total-amount'>Grand Total: ${price}/- only</p>
         <button className='confirm-order' onClick={handleConfirmOrder}>Confirm Order</button>
       </div>
       </div>

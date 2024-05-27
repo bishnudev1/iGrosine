@@ -15,6 +15,9 @@ import CheckOut from './Screens/order/CheckOut';
 import OrderSuccess from './Screens/order/OrderSuccess';
 import Footer from './Components/Footer';
 import ViewItem from './Screens/ViewItem';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+// import { ProtectedRoute } from 'protected-route-react';
 
 const App = () => {
 
@@ -38,8 +41,13 @@ const App = () => {
       <Routes>
       <Route exact path='/' element={<Home />}/>
       <Route exact path='/my-carts' element={<MyCart />}/>
-      <Route exact path='/order-success' element={<OrderSuccess />}/>
-      <Route exact path='/checkout-order' element={<CheckOut />}/>
+      <Route exact path='/order-success' element={ <OrderSuccess />}/>
+      <Route exact path='/checkout-order' element={  <ProtectedRoute
+                      isAuthenticated={isAuth}
+                      redirect="/login"
+                    >
+                      <CheckOut />
+                    </ProtectedRoute>}/>
       <Route exact path='/view-item' element={<ViewItem />}/>
       <Route
                   exact
@@ -78,6 +86,7 @@ const App = () => {
                 />
       </Routes>
       {/* <Footer /> */}
+      <ToastContainer />
     </BrowserRouter>
   )
 }

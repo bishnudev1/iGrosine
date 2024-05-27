@@ -1,13 +1,18 @@
 import React from 'react'
 import { FaCartPlus, FaBuyNLarge, FaCheckCircle } from 'react-icons/fa'
 import {useNavigate, useLocation} from 'react-router-dom'
+import { useSelector,useDispatch } from 'react-redux';
+import { addToCart,removeCartItem } from '../Redux/user/user_action';
 
 const ViewItem = () => {
+
+    const { carts } = useSelector(state => state.user);
    
     const navigate = useNavigate();
     const location = useLocation();
+    const dispatch = useDispatch();
 
-    const { name, price, image } = location.state || {};
+    const { id,name, price, image } = location.state || {};
 
   console.log(name, price, image); 
 
@@ -35,8 +40,28 @@ const ViewItem = () => {
             <div className='sub-left-view-sub-item-container'>
             <img src={image ?? ""} className='sub-left-view-item-image' />
                 <div className='sub-left-view-sub-item-button-container'>
-                <button onClick={() => {navigate('/my-carts')}} className='add-to-cart-button-view-item-container'><FaCartPlus/> ADD TO CART</button>
-            <button onClick={() => {}} className='buy-now-button-view-item-container'><FaBuyNLarge/> BUY NOW</button>
+                <button 
+  onClick={() => {
+    const itemInCart = carts.find(cartItem => cartItem.id === id);
+    if (itemInCart) {
+      // Item exists in cart, dispatch action to remove it
+      dispatch(removeCartItem(id));
+    } else {
+      // Item doesn't exist in cart, dispatch action to add it
+      dispatch(addToCart({ id, name, price, image }));
+    }
+  }} 
+  className='add-to-cart-button-view-item-container'>
+  <FaCartPlus/> <br/>
+  {carts.some(cartItem => cartItem.id === id) ? 'REMOVE CART' : 'ADD TO CART'}
+</button>
+  
+                {/* <button onClick={() => {navigate('/my-carts')}} className='add-to-cart-button-view-item-container'><FaCartPlus/> ADD TO CART</button> */}
+            <button onClick={() => {navigate('/checkout-order',{
+                state: {
+                    id:id,name:name,price:price,image:image
+                }
+            })}} className='buy-now-button-view-item-container'><FaBuyNLarge/> BUY NOW</button>
                 </div>
             </div>
         </div>

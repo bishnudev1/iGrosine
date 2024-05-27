@@ -123,6 +123,27 @@
   flex-direction: column;
 }
 
+.login-btn-nav,.logout-btn-nav{
+  border: none;
+  padding-block: 5px;
+  background-color: white;
+  width: 70px;
+  margin-left: 10px;
+  color: green;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.login-btn-nav,.logout-btn-nav:hover{
+  color: green;
+  background-color: lightgreen;
+  border-radius: 5px;
+  padding: 5px;
+  transition: all 0.3s ease-in-out;
+}
 
 .navbar-title{
   margin-left: 20px;
@@ -414,7 +435,7 @@ a{
   margin-top: 10px;
   padding-inline: 10px;
   padding-block: 6px;
-  background-color: green;
+  background-color: red;
   color: white;
   border-radius: 7px;
   border: none;
@@ -684,6 +705,18 @@ a{
   padding-block: 5px;
   padding-inline: 8px;
   background-color: green;
+  border: none;
+  width: 100%;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+.remove-cart{
+  padding-block: 5px;
+  padding-inline: 8px;
+  background-color: red;
   border: none;
   width: 100%;
   color: white;

@@ -5,77 +5,87 @@ import Picture1 from '../Assets/picture1.jpg';
 import Picture2 from '../Assets/picture2.jpg';
 import Picture3 from '../Assets/picture3.png';
 import { useNavigate } from 'react-router-dom';
-import { addToCart } from '../Redux/user/user_action';
+import { addToCart, removeCartItem } from '../Redux/user/user_action';
 import {useDispatch} from 'react-redux'
+import { useSelector } from 'react-redux';
 
 const Home = () => {
 
+  const { carts } = useSelector(state => state.user);
+
+  console.log(`carts:${carts.length}`);
+
   const dummyMedicineData = [
     {
+      id:1,
       image: 'https://www.orionlifes.com/wp-content/uploads/2021/01/Nimerion-P-tab-5.jpeg',
       name: 'Paracetamal',
       seller: "Apollo Farmacy",
-      price: '29'
+      price: '29',
     },
-    {
+    { id:2,
       image: 'https://www.netmeds.com/images/product-v1/600x600/854095/ventryl_ls_expectorant_60ml_2_0.jpg',
       name: 'Ventryl',
       seller: "Apollo Farmacy",
-      price: '118'
+      price: '118',
     },
     {
+      id:3,
       image: 'https://images.apollo247.in/pub/media/catalog/product/t/a/tak0011_2.jpg?tr=w-167.5,q-100,f-webp,c-at_max',
       name: 'Tecfresh Gel',
       seller: "Apollo Farmacy",
-      price: '269'
+      price: '269',
     },
     {
+      id:4,
       image: 'https://m.media-amazon.com/images/I/81368u7ZbcL.jpg',
       name: 'Manforce Super Thin',
       seller: "Apollo Farmacy",
-      price: '29'
+      price: '29',
     },
     {
+      id:5,
       image: 'https://www.pharmavends.com/userspics/2d6860a07cc0d2a10ab0883e35371317.jpg',
       name: 'Belovit-A',
       seller: "Apollo Farmacy",
-      price: '78'
+      price: '78',
     },
     {
+      id:6,
       image: 'https://www.jiomart.com/images/product/original/491961048/vicks-inhaler-with-keychain-0-5-ml-pack-of-2-product-images-o491961048-p590514111-0-202203170358.jpg?im=Resize=(420,420)',
       name: 'Vicks Inhaler (2 Pcs)',
       seller: "Apollo Farmacy",
-      price: '79'
+      price: '79',
     },
   ];
 
   const dummyGroceryData = [
-    {
+    { id:7,
       image: 'https://www.jiomart.com/images/product/original/rvduzcik7k/goodness-grocery-premium-flax-seeds-for-hair-growth-seeds-for-eating-alsi-seeds-250gm-product-images-orvduzcik7k-p595135258-0-202211080844.jpg?im=Resize=(420,420)',
       name: 'Flex Seeds',
       price: '228'
     },
-    {
+    { id:8,
       image: 'https://m.media-amazon.com/images/I/61XnH090DJS._AC_UF1000,1000_QL80_.jpg',
       name: 'Soya Chunk',
       price: '65'
     },
-    {
+    { id:9,
       image: 'https://cdn.zeptonow.com/production///tr:w-600,ar-3000-3000,pr-true,f-auto,q-80/cms/product_variant/0106346e-a7ef-497b-a9ff-18da5cb8d602.jpeg',
       name: 'Ladies Finger',
       price: '75'
     },
-    {
+    { id:10,
       image: 'https://5.imimg.com/data5/QX/FQ/MY-68428614/lemon.jpeg',
       name: 'Green Lemon',
       price: '8'
     },
-    {
+    { id:11,
       image: 'https://5.imimg.com/data5/AN/TT/YF/SELLER-107321628/gram-flour.jpg',
       name: 'Gram Flour',
       price: '239'
     },
-    {
+    { id:12,
       image: 'https://cdn.britannica.com/08/194708-050-56FF816A/potatoes.jpg',
       name: 'Fresh Potato',
       price: '48'
@@ -88,10 +98,10 @@ const Home = () => {
 
   const viewItem = (item) => {
 
-    console.log(item.name);
+    // console.log(item.name);
 
     if(item.name !== undefined){
-      navigate('/view-item',{state:{name: item.name, price: item.price, image: item.image}})
+      navigate('/view-item',{state:{id:item.id,name: item.name, price: item.price, image: item.image}})
     }
   }
 
@@ -99,12 +109,18 @@ const Home = () => {
     if(item.name !== undefined){
       console.log(`Item in home ${item.name}`);
       dispatch(addToCart({
+        id:item.id,
         name: item.name,
         price: item.price,
         image: item.image,
-        seller: item.seller
+        seller: item.seller,
       }));
     }
+  }
+
+  const removeItem = (id) => {
+    console.log(id);
+    dispatch(removeCartItem(id))
   }
 
   return (
@@ -130,7 +146,16 @@ const Home = () => {
             <p className='best-of-medicines-card-title'>{item.name}</p>
             <p className='best-of-medicines-card-price'>₹{item.price}</p>
             <div className='best-of-medicines-card-buttons'>
-            <button onClick={() => {addToCartItem(item)}} className='add-to-cart'>Add to cart</button>
+  
+            {
+  carts.some(cartItem => cartItem.id === item.id) ? (
+    <button key={item.id} onClick={() => removeItem(item.id)} className='remove-cart'>Remove</button>
+  ) : (
+    <button key={item.id} onClick={() => addToCartItem(item)} className='add-to-cart'>Add to cart</button>
+  )
+}
+
+
             <button onClick={() => viewItem(item)} className='view-item'>View item</button>
             </div>
           </div>
@@ -149,8 +174,13 @@ const Home = () => {
               <p className='best-of-grossery-card-title'>{item.name}</p>
               <p className='best-of-grossery-card-price'>₹{item.price}</p>
               <div className='best-of-medicines-card-buttons'>
-            <button onClick={() => {navigate('/my-carts')}} className='add-to-cart'>Add to cart</button>
-            <button onClick={() => viewItem(item)} className='view-item'>View item</button>
+              {
+  carts.some(cartItem => cartItem.id === item.id) ? (
+    <button key={item.id} onClick={() => removeItem(item.id)} className='remove-cart'>Remove</button>
+  ) : (
+    <button key={item.id} onClick={() => addToCartItem(item)} className='add-to-cart'>Add to cart</button>
+  )
+}<button onClick={() => viewItem(item)} className='view-item'>View item</button>
             </div>
             </div>
           })

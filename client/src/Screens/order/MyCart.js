@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector,useDispatch } from 'react-redux';
+import { removeCartItem } from '../../Redux/user/user_action';
 
 const MyCart = () => {
 
@@ -8,11 +9,18 @@ const MyCart = () => {
 
   console.log("Carts:", carts);
 
+  const dispatch = useDispatch();
+
 
   const navigate = useNavigate();
 
   const placeOrderCall = () => {
     navigate('/checkout-order')
+  }
+
+  const removeItem = (id) => {
+    console.log(id);
+    dispatch(removeCartItem(id))
   }
 
   const items = 
@@ -47,7 +55,7 @@ const MyCart = () => {
           <h3 className='item-name'>{item.name}</h3>
           <h3 className='item-seller'>{item.seller}</h3>
           <p className='item-price'>₹{item.price}</p>
-          <button className='remove-item'>Remove</button>
+          <button onClick={() => removeItem(item.id)} className='remove-item'>Remove</button>
         </div>
       </div>
     ));

@@ -56,13 +56,22 @@ app.use(IndexRoute);
 const AuthRoute = require("./routes/auth");
 app.use("/auth",AuthRoute);
 
+const OrderRoutes = require('./routes/order_routes.js')
+app.use('/api',OrderRoutes)
+
 
 const Razorpay = require('razorpay');
 
-module.export = razorpayInstance = new Razorpay({
+module.exports = razorpayInstance = new Razorpay({
     key_id: 'rzp_test_NH7DutCORAH6gm',
     key_secret: 'ON7sNQcvMc1YaNXdBFjd4wTs'
 });
+
+app.get("/api/get-key", (req, res) => {
+    res.status(201).json({
+        key: 'rzp_test_NH7DutCORAH6gm'
+    });
+  });
 
 app.listen(port, () => {
     console.log(`Server has listening on http://localhost:${port}/`);

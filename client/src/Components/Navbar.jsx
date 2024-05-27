@@ -1,15 +1,18 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector,useDispatch } from 'react-redux';
 import { FaCartPlus } from "react-icons/fa";
 import { FaHome } from "react-icons/fa";
 import { FaSignInAlt } from "react-icons/fa";
 import { FaUser } from "react-icons/fa";
 import { FaSignOutAlt } from 'react-icons/fa';
+import { loginUser,logoutUser } from '../Redux/user/user_action';
 
 const Navbar = () => {
 
   const {isAuth} = useSelector(state => state.user);
+
+  const dispatch = useDispatch()
 
   return (
     <div className='navbar-container'>
@@ -25,13 +28,18 @@ const Navbar = () => {
                     <Link to='/'><FaHome /> Home</Link>
                     <Link to='/profile'><FaUser /> Profile</Link>
                     <Link to='/my-carts'><FaCartPlus /> Cart</Link>
-                    <a href='http://localhost:5000/auth/logout'><FaSignOutAlt /> Sign Out</a>
+                    <button className='logout-btn-nav' onClick={()=> dispatch(logoutUser())}
+                    //  href='http://localhost:5000/auth/logout'
+                     >
+                      <FaSignOutAlt /> Logout</button>
                     </>
                     :
                     <>
                     <Link to='/'><FaHome /> Home</Link>
                     <Link to='/my-carts'><FaCartPlus /> Cart</Link>
-                    <a href='http://localhost:5000/auth/google'> <FaSignInAlt /> Login</a>
+                    <button className='login-btn-nav' onClick={()=> dispatch(loginUser())} 
+                    // href='http://localhost:5000/auth/google'
+                    > <FaSignInAlt /> Login</button>
                     </>
                 }
         </div>
