@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { onlineOrder } from '../../Redux/order/order_action';
+import { onlineOrder, emptyOrder} from '../../Redux/order/order_action';
 import { toast } from 'react-toastify';
+
 
 const CheckOut = () => {
 
@@ -53,6 +54,7 @@ const CheckOut = () => {
         price,
         selectedFullName,
         name,
+        image,
         selectedEmail,
         id,
         mobileNo,

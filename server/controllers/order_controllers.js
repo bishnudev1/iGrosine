@@ -10,7 +10,7 @@ exports.getMyOrders = async (req, res) => {
     try {
         const user = await User.findById(req.user._id);
         const orders = user.orders;
-        console.log(`orders`,orders);
+        // console.log(`orders`,orders);
         res.status(200).json({
             success: true,
             data:orders
@@ -24,10 +24,75 @@ exports.getMyOrders = async (req, res) => {
     }
 }
 
+exports.makeEmptyOrders = async (req, res) => {
+    try {
+        const user = await User.findById("653fcba5adb8838ece0d6cea");
+        user.orders = [];
+        await user.save();
+        res.status(200).json({
+            success: true,
+            data:user
+        });
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).json({
+            success: false,
+            message: "Internal Server Error!"
+        });
+    }
+}
+
+exports.cancelOrder = async (req, res) => {
+    try {
+        const user = await User.findById(req.user._id);
+        const { orderId } = req.body; // Assuming orderId is passed in the request parameters
+
+        // Find the order by its ID in the user's orders array
+        const orderIndex = user.orders.findIndex(order => order._id.toString() === orderId);
+        if (orderIndex === -1) {
+            return res.status(404).json({
+                success: false,
+                message: "Order not found"
+            });
+        }
+
+        // Update the status of the order to "Cancelled by you"
+        const currentDate = new Date().toLocaleDateString('en-US', {
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric'
+        });
+        user.orders[orderIndex].status = `Cancelled by you on ${currentDate}`;
+        user.orders[orderIndex].deliveredDate = "You'll get 50% money within 5-7 days.";
+
+        // Mark the 'orders' array as modified
+        user.markModified('orders');
+
+        // Save the updated user document
+        await user.save();
+
+        console.log(`user order ${user}`);
+
+        res.status(200).json({
+            success: true,
+            message: "Order cancelled successfully",
+            // data: user // You can send the updated user data if needed
+        });
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).json({
+            success: false,
+            message: "Internal Server Error!"
+        });
+    }
+}
+
+
+
 
 exports.orderItem = async (req, res) => {
     try {
-        const { price, itemName, buyerName, buyerEmail,itemId,number,city,state } = req.body;
+        const { price, itemName,itemImage, buyerName, buyerEmail,itemId,number,city,state } = req.body;
 
         const razorpayInstance = new Razorpay({
             key_id: 'rzp_test_NH7DutCORAH6gm',
@@ -43,11 +108,12 @@ exports.orderItem = async (req, res) => {
         const myOrder = await Order.create({
             itemPrice: price,
             itemName,
+            itemImage,
             buyerName,
             buyerEmail,
             itemId,
             number,
-            city,state
+            city,state,
         });
 
         // Retrieve the user based on the authenticated user's ID

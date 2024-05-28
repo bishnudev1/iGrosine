@@ -2,6 +2,8 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector,useDispatch } from 'react-redux';
 import { removeCartItem } from '../../Redux/user/user_action';
+import EmptyCart from '../../Assets/empty_cart.svg'
+
 
 const MyCart = () => {
 
@@ -72,7 +74,7 @@ const MyCart = () => {
       <div className="items-container">
         {carts.length === 0 ? (
           <div className='empty-cart'>
-            <img className='empty-cart-image' src='https://png.pngtree.com/png-clipart/20190117/ourmid/pngtree-hand-painted-trolley-empty-cart-daily-supplies-png-image_441612.jpg' alt='empty-cart' />
+            <img className='empty-cart-image' src={EmptyCart} alt='empty-cart' />
             <p className='your-cart-is-empty'>Your cart is empty!</p>
             <p className='add-items-to-it-now'>Add items to it now.</p>
             <button onClick={() => navigate('/')} id='shop-now'>Shop now</button>

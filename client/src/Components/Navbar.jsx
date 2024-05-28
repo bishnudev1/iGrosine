@@ -11,6 +11,7 @@ import { loginUser,logoutUser } from '../Redux/user/user_action';
 const Navbar = () => {
 
   const {isAuth} = useSelector(state => state.user);
+  const { carts } = useSelector(state => state.user);
 
   const dispatch = useDispatch()
 
@@ -27,7 +28,11 @@ const Navbar = () => {
                     <>
                     <Link to='/'><FaHome /> Home</Link>
                     <Link to='/profile'><FaUser /> Profile</Link>
-                    <Link to='/my-carts'><FaCartPlus /> Cart</Link>
+                    <Link to='/my-carts' class="cart-link">
+    <FaCartPlus /> Cart
+    <div class="badge">{carts.length}</div>
+</Link>
+
                     <button className='logout-btn-nav' onClick={()=> dispatch(logoutUser())}
                     //  href='http://localhost:5000/auth/logout'
                      >

@@ -10,7 +10,7 @@ export const getMyOrdersAction = () => async (dispatch) => {
             withCredentials:true
         });
 
-        console.log(resp.data.data);
+        console.log("Action orders",resp.data.data);
 
         dispatch({
             type: ActionType.GET_MY_ORDERS,
@@ -22,7 +22,53 @@ export const getMyOrdersAction = () => async (dispatch) => {
     }
 }
 
-export const onlineOrder = (price, buyerName,itemName, buyerEmail,itemId,number,city,state) => async (dispatch) => {
+export const emptyOrder = () => async (dispatch) => {
+    try {
+        console.log('calling');
+        let resp = await axios.post(`http://localhost:5000/api/make-empty`,{
+            withCredentials:true,
+        },
+    {
+        responseType:'json'
+    }
+    );
+
+        console.log(resp.data);
+
+        // dispatch({
+        //     type: ActionType.GET_MY_ORDERS,
+        //     payload: resp.data.data
+        // })
+
+    } catch (error) {
+        toast(error.message)
+    }
+}
+
+export const cancelledOrder = (orderId) => async (dispatch) => {
+    try {
+        console.log('calling',orderId);
+        const resp = await axios.post(`http://localhost:5000/api/cancel-order`,{
+            orderId
+        },{
+            withCredentials:true,
+        }
+    );console.log('calling 2');
+
+        console.log(resp.data.message);
+
+        dispatch({
+            type: ActionType.CANCEL_ORDER,
+            payload: 'message'
+        })
+        toast("Order has been cancelled.")
+
+    } catch (error) {
+        toast(error.message)
+    }
+}
+
+export const onlineOrder = (price, buyerName,itemName,itemImage, buyerEmail,itemId,number,city,state) => async (dispatch) => {
     try {
 
         const { data: { key } }
@@ -31,7 +77,7 @@ export const onlineOrder = (price, buyerName,itemName, buyerEmail,itemId,number,
             });
 
         const { data: { order } } = await axios.post(`http://localhost:5000/api/order-item`, {
-            price, itemName, buyerName, buyerEmail,itemId,number,city,state
+            price, itemName,itemImage, buyerName, buyerEmail,itemId,number,city,state
             
         }, {
             withCredentials: true
@@ -63,6 +109,11 @@ export const onlineOrder = (price, buyerName,itemName, buyerEmail,itemId,number,
 
         const razorpay = new window.Razorpay(options);
         razorpay.open();
+
+        dispatch({
+            type: ActionType.ONLINE_ORDER,
+            payload: order
+        })
 
     } catch (error) {
         toast(error.message)

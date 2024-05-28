@@ -28,7 +28,6 @@ const userSchema = new mongoose.Schema({
         type: Date,
         default: Date.now,
     },
-    // orders: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Order' }],
     orders: [
         {
             type:Object
