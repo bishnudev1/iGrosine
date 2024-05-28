@@ -12,7 +12,7 @@ const ViewItem = () => {
     const location = useLocation();
     const dispatch = useDispatch();
 
-    const { id,name, price, image } = location.state || {};
+    const { id,name, price, image,realPrice,off ,desc, seller} = location.state || {};
 
   console.log(name, price, image); 
 
@@ -70,18 +70,18 @@ const ViewItem = () => {
             <p className='spacial-price'>Spacial prize</p>
             <div className='view-item-price'>
                 <p className='discounted-price'>₹{price ?? ""}</p>
-                <p className='real-price'>₹89,990</p>
-                <p className='percent-off'>26% off</p>
+                <p className='real-price'>₹{realPrice ?? ""}</p>
+                <p className='percent-off'>{off ?? ""}% off</p>
             </div>
             <div className='sub-right-view-item-container-product-details'>
                 <div className='sub-right-view-item-container-product-details-seller'>
                     <p className='sub-right-view-item-container-seller-title'>Seller</p>
-                    <p className='sub-right-view-item-container-seller-desc'>TREASURE HAUL ONLINE</p>
+                    <p className='sub-right-view-item-container-seller-desc'>{seller ?? ""}</p>
                 </div>
                 <div className='sub-right-view-item-container-product-details-description'>
                     <p className='sub-right-view-item-container-seller-title'>Description</p>
                     <p className='sub-right-view-item-container-seller-desc'>
-                    This Apple Macbook is powered by the Apple M1 chip and is easily portable so that you can carry it with you anywhere you want. This thin and light notebook is equipped with an 8-core CPU to handle all your tasks more efficiently. The 8-core GPU of this notebook takes graphic-intensive games and apps to a whole new level. It also comes with a 16-core Neural Engine to do machine learning tasks more effectively. Its fan-less design offers silent operations and has a long-lasting battery life which can last up to 18 hours on a single charge.
+                    {desc ?? ""}
                     </p>
                 </div>
             </div>
