@@ -91,6 +91,14 @@ exports.cancelOrder = async (req, res) => {
 
         console.log(`user order ${user}`);
 
+        sendEmail('Order Cancellation Confirmation - iGrosine',`
+        <p>Dear ${user.displayName},</p>
+        <img src="${user.orders[orderIndex].itemImage}" alt="Shopping Image" style="height: 300px;" />
+        <p>Your order for ${user.orders[orderIndex].itemName} has been cancelled successfully by you at ${currentDate}.</p>
+        <p>You'll get 50% money within 5-7 days.</p>
+        <p>Thank you for considering us!</p>
+    `,user.email)
+
         res.status(200).json({
             success: true,
             message: "Order cancelled successfully",
@@ -142,7 +150,13 @@ exports.orderItemByCarts = async (req, res) => {
 
         console.log(`req.user._id$`,order);
 
-        
+        sendEmail('Order Confirmation - iGrosine',`
+        <p>Dear ${buyerName},</p>
+        <img src="${itemImage}" alt="Shopping Image" style="height: 300px;" />
+        <p>Your order for ${itemName} has been placed successfully.</p>
+        <p>Thank you for shopping with us!</p>
+        <p>You can cancel the order within 24 hours, but only 50% of the amount will be refunded.</p>
+    `,buyerEmail );
 
         res.status(200).json({
             success: true,
@@ -199,7 +213,15 @@ exports.orderItem = async (req, res) => {
 
         await user.save()
 
-        console.log(`req.user._id$`,order);
+        // console.log(`req.user._id$`,order);
+
+        sendEmail('Order Confirmation - iGrosine',`
+        <p>Dear ${buyerName},</p>
+        <img src="${itemImage}" alt="Shopping Image" style="height: 300px;" />
+        <p>Your order for ${itemName} has been placed successfully.</p>
+        <p>Thank you for shopping with us!</p>
+        <p>You can cancel the order within 24 hours, but only 50% of the amount will be refunded.</p>
+    `, buyerEmail);
 
         res.status(200).json({
             success: true,
@@ -286,6 +308,7 @@ exports.getMyCarts = async (req, res) => {
 }
 
 const User = require('../models/User'); // Import the User model if it's not already imported
+const { sendEmail } = require('../utils/sendEmail');
 
 exports.removeFromCart = async (req, res) => {
     try {
