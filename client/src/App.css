@@ -74,34 +74,91 @@
 
 /* *****Login.jsx CSS***** */
 
-.login-container{
+.login-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 100vh;
+  background-color: white;
+}
+
+.sub-container {
+  background-color: lightgreen;
+  /* padding: 20px; */
+  /* border-radius: 10px; */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  /* padding: 60px; */
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  padding-inline: 40px;
+  padding-top: 5px;
 }
 
 .login-btn {
-  background-color: rgb(48, 176, 80);
-  color: white;
-  border: 1px solid white;
-  border-radius: 10px;
-  padding: 10px;
-  /* margin: 10px; */
-  font-size: 1.5rem;
-  cursor: pointer;
-  height: 30px;
-  width: 200px;
+  margin-top: 5px;
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: all 0.3s ease-in-out;
-
+  /* width: 250px; */
+  background-color: white;
+  padding-left: 20px;
+  padding-block: 2px;
+  /* border-radius: 10px; */
 }
-.login-btn a {
+
+.login-into-your-ac{
+  font-size: 18px;
   color: white;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.login-btn a {
   text-decoration: none;
+  color: black;
+  background-color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.login-btn a:hover {
+  /* background-color: darkgreen; */
+}
+
+.circle-image {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.circle-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.login-into-your-ac-img{
+  height: 70px;
+  width: 70px;
+  border-radius: 150px;
+  margin-bottom: 5px;
+}
+
+.igrosine-in-login{
+  font-size: 28px;
+  font-family:'Courier New', Courier, monospace;
+  font-weight: bold;
+}
+
+
+.welcome-back{
+  font-size: 22px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
 
@@ -390,7 +447,8 @@ a{
 .cart-container {
   display: flex;
   height: 100vh;
-  padding: 15px;
+  padding-inline: 40px;
+  padding-block: 15px;
 }
 
 .items-container {

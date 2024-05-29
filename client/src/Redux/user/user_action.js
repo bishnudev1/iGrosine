@@ -138,12 +138,18 @@ export const getMyCartsAction = () => async (dispatch) => {
 
         console.log("Action orders",resp.data.data);
 
+        console.log(resp.status);
+
+        if(resp.status === 304){
+            toast("You're not signed in. Please login.")
+        }
+
         dispatch({
             type: ActionType.GET_MY_CARTS,
             payload: resp.data.data
         })
 
     } catch (error) {
-        toast(error.message)
+        toast("You're not signed in. Please login.")
     }
 }

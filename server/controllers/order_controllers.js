@@ -44,7 +44,7 @@ exports.makeEmptyOrders = async (req, res) => {
 
 exports.makeEmptyCarts = async (req, res) => {
     try {
-        const user = await User.findById("653fcba5adb8838ece0d6cea");
+        const user = await User.findById(req.user._id);
         user.carts = [];
         await user.save();
         res.status(200).json({
@@ -104,6 +104,62 @@ exports.cancelOrder = async (req, res) => {
         });
     }
 }
+
+exports.orderItemByCarts = async (req, res) => {
+    try {
+        const { price, itemName,itemImage, buyerName, buyerEmail,itemId,number,city,state } = req.body;
+
+        console.log(buyerName);
+
+        const razorpayInstance = new Razorpay({
+            key_id: 'rzp_test_NH7DutCORAH6gm',
+            key_secret: 'ON7sNQcvMc1YaNXdBFjd4wTs'
+        });
+
+        const order = await razorpayInstance.orders.create({
+            amount: Number((price) * 100),
+            currency: "INR"
+        });
+
+        // Create and save the order using the Order model
+        const myOrder = await Order.create({
+            itemPrice: price,
+            itemName,
+            itemImage,
+            buyerName,
+            buyerEmail,
+            itemId,
+            number,
+            city,state,
+        });
+
+        // Retrieve the user based on the authenticated user's ID
+        const user = await User.findById(req.user._id);
+
+        user.orders.push(myOrder);
+
+        await user.save()
+
+        console.log(`req.user._id$`,order);
+
+        
+
+        res.status(200).json({
+            success: true,
+            order
+        });
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).json({
+            success: false,
+            message: "Internal Server Error!"
+        });
+    }finally{
+        const user = await User.findById(req.user._id);
+        user.carts = [];
+        await user.save();
+    }
+};
 
 
 
