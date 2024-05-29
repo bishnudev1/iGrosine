@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { onlineOrder, emptyOrder} from '../../Redux/order/order_action';
+import { onlineOrder, emptyOrder, onlineOrderMultiple} from '../../Redux/order/order_action';
 import { toast } from 'react-toastify';
 
 
@@ -17,6 +17,10 @@ const CheckOut = () => {
   const [mobileNo, setMobileNo] = useState('');
 
   const { id,name, price, image } = location.state || {};
+
+  const {items} = location.state || [];
+
+  console.log(items);
 
   console.log(name,price,id);
 
@@ -42,27 +46,41 @@ const CheckOut = () => {
 
   const handleConfirmOrder = () => {
     // Check if any field is empty
-    if (!selectedFullName || !selectedState || !selectedCity || !mobileNo) {
-      toast('Please fill out all fields before confirming the order.');
-      return; // Exit the function if any field is empty
-    }
+    // if (!selectedFullName || !selectedState || !selectedCity || !mobileNo) {
+    //   toast('Please fill out all fields before confirming the order.');
+    //   return; // Exit the function if any field is empty
+    // }
   
     // Implement your logic for confirming the order here
     console.log('Order confirmed!');
-    dispatch(
-      onlineOrder(
-        price,
-        selectedFullName,
-        name,
-        image,
-        selectedEmail,
-        id,
-        mobileNo,
-        selectedCity,
-        selectedState
-      )
-    );
+    if(items === undefined){
+      dispatch(
+        onlineOrder(
+          price,
+          selectedFullName,
+          name,
+          image,
+          selectedEmail,
+          id,
+          mobileNo,
+          selectedCity,
+          selectedState
+        )
+      );
+    }
+    else{
+      dispatch(onlineOrderMultiple(selectedFullName,selectedEmail,mobileNo,selectedCity,selectedState,items, calculateTotal()))
+    }
   };
+
+  const calculateTotal = () => {
+    if(items === undefined){
+      return price;
+    }
+    else{
+      return items.reduce((total, item) => total + parseFloat(item.price), 0);
+    }
+  }
   
 
   return (
@@ -77,8 +95,8 @@ const CheckOut = () => {
         <label htmlFor='cod'>Cash on Delivery (COD)</label>
       </div>
       <div className='grand-total-details'>
-        <p className='items-no'>Total items: 1</p>
-        <p className='grand-total-amount'>Grand Total: ${price}/- only</p>
+        <p className='items-no'>Total items: {items === undefined ? "1" : items.length}</p>
+        <p className='grand-total-amount'>Grand Total: ${calculateTotal()}/- only</p>
         <button className='confirm-order' onClick={handleConfirmOrder}>Confirm Order</button>
       </div>
       </div>

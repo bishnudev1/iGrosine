@@ -1,7 +1,7 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector,useDispatch } from 'react-redux';
-import { removeCartItem } from '../../Redux/user/user_action';
+import { getMyCartsAction, getUserData, removeCartItem } from '../../Redux/user/user_action';
 import EmptyCart from '../../Assets/empty_cart.svg'
 
 
@@ -13,11 +13,19 @@ const MyCart = () => {
 
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    dispatch(getMyCartsAction())
+  },[dispatch])
+
+  useEffect(() => {
+    dispatch(getUserData());
+  },[dispatch]);
+
 
   const navigate = useNavigate();
 
   const placeOrderCall = () => {
-    navigate('/checkout-order')
+    navigate('/checkout-order',{state:{items:carts}})
   }
 
   const removeItem = (id) => {

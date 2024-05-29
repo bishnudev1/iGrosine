@@ -5,15 +5,22 @@ import Picture1 from '../Assets/picture1.jpg';
 import Picture2 from '../Assets/picture2.jpg';
 import Picture3 from '../Assets/picture3.png';
 import { useNavigate } from 'react-router-dom';
-import { addToCart, removeCartItem } from '../Redux/user/user_action';
+import { addToCart, getMyCartsAction, removeCartItem } from '../Redux/user/user_action';
 import {useDispatch} from 'react-redux'
 import { useSelector } from 'react-redux';
 
 const Home = () => {
 
   const { carts } = useSelector(state => state.user);
+  const dispatch = useDispatch();
+
+  const navigate = useNavigate();
 
   console.log(`carts:${carts.length}`);
+
+  React.  useEffect(() => {
+    dispatch(getMyCartsAction())
+  },[dispatch])
 
   const dummyMedicineData = [
     {
@@ -163,9 +170,7 @@ const Home = () => {
     },
   ];
 
-  const dispatch = useDispatch();
 
-  const navigate = useNavigate();
 
   const viewItem = (item) => {
 
@@ -200,14 +205,10 @@ const Home = () => {
   return (
     <div className='home-container'>
       <div className='carousel-container'>
-        <Carousel
-        autoPlay
-        // autoFocus
-        infiniteLoop
-        >
-          <img src={Picture1} alt='picture1'/>
-          <img src={Picture2} alt='picture2'/>
-          <img src={Picture3} alt='picture3'/>
+        <Carousel autoPlay infiniteLoop dynamicHeight="100px">
+          <img src={Picture1} alt='picture1' />
+          <img src={Picture2} alt='picture2' />
+          <img src={Picture3} alt='picture3' />
         </Carousel>
       </div>
       <div onClick={viewItem} className='best-of-medicines'>

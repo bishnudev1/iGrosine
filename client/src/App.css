@@ -671,6 +671,11 @@ a{
   height: 100vh;
 }
 
+.carousel-container-img {
+  height: 80px; /* Adjust the height as needed */
+}
+
+
 .best-of-medicines, .best-of-grossery {
   padding-inline: 10px;
   padding-block: 15px;

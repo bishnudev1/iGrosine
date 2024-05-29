@@ -119,3 +119,91 @@ export const onlineOrder = (price, buyerName,itemName,itemImage, buyerEmail,item
         toast(error.message)
     }
 }
+
+export const onlineOrderMultiple = (buyerName, buyerEmail, number, city, state, items,total) => async (dispatch) => {
+    try {
+        const { data: { key } } = await axios.get('http://localhost:5000/api/get-key', {
+            withCredentials: true
+        });
+
+        const orders = [];
+
+        console.log(total);
+
+        // Iterate over each item in the items array
+        for (const item of items) {
+            const { id, name, price, image } = item;
+
+            // Make a request to create an order for each item
+            const response = await axios.post(`http://localhost:5000/api/order-item`, {
+                price,
+                itemName: name,
+                itemImage: image,
+                buyerName,
+                buyerEmail,
+                itemId: id,
+                number,
+                city,
+                state
+            }, {
+                withCredentials: true
+            });
+
+            if (response.data && response.data.order) {
+                const order = response.data.order;
+                orders.push(order);
+                console.log("Order placed for:", order);
+            } else {
+                console.error("Order creation failed:", response.data);
+            }
+        }
+
+        const calculateTotal = () => {
+            return items.reduce((total, item) => total + parseFloat(item.price), 0);
+          };
+
+        console.log(calculateTotal());
+
+        console.log(`orders[0].id ${orders[0].id}`);
+
+        // Open Razorpay payment dialog after all orders are processed
+        if (orders.length > 0) {
+            const options = {
+                key: key,
+                amount: total, // Total amount of all orders
+                currency: "INR",
+                description: "Test Transaction",
+                image: "https://example.com/your_logo",
+                order_id: orders[0].id, // Use the order_id of the first order for Razorpay options
+                callback_url: `http://localhost:5000/api/verify-payment`,
+                prefill: {
+                    name: buyerName,
+                    email: buyerEmail,
+                    contact: number
+                },
+                notes: {
+                    address: "Razorpay Corporate Office"
+                },
+                theme: {
+                    color: "#3399cc"
+                }
+            };
+
+            const razorpay = new window.Razorpay(options);
+            razorpay.open();
+
+            // Dispatch an action to handle the orders
+            dispatch({
+                type: ActionType.ONLINE_ORDER_MULTIPLE,
+                payload: orders
+            });
+        } else {
+            console.log("No orders to process");
+        }
+    } catch (error) {
+        console.error(error.message);
+        // Handle errors appropriately
+        toast(error.message);
+    }
+};
+

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { cancelledOrder, getMyOrdersAction } from '../../Redux/order/order_action';
 
 import Modal from 'react-modal';
+import { toast } from 'react-toastify';
 
 const customStyles = {
   content: {
@@ -81,12 +82,22 @@ const MyOrders = () => {
     setIsOpen(false);
   }
 
-  const cancelOrder = (id) => {
-    console.log(id);
-    setOrderId(id);
-    console.log(orderId);
-    openModal()
+  const cancelOrder = (id, orderedDate) => {
+    const orderDate = new Date(orderedDate); // Parse the orderedDate string into a Date object
+  
+    console.log(orderDate);
+    console.log(Date.now());
+  
+    if (Date.now() - orderDate < 24 * 60 * 60 * 1000) {
+      console.log(orderDate);
+      setOrderId(id);
+      console.log(orderId);
+      openModal();
+    } else {
+      toast("You can't cancel your order as it's more than 24 hours.");
+    }
   }
+  
 
   const handleCancelConfirm =(id) =>{
     console.log(id);
@@ -178,7 +189,7 @@ const MyOrders = () => {
      {
       item.deliveredDate === "You'll get 50% money within 5-7 days." ? null :        <div className='right-order-card-cancel-review'>
       <button className='right-order-card-review-btn'>⭐ Review</button>
-      <button onClick={() => {cancelOrder(item._id)}} className='right-order-card-cancel-btn'>❌ Cancel</button>
+      <button onClick={() => {cancelOrder(item._id, item.orderedDate)}} className='right-order-card-cancel-btn'>❌ Cancel</button>
     </div>
      }
           </div>

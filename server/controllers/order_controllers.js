@@ -4,7 +4,7 @@ const Razorpay = require('razorpay');
 const crypto =require('crypto')
 
 const Order = require('../models/Order');
-const User = require('../models/User');
+// const User = require('../models/User');
 
 exports.getMyOrders = async (req, res) => {
     try {
@@ -28,6 +28,24 @@ exports.makeEmptyOrders = async (req, res) => {
     try {
         const user = await User.findById("653fcba5adb8838ece0d6cea");
         user.orders = [];
+        await user.save();
+        res.status(200).json({
+            success: true,
+            data:user
+        });
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).json({
+            success: false,
+            message: "Internal Server Error!"
+        });
+    }
+}
+
+exports.makeEmptyCarts = async (req, res) => {
+    try {
+        const user = await User.findById("653fcba5adb8838ece0d6cea");
+        user.carts = [];
         await user.save();
         res.status(200).json({
             success: true,
@@ -94,6 +112,8 @@ exports.orderItem = async (req, res) => {
     try {
         const { price, itemName,itemImage, buyerName, buyerEmail,itemId,number,city,state } = req.body;
 
+        console.log(buyerName);
+
         const razorpayInstance = new Razorpay({
             key_id: 'rzp_test_NH7DutCORAH6gm',
             key_secret: 'ON7sNQcvMc1YaNXdBFjd4wTs'
@@ -123,7 +143,7 @@ exports.orderItem = async (req, res) => {
 
         await user.save()
 
-        console.log(`req.user._id${req.user._id}`);
+        console.log(`req.user._id$`,order);
 
         res.status(200).json({
             success: true,
@@ -137,6 +157,7 @@ exports.orderItem = async (req, res) => {
         });
     }
 };
+
 
 
 exports.verifyPayment = async(req,res) => {
@@ -160,6 +181,82 @@ exports.verifyPayment = async(req,res) => {
         return res.status(404).json({
             success: false,
             message: "We couldn't verify your order."
+        });
+    }
+}
+
+
+exports.addToCart = async(req,res) => {
+    try {
+        const {item} = req.body;
+
+        const user = await User.findById(req.user._id);
+        user.carts.push(item);
+
+        const carts = user.carts;
+    
+        await user.save()
+    
+        res.status(201).json({
+            success:true,
+            data: carts
+        })
+    
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).json({
+            success: false,
+            message: "Internal Server Error!"
+        });
+    }
+}
+
+exports.getMyCarts = async (req, res) => {
+    try {
+        const user = await User.findById(req.user._id);
+        const carts = user.carts;
+        // console.log(`orders`,orders);
+        res.status(200).json({
+            success: true,
+            data:carts
+        });
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).json({
+            success: false,
+            message: "Internal Server Error!"
+        });
+    }
+}
+
+const User = require('../models/User'); // Import the User model if it's not already imported
+
+exports.removeFromCart = async (req, res) => {
+    try {
+        // Find the user by ID
+        const user = await User.findById(req.user._id);
+
+        // Extract the id of the item to be removed from the request body
+        const { id } = req.body;
+
+        // Filter out the item with the specified ID from the user's carts
+        user.carts = user.carts.filter(cartItem => cartItem.id !== id);
+
+        // Save the updated user object
+        await user.save();
+
+        const carts = user.carts;
+
+        // Respond with success status and updated cart data
+        res.status(200).json({
+            success: true,
+            data: carts // Assuming you want to return the updated cart items
+        });
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).json({
+            success: false,
+            message: "Internal Server Error!"
         });
     }
 }
