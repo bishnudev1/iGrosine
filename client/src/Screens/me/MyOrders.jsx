@@ -189,7 +189,9 @@ const MyOrders = () => {
      {
       item.deliveredDate === "You'll get 50% money within 5-7 days." ? null :        <div className='right-order-card-cancel-review'>
       <button className='right-order-card-review-btn'>⭐ Review</button>
-      <button onClick={() => {cancelOrder(item._id, item.orderedDate)}} className='right-order-card-cancel-btn'>❌ Cancel</button>
+      {
+        item.isDelivered ? null :  <button onClick={() => {cancelOrder(item._id, item.orderedDate)}} className='right-order-card-cancel-btn'>❌ Cancel</button>
+      }
     </div>
      }
           </div>

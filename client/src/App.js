@@ -18,6 +18,9 @@ import ViewItem from './Screens/ViewItem';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { getMyOrdersAction } from './Redux/order/order_action';
+import AdminLogin from './Admin/AdminLogin';
+import AdminRegister from './Admin/AdminRegister';
+import AdminHome from './Admin/AdminHome';
 // import { ProtectedRoute } from 'protected-route-react';
 
 const App = () => {
@@ -46,6 +49,9 @@ const App = () => {
       <Routes>
       <Route exact path='/' element={<Home />}/>
       <Route exact path='/my-carts' element={<MyCart />}/>
+      <Route exact path='/admin/home' element={<AdminHome />}/>
+      <Route exact path='/admin/login' element={<AdminLogin />}/>
+      <Route exact path='/admin/signup' element={<AdminRegister />}/>
       <Route exact path='/order-success' element={ <OrderSuccess />}/>
       <Route exact path='/checkout-order' element={  <ProtectedRoute
                       isAuthenticated={isAuth}

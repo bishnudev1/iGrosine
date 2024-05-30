@@ -68,7 +68,7 @@ export const cancelledOrder = (orderId) => async (dispatch) => {
     }
 }
 
-export const onlineOrder = (price, buyerName,itemName,itemImage, buyerEmail,itemId,number,city,state) => async (dispatch) => {
+export const onlineOrder = (price,buyerId, buyerName,itemName,itemImage, buyerEmail,itemId,number,city,state) => async (dispatch) => {
     try {
 
         const { data: { key } }
@@ -77,7 +77,7 @@ export const onlineOrder = (price, buyerName,itemName,itemImage, buyerEmail,item
             });
 
         const { data: { order } } = await axios.post(`http://localhost:5000/api/order-item`, {
-            price, itemName,itemImage, buyerName, buyerEmail,itemId,number,city,state
+            price, buyerId,itemName,itemImage, buyerName, buyerEmail,itemId,number,city,state
             
         }, {
             withCredentials: true
@@ -120,7 +120,7 @@ export const onlineOrder = (price, buyerName,itemName,itemImage, buyerEmail,item
     }
 }
 
-export const onlineOrderMultiple = (buyerName, buyerEmail, number, city, state, items,total) => async (dispatch) => {
+export const onlineOrderMultiple = (buyerId,buyerName, buyerEmail, number, city, state, items,total) => async (dispatch) => {
     try {
         const { data: { key } } = await axios.get('http://localhost:5000/api/get-key', {
             withCredentials: true
@@ -137,6 +137,7 @@ export const onlineOrderMultiple = (buyerName, buyerEmail, number, city, state, 
             // Make a request to create an order for each item
             const response = await axios.post(`http://localhost:5000/api/order-item-cart`, {
                 price,
+                buyerId,
                 itemName: name,
                 itemImage: image,
                 buyerName,

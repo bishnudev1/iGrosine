@@ -2,9 +2,265 @@
 // const { razorpayInstance } = require("../server.js");
 const Razorpay = require('razorpay');
 const crypto =require('crypto')
+// const bcrypt = require('bcrypt');
+// const jwt = require('jsonwebtoken');
 
 const Order = require('../models/Order');
 // const User = require('../models/User');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const Admin = require('../models/Admin'); // Import the Admin model
+
+
+exports.getAllOrders = async (req, res) => {
+    try {
+        const orders = await Order.find();
+
+        res.status(200).json({
+            success: true,
+            data:orders
+        });
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).json({
+            success: false,
+            message: "Internal Server Error!"
+        });
+    }
+}
+
+
+exports.updateOrderStatus = async (req, res) => {
+    try {
+        const { buyerId, status, item } = req.body;
+
+        console.log("Calling updateOrderStatus");
+
+        // Validate input fields
+        if (!buyerId || !status || !item) {
+            return res.status(400).json({ success: false, message: "Missing required fields" });
+        }
+
+        const orders = await Order.find({
+            buyerId
+        });
+
+        const order = orders[0];
+
+        console.log(order);
+
+        if (!order) {
+            return res.status(404).json({ success: false, message: "Order not found" });
+        }
+
+        const currentDate = new Date().toLocaleDateString('en-US', {
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric'
+        });
+
+        // Update order status based on the provided status
+        switch (status) {
+            case "Shipped":
+                order.status = `Your item is shipped at ${currentDate}`;
+                break;
+            case "Out of Delivery":
+                order.status = `Your item is out for delivery at ${currentDate}`;
+                break;
+            case "Delivered":
+                order.status = `Your item is delivered successfully at ${currentDate}`;
+                break;
+            default:
+                return res.status(400).json({ success: false, message: "Invalid status" });
+        }
+
+        await order.save();
+
+        console.log(item.buyerEmail);
+
+        const user = await User.findOne({email:item.buyerEmail}); // Assuming buyerId is present in the item object
+
+// console.log(users);
+
+// const user = users[0];
+
+        if (!user) {
+            return res.status(404).json({ success: false, message: "User not found" });
+        }
+
+        const userOrder = user.orders.find(order => order.buyerId.toString() === buyerId.toString());
+        if (userOrder) {
+            userOrder.status = order.status;
+            userOrder.isDelivered = true;
+            user.markModified('orders');
+            await user.save();
+        }
+
+
+        // Send email notification
+        sendEmail(`Delivery update - iGrosine`,
+            `<p>Dear ${item.buyerName},</p>
+            <img src="${item.itemImage}" alt="Shopping Image" style="height: 300px;" />
+            <p>Your order for ${item.itemName} has been ${status} successfully by our team at ${currentDate}.</p>`,
+            item.buyerEmail
+        );
+
+        res.status(200).json({
+            success: true,
+            data: order
+        });
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).json({
+            success: false,
+            message: "Internal Server Error!"
+        });
+    }
+}
+
+exports.removeOrders = async (req, res) => {
+    try {
+        const orders = await Order.deleteMany();
+
+        res.status(200).json({
+            success: true,
+            data:orders
+        });
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).json({
+            success: false,
+            message: "Internal Server Error!"
+        });
+    }
+}
+
+exports.loginAdmin = async (req, res) => {
+    try {
+        const { email, password } = req.body;
+
+        console.log(email,password);
+
+        // Check if the provided email exists in the database
+        const admin = await Admin.findOne({ email });
+
+        if (!admin) {
+            return res.status(401).json({
+                success: false,
+                message: "Invalid email or password"
+            });
+        }
+
+        // Compare the provided password with the hashed password stored in the database
+
+        console.log(admin.password);
+        const passwordMatch = await bcrypt.compare(password, admin.password);
+
+        if (!passwordMatch) {
+            return res.status(401).json({
+                success: false,
+                message: "Invalid email or password"
+            });
+        }
+
+        // If email and password are correct, generate JWT token
+        const token = jwt.sign({ id: admin._id }, "process.env.JWT_SECRET", {
+            expiresIn: '1h' // Token expires in 1 hour
+        });
+
+        // Set the token in a cookie
+        res.cookie('adminToken', token, { 
+            httpOnly: true, // Cookie is only accessible via HTTP(S) and not JavaScript
+            expires: new Date(Date.now() + 3600000) // Cookie expires in 1 hour (3600000 milliseconds)
+        });
+
+        // Send the token in the response
+        res.status(200).json({
+            success: true,
+            message: "Login successful",
+            token:token
+        });
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).json({
+            success: false,
+            message: "Internal Server Error"
+        });
+    }
+};
+
+
+exports.getAdmin = async (req, res) => {
+    try {
+
+        const admin = await Admin.findById(req.admin.id);
+
+        console.log(req.admin.id);
+
+        // Return the admin information in the response
+        res.status(200).json({
+            success: true,
+            data: admin
+        });
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).json({
+            success: false,
+            message: "Internal Server Error"
+        });
+    }
+}
+
+
+
+
+exports.signupAdmin = async (req, res) => {
+    try {
+        const { name, email, password } = req.body;
+
+        // Check if the email already exists in the database
+        const existingAdmin = await Admin.findOne({ email });
+
+        if (existingAdmin) {
+            return res.status(400).json({
+                success: false,
+                message: "Email already exists"
+            });
+        }
+
+        // Hash the password
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        // Create a new admin
+        const newAdmin = new Admin({
+            name,
+            email,
+            password: hashedPassword
+        });
+
+        // Save the new admin to the database
+        await newAdmin.save();
+
+        // Generate JWT token
+        const token = jwt.sign({ id: newAdmin._id, email: newAdmin.email }, "process.env.JWT_SECRET", {
+            expiresIn: '1h' // Token expires in 1 hour
+        });
+
+        // Send the token in the response
+        res.status(201).json({
+            success: true,
+            message: "Signup successful",
+            token
+        });
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).json({
+            success: false,
+            message: "Internal Server Error"
+        });
+    }
+};
+
 
 exports.getMyOrders = async (req, res) => {
     try {
@@ -115,7 +371,7 @@ exports.cancelOrder = async (req, res) => {
 
 exports.orderItemByCarts = async (req, res) => {
     try {
-        const { price, itemName,itemImage, buyerName, buyerEmail,itemId,number,city,state } = req.body;
+        const { price, itemName,itemImage,buyerId, buyerName, buyerEmail,itemId,number,city,state } = req.body;
 
         console.log(buyerName);
 
@@ -134,6 +390,7 @@ exports.orderItemByCarts = async (req, res) => {
             itemPrice: price,
             itemName,
             itemImage,
+            buyerId,
             buyerName,
             buyerEmail,
             itemId,
@@ -180,7 +437,7 @@ exports.orderItemByCarts = async (req, res) => {
 
 exports.orderItem = async (req, res) => {
     try {
-        const { price, itemName,itemImage, buyerName, buyerEmail,itemId,number,city,state } = req.body;
+        const { price, itemName,itemImage,buyerId, buyerName, buyerEmail,itemId,number,city,state } = req.body;
 
         console.log(buyerName);
 
@@ -199,6 +456,7 @@ exports.orderItem = async (req, res) => {
             itemPrice: price,
             itemName,
             itemImage,
+            buyerId,
             buyerName,
             buyerEmail,
             itemId,

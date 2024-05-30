@@ -11,9 +11,23 @@ import { loginUser,logoutUser } from '../Redux/user/user_action';
 const Navbar = () => {
 
   const {isAuth} = useSelector(state => state.user);
+
+  const {admin} = useSelector(state => state.admin);
   const { carts } = useSelector(state => state.user);
 
   const dispatch = useDispatch()
+
+  console.log(admin);
+
+  if (Object.keys(admin).length !== 0) {
+    return (
+      <nav className="navbar">
+        <div className="navbar-center">
+          <span className="admin-text">Admin</span>
+        </div>
+      </nav>
+    );
+  }
 
   return (
     <div className='navbar-container'>

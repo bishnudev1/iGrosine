@@ -26,6 +26,10 @@ const orderSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
+    buyerId: {
+        type: String,
+        required: true
+    },
     buyerName: {
         type: String,
         required: true
@@ -49,6 +53,10 @@ const orderSchema = new mongoose.Schema({
     orderedDate: {
         type: Date,
         default: Date.now()
+    },
+    isDelivered: {
+        type: Boolean,
+    default: false
     },
     deliveredDate: {
         type: String,
