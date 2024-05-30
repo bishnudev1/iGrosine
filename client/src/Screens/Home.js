@@ -254,6 +254,25 @@ Safety information:  -
       
       Whether enjoyed as a side dish, incorporated into main courses, or used as the star ingredient in a variety of recipes, fresh potatoes are a versatile and nutritious addition to any diet.`
     },
+    { id:13,
+      image: 'https://d1z88p83zuviay.cloudfront.net/ProductVariantThumbnailImages/70726a6d-f35e-480c-ba42-c95e808e3ec1_425x425.jpg',
+      name: 'Apple Red Delicious Washington (1 Kg)',
+      price: '209',
+      realPrice:'229',
+      seller:'Tata Groups',
+      off:'8',
+      desc:`Washingtons Red Delicious apple is an iconic fruit, beloved for its striking crimson skin and classic shape. Its deep red hue and glossy sheen make it instantly recognizable and popular for both fresh consumption and decoration. Beneath its vibrant exterior lies a crisp, juicy flesh with a predominantly sweet flavor and a hint of tartness, providing a refreshing experience.Renowned for its versatility, the Red Delicious apple is enjoyed as a convenient snack and adds sweetness and crunch to salads or cheese platters. Its also used in baking, adding natural sweetness and texture to pies and desserts. Nutritionally, its a good source of fiber, aiding digestion, and offering essential vitamins and minerals like vitamin C and potassium.Despite recent criticism, the Red Delicious remains a cherished classic in the Pacific Northwest, symbolizing the regions apple-growing heritage and commitment to quality. Whether fresh or in culinary creations, it continues to be a staple, appreciated for its rich history, vibrant appearance, and delightful taste.`
+    },
+    { id:14,
+      image: 'https://d1z88p83zuviay.cloudfront.net/ProductVariantThumbnailImages/b384f72b-a5bc-4d54-971a-1261239206a0_425x425.jpg',
+      name: 'Indian Gooseberry (1 Kg)',
+      price: '120',
+      realPrice:'140',
+      seller:'iGrocine',
+      off:'18',
+      desc:`
+      Powerhouse of Vitamin C and antioxidants, amla is a superfruit.`
+    },
   ];
 
 
