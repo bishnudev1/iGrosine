@@ -84,33 +84,33 @@ const Home = () => {
       desc:`
       Vicks Inhaler, a trusted companion for nasal congestion relief, comes in a convenient pack of 2 pieces, offering on-the-go respiratory support. This compact inhaler delivers refreshing menthol vapors directly to the nasal passages, providing instant relief from stuffiness and congestion caused by colds, allergies, or sinusitis. Its portable design fits seamlessly into pockets or purses, making it ideal for travel or daily use. Simply inhale deeply to experience the soothing sensation that clears your airways, allowing you to breathe easier and feel revitalized. With Vicks Inhaler, congestion doesn't stand a chance, ensuring comfort and relief whenever and wherever you need it.`
     },    {
-      id:6,
-      image: 'https://www.jiomart.com/images/product/original/491961048/vicks-inhaler-with-keychain-0-5-ml-pack-of-2-product-images-o491961048-p590514111-0-202203170358.jpg?im=Resize=(420,420)',
-      name: 'Vicks Inhaler (2 Pcs)',
-      seller: "Apollo Farmacy",
-      price: '79',
-      realPrice:'90',
+      id:7,
+      image: 'https://cdn01.pharmeasy.in/dam/products_otc/000591/abzorb-antifungal-dusting-powder-100gm-2-1712152664.jpg?dim=700x0&dpr=1&q=100',
+      name: 'Abzorb Antifungal Dusting Powder 100gm',
+      seller: "Pharmeasy",
+      price: '122',
+      realPrice:'142',
       off:'11',
       desc:`
-      Vicks Inhaler, a trusted companion for nasal congestion relief, comes in a convenient pack of 2 pieces, offering on-the-go respiratory support. This compact inhaler delivers refreshing menthol vapors directly to the nasal passages, providing instant relief from stuffiness and congestion caused by colds, allergies, or sinusitis. Its portable design fits seamlessly into pockets or purses, making it ideal for travel or daily use. Simply inhale deeply to experience the soothing sensation that clears your airways, allowing you to breathe easier and feel revitalized. With Vicks Inhaler, congestion doesn't stand a chance, ensuring comfort and relief whenever and wherever you need it.`
+      Abzorb Anti Fungal Powder is a topical antifungal dusting powder. It is recommended for local fungal infections arising from excess heat or friction rashes. Abzorb Anti Fungal Powder uses a 2X sweat control formula that prevents itches by minimising excess sweat. For this reason, it is a top recommendation of many skin specialists.`
     },    {
-      id:5,
-      image: 'https://www.pharmavends.com/userspics/2d6860a07cc0d2a10ab0883e35371317.jpg',
-      name: 'BELOVIT-A Tablets',
-      seller: "Apollo Farmacy",
-      realPrice:'70',
-      price: '36',
-      off:'48',
-      desc:`Belovit-A tablets are a comprehensive multivitamin supplement tailored to support overall health and well-being. With a blend of essential vitamins and minerals, including Vitamin A, Vitamin D, Vitamin E, Vitamin C, and B-complex vitamins, these tablets offer a holistic approach to nutritional support. They are meticulously formulated to address potential deficiencies, boost immune function, promote healthy skin, support bone health, and enhance energy levels. Whether for everyday health maintenance or to address specific nutritional needs, Belovit-A tablets serve as a convenient and effective way to ensure your body receives the vital nutrients it requires for optimal functioning.`
+      id:8,
+      image: 'https://cdn01.pharmeasy.in/dam/products_otc/270382/scalpe-plus-anti-dandruff-shampoo-bottle-of-75-ml-2-1671741035.jpg?dim=700x0&dpr=1&q=100',
+      name: 'Scalpe Plus Anti Dandruff Shampoo Bottle Of 75 Ml',
+      seller: "Pharmeasy",
+      realPrice:'306.5',
+      price: '229',
+      off:'25',
+      desc:`Scalpe Plus Shampoo is a proven shampoo for the treatment of dandruff-related issues. The ingredients are based on the ketoconazole + ZPTO formula, which is renowned and recognized across the globe for its effectiveness against dandruff. Ketoconazole works by fighting against the primary cause of dandruff in humans, the fungus Malassezia. By destroying this fungus and with regular use even eliminating it from the scalp, Scalpe Shampoo can provide long-term relief from dandruff. Regular use of Scalpe is also great for your hair as the shampoo base conditions your hair making it softer. From the IMS Prescription Audit MAT (Mar 20) Scalpe Plus was rated as the most prescribed anti-dandruff shampoo currently on the market, especially due to its ability to fight off recurring dandruff.`
     },
     {
-      id:6,
-      image: 'https://www.jiomart.com/images/product/original/491961048/vicks-inhaler-with-keychain-0-5-ml-pack-of-2-product-images-o491961048-p590514111-0-202203170358.jpg?im=Resize=(420,420)',
-      name: 'Vicks Inhaler (2 Pcs)',
-      seller: "Apollo Farmacy",
-      price: '79',
-      realPrice:'90',
-      off:'11',
+      id:9,
+      image: 'https://cdn01.pharmeasy.in/dam/products_otc/O57113/dabur-honey-with-20-extra-bottle-of-300gm-2-1708929109.jpg?dim=700x0&dpr=1&q=100',
+      name: 'Dabur Honey With 20% Extra Bottle Of 300gm',
+      seller: "Pharmeasy",
+      price: '110',
+      realPrice:'120',
+      off:'8',
       desc:`
       Vicks Inhaler, a trusted companion for nasal congestion relief, comes in a convenient pack of 2 pieces, offering on-the-go respiratory support. This compact inhaler delivers refreshing menthol vapors directly to the nasal passages, providing instant relief from stuffiness and congestion caused by colds, allergies, or sinusitis. Its portable design fits seamlessly into pockets or purses, making it ideal for travel or daily use. Simply inhale deeply to experience the soothing sensation that clears your airways, allowing you to breathe easier and feel revitalized. With Vicks Inhaler, congestion doesn't stand a chance, ensuring comfort and relief whenever and wherever you need it.`
     },    {
