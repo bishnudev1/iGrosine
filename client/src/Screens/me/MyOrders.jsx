@@ -184,7 +184,9 @@ const MyOrders = () => {
             <p className='middle-order-card-price'>₹{item.itemPrice}</p>
           </div>
           <div className='right-order-card'>
-            <p className='right-order-card-delivary-date'>{item.deliveredDate}</p>
+            <p className='right-order-card-delivary-date'>{
+              item.isDelivered ? "Hurrah 🥳" : item.deliveredDate
+            }</p>
             <p className='right-order-card-delivary-done'>{item.status}</p>
      {
       item.deliveredDate === "You'll get 50% money within 5-7 days." ? null :        <div className='right-order-card-cancel-review'>
