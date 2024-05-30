@@ -83,6 +83,46 @@ const Home = () => {
       off:'11',
       desc:`
       Vicks Inhaler, a trusted companion for nasal congestion relief, comes in a convenient pack of 2 pieces, offering on-the-go respiratory support. This compact inhaler delivers refreshing menthol vapors directly to the nasal passages, providing instant relief from stuffiness and congestion caused by colds, allergies, or sinusitis. Its portable design fits seamlessly into pockets or purses, making it ideal for travel or daily use. Simply inhale deeply to experience the soothing sensation that clears your airways, allowing you to breathe easier and feel revitalized. With Vicks Inhaler, congestion doesn't stand a chance, ensuring comfort and relief whenever and wherever you need it.`
+    },    {
+      id:6,
+      image: 'https://www.jiomart.com/images/product/original/491961048/vicks-inhaler-with-keychain-0-5-ml-pack-of-2-product-images-o491961048-p590514111-0-202203170358.jpg?im=Resize=(420,420)',
+      name: 'Vicks Inhaler (2 Pcs)',
+      seller: "Apollo Farmacy",
+      price: '79',
+      realPrice:'90',
+      off:'11',
+      desc:`
+      Vicks Inhaler, a trusted companion for nasal congestion relief, comes in a convenient pack of 2 pieces, offering on-the-go respiratory support. This compact inhaler delivers refreshing menthol vapors directly to the nasal passages, providing instant relief from stuffiness and congestion caused by colds, allergies, or sinusitis. Its portable design fits seamlessly into pockets or purses, making it ideal for travel or daily use. Simply inhale deeply to experience the soothing sensation that clears your airways, allowing you to breathe easier and feel revitalized. With Vicks Inhaler, congestion doesn't stand a chance, ensuring comfort and relief whenever and wherever you need it.`
+    },    {
+      id:5,
+      image: 'https://www.pharmavends.com/userspics/2d6860a07cc0d2a10ab0883e35371317.jpg',
+      name: 'BELOVIT-A Tablets',
+      seller: "Apollo Farmacy",
+      realPrice:'70',
+      price: '36',
+      off:'48',
+      desc:`Belovit-A tablets are a comprehensive multivitamin supplement tailored to support overall health and well-being. With a blend of essential vitamins and minerals, including Vitamin A, Vitamin D, Vitamin E, Vitamin C, and B-complex vitamins, these tablets offer a holistic approach to nutritional support. They are meticulously formulated to address potential deficiencies, boost immune function, promote healthy skin, support bone health, and enhance energy levels. Whether for everyday health maintenance or to address specific nutritional needs, Belovit-A tablets serve as a convenient and effective way to ensure your body receives the vital nutrients it requires for optimal functioning.`
+    },
+    {
+      id:6,
+      image: 'https://www.jiomart.com/images/product/original/491961048/vicks-inhaler-with-keychain-0-5-ml-pack-of-2-product-images-o491961048-p590514111-0-202203170358.jpg?im=Resize=(420,420)',
+      name: 'Vicks Inhaler (2 Pcs)',
+      seller: "Apollo Farmacy",
+      price: '79',
+      realPrice:'90',
+      off:'11',
+      desc:`
+      Vicks Inhaler, a trusted companion for nasal congestion relief, comes in a convenient pack of 2 pieces, offering on-the-go respiratory support. This compact inhaler delivers refreshing menthol vapors directly to the nasal passages, providing instant relief from stuffiness and congestion caused by colds, allergies, or sinusitis. Its portable design fits seamlessly into pockets or purses, making it ideal for travel or daily use. Simply inhale deeply to experience the soothing sensation that clears your airways, allowing you to breathe easier and feel revitalized. With Vicks Inhaler, congestion doesn't stand a chance, ensuring comfort and relief whenever and wherever you need it.`
+    },    {
+      id:6,
+      image: 'https://www.jiomart.com/images/product/original/491961048/vicks-inhaler-with-keychain-0-5-ml-pack-of-2-product-images-o491961048-p590514111-0-202203170358.jpg?im=Resize=(420,420)',
+      name: 'Vicks Inhaler (2 Pcs)',
+      seller: "Apollo Farmacy",
+      price: '79',
+      realPrice:'90',
+      off:'11',
+      desc:`
+      Vicks Inhaler, a trusted companion for nasal congestion relief, comes in a convenient pack of 2 pieces, offering on-the-go respiratory support. This compact inhaler delivers refreshing menthol vapors directly to the nasal passages, providing instant relief from stuffiness and congestion caused by colds, allergies, or sinusitis. Its portable design fits seamlessly into pockets or purses, making it ideal for travel or daily use. Simply inhale deeply to experience the soothing sensation that clears your airways, allowing you to breathe easier and feel revitalized. With Vicks Inhaler, congestion doesn't stand a chance, ensuring comfort and relief whenever and wherever you need it.`
     },
   ];
 

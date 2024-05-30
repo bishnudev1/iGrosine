@@ -759,6 +759,7 @@ a{
   text-align: center;
   border: .5px solid grey;
   padding: 10px;
+  margin-bottom: 10px;
   width: 180px;
   border-radius: 7px;
 }
