@@ -105,24 +105,70 @@ const Home = () => {
     },
     {
       id:9,
-      image: 'https://cdn01.pharmeasy.in/dam/products_otc/O57113/dabur-honey-with-20-extra-bottle-of-300gm-2-1708929109.jpg?dim=700x0&dpr=1&q=100',
-      name: 'Dabur Honey With 20% Extra Bottle Of 300gm',
-      seller: "Pharmeasy",
-      price: '110',
-      realPrice:'120',
-      off:'8',
+      image: 'https://res.fkhealthplus.com/incom/images/product/Dabur-Ashwagandharishta-Syrup-1605684367-10027411-1.jpg',
+      name: 'Dabur Ashwagandharishta Syrup 680 ml',
+      seller: "Flipkart Health+",
+      price: '246',
+      realPrice:'328',
+      off:'25',
       desc:`
-      Vicks Inhaler, a trusted companion for nasal congestion relief, comes in a convenient pack of 2 pieces, offering on-the-go respiratory support. This compact inhaler delivers refreshing menthol vapors directly to the nasal passages, providing instant relief from stuffiness and congestion caused by colds, allergies, or sinusitis. Its portable design fits seamlessly into pockets or purses, making it ideal for travel or daily use. Simply inhale deeply to experience the soothing sensation that clears your airways, allowing you to breathe easier and feel revitalized. With Vicks Inhaler, congestion doesn't stand a chance, ensuring comfort and relief whenever and wherever you need it.`
-    },    {
-      id:6,
-      image: 'https://www.jiomart.com/images/product/original/491961048/vicks-inhaler-with-keychain-0-5-ml-pack-of-2-product-images-o491961048-p590514111-0-202203170358.jpg?im=Resize=(420,420)',
-      name: 'Vicks Inhaler (2 Pcs)',
-      seller: "Apollo Farmacy",
-      price: '79',
-      realPrice:'90',
-      off:'11',
+      Pack Of- 1 ,
+
+Quantity- 680 ml ,
+
+Container Type- Bottle , 
+
+Food Preference: - Vegetarian ,
+
+Mfg Licence No:- M.L.A -1408/86  ,
+
+Product Information-  Dabur Ashwagandharishta is a potent formulation comprising herbs like Ashwagandha, Mushali, Manjishtha, Haritaki etc, which are goood for physical and mental health.
+
+  Useful in nervous disorders improves memory, used in epilepsy, insanity, infertility and in piles and also useful in infertility.
+  Treats burning sensation of feet and palms.
+  Useful in treating tension, anxiety and general weakness.
+  Also, helpful in treating physical and mental disorders,  
+
+
+Ingredients: - Ashwagandha, Sweta Musli, Manjishtha, Hareetaki, Haridra, Daruharidra, Yashtimadhu, Rasna, Vidari Kand, Arjun Tvak, Mustaka, Trivrit, Ananta Mool, Krishna Sariva, Rakta Chandan, Chandan, Vacha, Chitrak Mool, Dhatakipusph, Madhu, Shunthi, Maric
+
+Direction for use/Dosage: -
+Take 1 to 2 tablespoonful (15 to 30ml) Dabur Ashwagandharishta with an equal quantity of water after meals or as directed by the physician.  ,
+
+Storage instructions: -
+
+  Store in a cool, dry & dark place
+  Protect from direct sunlight  .
+
+Safety information:  -
+  Read the label carefully before use
+  Do not exceed the recommended dose
+  Keep out of the reach and sight of children.  
+`
+    },    
+    {
+      id:10,
+      image: 'https://res.fkhealthplus.com/incom/images/product/Dettol-Multi-Purpose-Disinfectant-Liquid-Lime-Fresh-1678857029-10064165-1.jpg',
+      name: 'Dettol Multi-Purpose Disinfectant Liquid Lime Fresh 1 L',
+      seller: "Dettol ",
+      price: '342',
+      realPrice:'382',
+      off:'17',
       desc:`
-      Vicks Inhaler, a trusted companion for nasal congestion relief, comes in a convenient pack of 2 pieces, offering on-the-go respiratory support. This compact inhaler delivers refreshing menthol vapors directly to the nasal passages, providing instant relief from stuffiness and congestion caused by colds, allergies, or sinusitis. Its portable design fits seamlessly into pockets or purses, making it ideal for travel or daily use. Simply inhale deeply to experience the soothing sensation that clears your airways, allowing you to breathe easier and feel revitalized. With Vicks Inhaler, congestion doesn't stand a chance, ensuring comfort and relief whenever and wherever you need it.`
+      Dettol Hygiene Liquid provides expert protection against more than 100 illness-causing germs and can be used on many surfaces in your home for infection control purposes and for general disinfection. Dettol Disinfectant liquid can also be used for personal hygiene. Add dettol to bathing water and laundry to kill germs or use it as a household cleaning agent on hard surfaces to disinfect and kill germs around the home. It has a fresh pine fragrance. Keep out of reach of children, Do not use undiluted. For external use only. Avoid contact with eyes. In case of accidental contact with eyes, wash immediately with water. Seek medical advice immediately, if swallowed. It comes in a 200ml bottle.`
+    },
+    {
+      id:11,
+      image: 'https://www.netmeds.com/images/product-v1/600x600/845922/dr_reckeweg_arnica_montana_200_liquid_11_ml_0.jpg',
+      name: 'Dr. Reckeweg Arnica Montana 200 Liquid 11 ml',
+      seller: "Dr. Willmar Schwabe India Pvt. Ltd. A-36, Sector-60, Uttar Pradesh, Noida – 201304.",
+      price: '140',
+      realPrice:'170',
+      off:'17',
+      desc:`
+      Reckeweg Arnica Mont Dilution is extremely useful in the treatment of post-injury bruises that causes pain in the joints and muscular cramps. It is also an effective remedy for the treatment of mouth ulcers and bleeding gums. It also helps in reducing soreness and stops bleeding.Arnica is used topically for a wide range of conditions, including bruises, sprains, muscle aches, wound healing, superficial phlebitis, joint pain, inflammation from insect bites, and swelling from broken bones. More recent studies suggest it may also be helpful in the treatment of burns.
+      
+      DIRECTIONS: Adults & children above 12 years: 10 drops orally 3 times daily, or as directed by a health care professional. WARNINGS: Consult a physician for use in children under 12 years of age`
     },
   ];
 
