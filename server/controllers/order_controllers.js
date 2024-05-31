@@ -38,7 +38,7 @@ exports.updateOrderStatus = async (req, res) => {
 
         console.log("Calling updateOrderStatus");
 
-        console.log(item);
+        console.log("item",item);
 
         // Validate input fields
         if (!buyerId || !status || !item) {
@@ -51,7 +51,7 @@ exports.updateOrderStatus = async (req, res) => {
 
         const order = orders[0];
 
-        console.log(order);
+        console.log("order",order);
 
         if (!order) {
             return res.status(404).json({ success: false, message: "Order not found" });
@@ -95,6 +95,7 @@ exports.updateOrderStatus = async (req, res) => {
 
         const userOrder = user.orders.find(order => order.buyerId.toString() === buyerId.toString());
         if (userOrder) {
+            console.log("userOrder",userOrder);
             userOrder.status = order.status;
             userOrder.isDelivered = status === "Delivered" ? true : false;
             user.markModified('orders');

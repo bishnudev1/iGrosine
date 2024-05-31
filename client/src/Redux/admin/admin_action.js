@@ -109,6 +109,8 @@ export const registerAdmin = (name,email,password) => async(dispatch) => {
                 withCredentials:true,
             }
         );console.log('calling 2');
+
+        console.log("item",item);
         
             console.log(resp.data.data);
         
