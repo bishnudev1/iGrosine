@@ -170,6 +170,143 @@ Safety information:  -
       
       DIRECTIONS: Adults & children above 12 years: 10 drops orally 3 times daily, or as directed by a health care professional. WARNINGS: Consult a physician for use in children under 12 years of age`
     },
+    {
+      id:12,
+      image: 'https://res.fkhealthplus.com/incom/images/product/Revital-H-Complete-Multivitamin-for-Men-with-Natural-Ginseng-1714028737-10045121-1.jpg',
+      name: 'Revital H Complete Multivitamin for Men with Natural Ginseng 60 Capsules',
+      seller: "Flipkart Health+",
+      realPrice:'600',
+      price: '501',
+      off:'16',
+      desc:`   Revital H multivitamin supplement capsules for daily health is a balanced combination of Natural Ginseng, 10 Vitamins and 9 minerals which can help fill in nutritional gaps and support general well-being for a healthy, active lifestyle
+      Its key ingredients, Natural Ginseng, Vitamin B Complex and Iron, help support daily energy needs, and fight tiredness throughout the day
+      Daily essential vitamins, multivitamins and minerals such as vitamin C, vitamin D and Zinc help in improving immunity preventing frequent illness
+      Natural Ginseng and Magnesium, improve mental alertness and concentration, and increase the ability to manage stress
+    Nutritional information (approximate values)-
+    
+    Per serving (1.39/capsule)-
+    
+    Energy- 1.9 kcal
+    
+    Protein - 0.01 g
+    
+    Carbohydrate - 0.03 g
+    
+    Total sugars- 0.026 g
+    
+    Added sugars- 0.000 g
+    
+    Fat- 0.195 g
+    
+    Saturated fat- 0.034 g            
+    
+    Trans fat - 0.006 g
+    
+    Cholesterol - 0.000 mg
+    
+    Sodium-0.700 mg
+    
+    Vitamin a -1500 IU
+    
+    Vitamin b1 - 1mg
+    
+    Vitamin b2- 1.4 mg
+    
+    Vitamin b3- 10 mg
+    
+    Vitamin b6- 0.8 mg
+    
+    Vitamin b12- 0.8 mcg
+    
+    Vitamin c - 33 mg
+    
+    Vitamin d3- 300 IU
+    
+    Vitamin e- 7 mg
+    
+    Folic acid-0.08 mg
+    
+    Calcium-76.9 mg
+    
+    Phosphorus- 59.43 mg
+    
+    Zinc- 10.29 mg
+    
+    Iron- 10 mg
+    
+    Magnesium- 3.13 mg
+    
+    Potassium- 2.07 mg
+    
+    Ingredients - Vehicle (peanut oil), minerals, gelatin food grade, bulking  agent (460i) ,  humectant (422), vitamins, ginseng root extract, emulsifier ,  lubricant (hydrogenated vegetable oil), thickner (beeswax white),  (preservative (211), colours (110, 124, 133) and antioxidant (320).
+    Recommended usage: For adult men, one capsule daily after meal take a break of 15 days after 3 months of daily usage. Not to exceed the stated recommended daily usage. Not for medicinal use
+    
+    Storage Information- Store in a cool dry place protected from light. `
+    },
+    {
+      id:13,
+      image: 'https://res.fkhealthplus.com/incom/images/product/Revital-H-Complete-Multivitamin-for-Women-with-Natural-Ginseng-1714027755-10026943-1.jpg',
+      name: 'Revital H Complete Multivitamin for Women with Natural Ginseng 30 Tablets',
+      seller: "Flipkart Health+",
+      realPrice:'400',
+      price: '334',
+      off:'16',
+      desc:`   Revital H multivitamin supplement capsules for daily health is a balanced combination of Natural Ginseng, 10 Vitamins and 9 minerals which can help fill in nutritional gaps and support general well-being for a healthy, active lifestyle
+      Its key ingredients, Natural Ginseng, Vitamin B Complex and Iron, help support daily energy needs, and fight tiredness throughout the day
+      Daily essential vitamins, multivitamins and minerals such as vitamin C, vitamin D and Zinc help in improving immunity preventing frequent illness
+      Natural Ginseng and Magnesium, improve mental alertness and concentration, and increase the ability to manage stress
+    Ingredients - Minerals, Bulking agent (460i),vitamins, Disintegrant (466), ginseng root extract, glazing agent (1203), binding Agent(1201), Anti Sticking Agent (470), Dusting Powder for Coating (553iii), Colour (171), Emulsifier (433, 322I)`
+    },
+    {
+      id:14,
+      image: 'https://res.fkhealthplus.com/incom/images/product/Sugar-Free-Natura-Sachets-1596263845-10012992-1.jpg',
+      name: 'Sugar Free Natura Low Calorie Sweetener 50 x 0.75 g',
+      seller: "Sugar Free Natura",
+      realPrice:'80',
+      price: '66',
+      off:'17',
+      desc:`Sugar-Free Natura Low-Calorie Sweetener is made from Aspartame, a protein derivative. It is a nutritious, safe & ideal low-calorie sugar substitute, giving you the sweetness and taste of sugar but with negligible calories to worry about! Sugar-Free Gold helps you cut down on excess sugar calories to keep you fit. While an hour of the walk may help you to lose 350 calories (approx), by making Sugar-Free a part of your fitness plan, you can avoid 500 calories a day. Burning calories is difficult; avoiding them is easy with Sugar-Free Gold.  `
+    },
+    {
+      id:5,
+      image: 'https://www.pharmavends.com/userspics/2d6860a07cc0d2a10ab0883e35371317.jpg',
+      name: 'BELOVIT-A Tablets',
+      seller: "Apollo Farmacy",
+      realPrice:'70',
+      price: '36',
+      off:'48',
+      desc:`Belovit-A tablets are a comprehensive multivitamin supplement tailored to support overall health and well-being. With a blend of essential vitamins and minerals, including Vitamin A, Vitamin D, Vitamin E, Vitamin C, and B-complex vitamins, these tablets offer a holistic approach to nutritional support. They are meticulously formulated to address potential deficiencies, boost immune function, promote healthy skin, support bone health, and enhance energy levels. Whether for everyday health maintenance or to address specific nutritional needs, Belovit-A tablets serve as a convenient and effective way to ensure your body receives the vital nutrients it requires for optimal functioning.`
+    },
+    {
+      id:5,
+      image: 'https://www.pharmavends.com/userspics/2d6860a07cc0d2a10ab0883e35371317.jpg',
+      name: 'BELOVIT-A Tablets',
+      seller: "Apollo Farmacy",
+      realPrice:'70',
+      price: '36',
+      off:'48',
+      desc:`Belovit-A tablets are a comprehensive multivitamin supplement tailored to support overall health and well-being. With a blend of essential vitamins and minerals, including Vitamin A, Vitamin D, Vitamin E, Vitamin C, and B-complex vitamins, these tablets offer a holistic approach to nutritional support. They are meticulously formulated to address potential deficiencies, boost immune function, promote healthy skin, support bone health, and enhance energy levels. Whether for everyday health maintenance or to address specific nutritional needs, Belovit-A tablets serve as a convenient and effective way to ensure your body receives the vital nutrients it requires for optimal functioning.`
+    },
+    {
+      id:5,
+      image: 'https://www.pharmavends.com/userspics/2d6860a07cc0d2a10ab0883e35371317.jpg',
+      name: 'BELOVIT-A Tablets',
+      seller: "Apollo Farmacy",
+      realPrice:'70',
+      price: '36',
+      off:'48',
+      desc:`Belovit-A tablets are a comprehensive multivitamin supplement tailored to support overall health and well-being. With a blend of essential vitamins and minerals, including Vitamin A, Vitamin D, Vitamin E, Vitamin C, and B-complex vitamins, these tablets offer a holistic approach to nutritional support. They are meticulously formulated to address potential deficiencies, boost immune function, promote healthy skin, support bone health, and enhance energy levels. Whether for everyday health maintenance or to address specific nutritional needs, Belovit-A tablets serve as a convenient and effective way to ensure your body receives the vital nutrients it requires for optimal functioning.`
+    },
+    {
+      id:5,
+      image: 'https://www.pharmavends.com/userspics/2d6860a07cc0d2a10ab0883e35371317.jpg',
+      name: 'BELOVIT-A Tablets',
+      seller: "Apollo Farmacy",
+      realPrice:'70',
+      price: '36',
+      off:'48',
+      desc:`Belovit-A tablets are a comprehensive multivitamin supplement tailored to support overall health and well-being. With a blend of essential vitamins and minerals, including Vitamin A, Vitamin D, Vitamin E, Vitamin C, and B-complex vitamins, these tablets offer a holistic approach to nutritional support. They are meticulously formulated to address potential deficiencies, boost immune function, promote healthy skin, support bone health, and enhance energy levels. Whether for everyday health maintenance or to address specific nutritional needs, Belovit-A tablets serve as a convenient and effective way to ensure your body receives the vital nutrients it requires for optimal functioning.`
+    },
   ];
 
   const dummyGroceryData = [
@@ -269,7 +406,7 @@ Safety information:  -
       price: '120',
       realPrice:'140',
       seller:'iGrocine',
-      off:'18',
+      off:'11',
       desc:`
       Powerhouse of Vitamin C and antioxidants, amla is a superfruit.`
     },
