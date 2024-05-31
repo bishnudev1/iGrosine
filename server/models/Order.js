@@ -50,11 +50,18 @@ const orderSchema = new mongoose.Schema({
         type: String,
         default: "Your item will be shipped soon."
     },
+    orderedType:{
+        type: String,
+        required: true
+    },
     orderedDate: {
         type: Date,
         default: Date.now()
     },
     isDelivered: {
+        type: Boolean,
+    default: false
+    },    isCancelled: {
         type: Boolean,
     default: false
     },

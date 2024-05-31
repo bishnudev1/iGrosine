@@ -450,7 +450,18 @@ a{
   padding-inline: 40px;
   padding-block: 15px;
 }
+.checkout-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
+.sub-checkout-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 80%;
+}
 .items-container {
   flex: 4; /* Take up 4/5 of the space */
 
@@ -467,11 +478,43 @@ a{
   height: 150px;
   width: 150px;
   border-radius: 150%;
+  padding-right: 15px;
 }
 
 .item-name{
   font-size: 25px;
   font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.payment-options {
+  margin-right: 20px;
+}
+
+.grand-total-details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.grand-total-details p {
+  margin: 5px 0; /* Add some margin between paragraphs */
+}
+
+.delivery-charge {
+  color: red;
+  margin-left: 10px; /* Add margin to separate the delivery charge from the grand total */
+}
+
+.place-details {
+  margin-top: 20px;
+}
+
+.choose-payment-option {
+  font-weight: bold;
+}
+
+.delivery-charge {
+  color: red;
 }
 
 .item-seller{
@@ -487,6 +530,7 @@ a{
 .item-desc{
   padding-top: 10px;
   padding-left: 10px;
+  width: 100%;
 }
 
 .remove-item{

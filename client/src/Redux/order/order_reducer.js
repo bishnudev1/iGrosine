@@ -3,6 +3,7 @@ import * as ActionType from "./order_types";
 
 const initialState = {
   myOrders:[],
+  userLocation: {}
 };
 
 export const orderReducer = (state = initialState, action) => {
@@ -13,11 +14,21 @@ export const orderReducer = (state = initialState, action) => {
           ...state,
         data: ""
           };
-          case ActionType.ONLINE_ORDER:
+          case ActionType.ONLINE_ORDER_MULTIPLE:
             return {
                 ...state,
               data: ""
                 };
+                case ActionType.ONLINE_ORDER_COD:
+                  return {
+                      ...state,
+                    data: ""
+                      };
+                      case ActionType.ONLINE_ORDER_MULTIPLE_COD:
+                        return {
+                            ...state,
+                          data: ""
+                            };
           case ActionType.GET_MY_ORDERS:
             return {
                 ...state,
@@ -28,6 +39,12 @@ export const orderReducer = (state = initialState, action) => {
                       ...state,
                     data: ""
                       };
+                      case ActionType.GET_LOCATION:
+                        console.log("action.payload",action.payload);
+                        return {
+                            ...state,
+                          userLocation: action.payload
+                            };
     default:
       return state;
   }

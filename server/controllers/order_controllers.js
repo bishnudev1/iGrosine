@@ -34,7 +34,11 @@ exports.updateOrderStatus = async (req, res) => {
     try {
         const { buyerId, status, item } = req.body;
 
+        console.log(buyerId);
+
         console.log("Calling updateOrderStatus");
+
+        console.log("item",item);
 
         // Validate input fields
         if (!buyerId || !status || !item) {
@@ -47,7 +51,7 @@ exports.updateOrderStatus = async (req, res) => {
 
         const order = orders[0];
 
-        console.log(order);
+        console.log("order",order);
 
         if (!order) {
             return res.status(404).json({ success: false, message: "Order not found" });
@@ -69,6 +73,7 @@ exports.updateOrderStatus = async (req, res) => {
                 break;
             case "Delivered":
                 order.status = `Your item is delivered successfully at ${currentDate}`;
+                order.isDelivered = true;
                 break;
             default:
                 return res.status(400).json({ success: false, message: "Invalid status" });
@@ -90,8 +95,9 @@ exports.updateOrderStatus = async (req, res) => {
 
         const userOrder = user.orders.find(order => order.buyerId.toString() === buyerId.toString());
         if (userOrder) {
+            console.log("userOrder",userOrder);
             userOrder.status = order.status;
-            userOrder.isDelivered = true;
+            userOrder.isDelivered = status === "Delivered" ? true : false;
             user.markModified('orders');
             await user.save();
         }
@@ -337,7 +343,8 @@ exports.cancelOrder = async (req, res) => {
             year: 'numeric'
         });
         user.orders[orderIndex].status = `Cancelled by you on ${currentDate}`;
-        user.orders[orderIndex].deliveredDate = "You'll get 50% money within 5-7 days.";
+        user.orders[orderIndex].isCancelled = true;
+        user.orders[orderIndex].deliveredDate = user.orders[orderIndex].orderedType === "online" ?  "You'll get 50% money within 5-7 days." : "Thanks for choosing us.";
 
         // Mark the 'orders' array as modified
         user.markModified('orders');
@@ -391,6 +398,7 @@ exports.orderItemByCarts = async (req, res) => {
             itemName,
             itemImage,
             buyerId,
+            orderedType:"online",
             buyerName,
             buyerEmail,
             itemId,
@@ -432,6 +440,116 @@ exports.orderItemByCarts = async (req, res) => {
     }
 };
 
+exports.orderItemByCartsCOD = async (req, res) => {
+    try {
+        const { price, itemName,itemImage,buyerId, buyerName, buyerEmail,itemId,number,city,state } = req.body;
+
+        console.log(buyerName);
+
+        // Create and save the order using the Order model
+        const myOrder = await Order.create({
+            itemPrice: Number(price)+99,
+            itemName,
+            itemImage,
+            buyerId,
+            orderedType:"cod",
+            buyerName,
+            buyerEmail,
+            itemId,
+            number,
+            city,state,
+        });
+
+        // Retrieve the user based on the authenticated user's ID
+        const user = await User.findById(req.user._id);
+
+        user.orders.push(myOrder);
+
+        await user.save()
+
+        // console.log(`req.user._id$`,order);
+
+        sendEmail('Order Confirmation - iGrosine',`
+        <p>Dear ${buyerName},</p>
+        <img src="${itemImage}" alt="Shopping Image" style="height: 300px;" />
+        <p>Your order for ${itemName} has been placed successfully.</p>
+        <p>Thank you for shopping with us!</p>
+        <p>You can cancel the order within 24 hours, but only 50% of the amount will be refunded.</p>
+    `,buyerEmail );
+
+        res.status(200).json({
+            success: true,
+            myOrder
+        });
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).json({
+            success: false,
+            message: "Internal Server Error!"
+        });
+    }finally{
+        const user = await User.findById(req.user._id);
+        user.carts = [];
+        await user.save();
+    }
+};
+
+
+exports.orderItemCOD = async (req, res) => {
+    try {
+        const { price, itemName,itemImage,buyerId, buyerName, buyerEmail,itemId,number,city,state } = req.body;
+
+        console.log(buyerName);
+
+        console.log(typeof price);
+        console.log(price);
+
+        console.log(Number(price) + Number(99));
+
+
+        // Create and save the order using the Order model
+        const myOrder = await Order.create({
+            itemPrice: Number(price)+99,
+            itemName,
+            itemImage,
+            buyerId,
+            orderedType:"cod",
+            buyerName,
+            buyerEmail,
+            itemId,
+            number,
+            city,state,
+        });
+
+        // Retrieve the user based on the authenticated user's ID
+        const user = await User.findById(req.user._id);
+
+        user.orders.push(myOrder);
+
+        await user.save()
+
+        // console.log(`req.user._id$`,order);
+
+        sendEmail('Order Confirmation - iGrosine',`
+        <p>Dear ${buyerName},</p>
+        <img src="${itemImage}" alt="Shopping Image" style="height: 300px;" />
+        <p>Your order for ${itemName} has been placed successfully.</p>
+        <p>Thank you for shopping with us!</p>
+        <p>You can cancel the order within 24 hours, but only 50% of the amount will be refunded.</p>
+    `, buyerEmail);
+
+        res.status(200).json({
+            success: true,
+            myOrder
+        });
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).json({
+            success: false,
+            message: "Internal Server Error!"
+        });
+    }
+};
 
 
 
@@ -457,6 +575,7 @@ exports.orderItem = async (req, res) => {
             itemName,
             itemImage,
             buyerId,
+            orderedType:"online",
             buyerName,
             buyerEmail,
             itemId,
