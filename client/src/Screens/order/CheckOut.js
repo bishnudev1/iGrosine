@@ -1,20 +1,21 @@
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { onlineOrder, emptyOrder, onlineOrderMultiple} from '../../Redux/order/order_action';
+import { onlineOrder, emptyOrder, onlineOrderMultiple, onlineOrderCOD, onlineOrderMultipleCOD} from '../../Redux/order/order_action';
 import { toast } from 'react-toastify';
 const { v4: uuidv4 } = require('uuid');
 
 
-const CheckOut = () => {
+const CheckOut = ({user}) => {
 
   const dispatch = useDispatch()
 
   const location = useLocation();
-  const [selectedFullName, setSelectedFullName] = useState('');
+  const [selectedPayment, setSelectedPayment] = useState('');
+  const [selectedFullName, setSelectedFullName] = useState(user.displayName ?? "");
   const [selectedState, setSelectedState] = useState('');
   const [selectedCity, setSelectedCity] = useState('');
-  const [selectedEmail, setSelectedEmail] = useState('');
+  const [selectedEmail, setSelectedEmail] = useState(user.email ?? "");
   const [mobileNo, setMobileNo] = useState('');
 
   const { id,name, price, image } = location.state || {};
@@ -23,7 +24,15 @@ const CheckOut = () => {
 
   console.log(items);
 
+  console.log("User: ", user);
+
   console.log(name,price,id);
+
+  const handlePaymentChange = (e) => {
+    setSelectedPayment(e.target.value);
+
+    console.log(selectedPayment);
+  };
 
   const handleFullNameChange = (event) => {
     setSelectedFullName(event.target.value);
@@ -47,40 +56,70 @@ const CheckOut = () => {
 
   const handleConfirmOrder = () => {
     // Check if any field is empty
-    // if (!selectedFullName || !selectedState || !selectedCity || !mobileNo) {
-    //   toast('Please fill out all fields before confirming the order.');
-    //   return; // Exit the function if any field is empty
-    // }
+    if (!selectedFullName || !selectedState || !selectedCity || !mobileNo) {
+      toast('Please fill out all fields before confirming the order.');
+      return; // Exit the function if any field is empty
+    }
   
-    // Implement your logic for confirming the order here
-    console.log('Order confirmed!');
-    if(items === undefined){
-      dispatch(
-        onlineOrder(
-          price,
-          uuidv4(),
-          selectedFullName,
-          name,
-          image,
-          selectedEmail,
-          id,
-          mobileNo,
-          selectedCity,
-          selectedState
-        )
-      );
+    // // Implement your logic for confirming the order here
+    // console.log('Order confirmed!');
+
+
+    if(selectedPayment === "razorpay"){
+      console.log("COD is selected");
+      if(items === undefined){
+        dispatch(
+          onlineOrderCOD(
+            price,
+            uuidv4(),
+            selectedFullName,
+            name,
+            image,
+            selectedEmail,
+            id,
+            mobileNo,
+            selectedCity,
+            selectedState
+          )
+        );
+      }
+      else{
+        dispatch(onlineOrderMultipleCOD( uuidv4(),selectedFullName,selectedEmail,mobileNo,selectedCity,selectedState,items, Number(calculateTotal())))
+      }
+    }
+    else if(selectedPayment === "cod"){
+      console.log("Razorpay is selected");
+      if(items === undefined){
+        dispatch(
+          onlineOrder(
+            price,
+            uuidv4(),
+            selectedFullName,
+            name,
+            image,
+            selectedEmail,
+            id,
+            mobileNo,
+            selectedCity,
+            selectedState
+          )
+        );
+      }
+      else{
+        dispatch(onlineOrderMultiple( uuidv4(),selectedFullName,selectedEmail,mobileNo,selectedCity,selectedState,items, calculateTotal()))
+      }
     }
     else{
-      dispatch(onlineOrderMultiple( uuidv4(),selectedFullName,selectedEmail,mobileNo,selectedCity,selectedState,items, calculateTotal()))
+      toast("Please choose a payment method...");
     }
   };
 
   const calculateTotal = () => {
     if(items === undefined){
-      return price;
+      return Number(price);
     }
     else{
-      return items.reduce((total, item) => total + parseFloat(item.price), 0);
+      return Number(items.reduce((total, item) => total + parseFloat(item.price), 0));
     }
   }
   
@@ -89,18 +128,42 @@ const CheckOut = () => {
     <div className='checkout-container'>
       <div className='sub-checkout-container'>
       <div className='payment-options'>
-        <p className='choose-payment-option'>Choose Payment Details</p>
-        <input type='radio' id='razorpay' name='payment' value='razorpay' />
-        <label htmlFor='razorpay'>Online (Razorpay)</label>
-        <br />
-        <input type='radio' id='cod' name='payment' value='cod' />
-        <label htmlFor='cod'>Cash on Delivery (COD)</label>
-      </div>
-      <div className='grand-total-details'>
-        <p className='items-no'>Total items: {items === undefined ? "1" : items.length}</p>
-        <p className='grand-total-amount'>Grand Total: ${calculateTotal()}/- only</p>
-        <button className='confirm-order' onClick={handleConfirmOrder}>Confirm Order</button>
-      </div>
+      <p className='choose-payment-option'>Choose Payment Details</p>
+      <input 
+        type='radio' 
+        id='razorpay' 
+        name='payment' 
+        value='razorpay' 
+        checked={selectedPayment === 'razorpay'} 
+        onChange={handlePaymentChange} 
+      />
+      <label htmlFor='razorpay'>Cash on Delivery (COD)</label>
+      <br />
+      <input 
+        type='radio' 
+        id='cod' 
+        name='payment' 
+        value='cod' 
+        checked={selectedPayment === 'cod'} 
+        onChange={handlePaymentChange} 
+      />
+      <label htmlFor='cod'>Online (Razorpay)</label>
+    </div>
+    <div className='grand-total-details'>
+          <p className='items-no'>Total items: {items === undefined ? "1" : items.length}</p>
+          <div style={{
+            display:"flex",
+            flexDirection:"row",
+            justifyContent:"center",
+            // alignItems:"center"
+          }}>
+          <p className='grand-total-amount'>Grand Total: ₹{calculateTotal()}/- only</p>
+          {selectedPayment === "razorpay" && <p className='delivery-charge' style={{
+            marginLeft:"5px"
+          }}> + ₹99</p>}
+          </div>
+          <button className='confirm-order' onClick={handleConfirmOrder}>Confirm Order</button>
+        </div>
       </div>
 
 

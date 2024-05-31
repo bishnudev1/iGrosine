@@ -13,11 +13,21 @@ export const orderReducer = (state = initialState, action) => {
           ...state,
         data: ""
           };
-          case ActionType.ONLINE_ORDER:
+          case ActionType.ONLINE_ORDER_MULTIPLE:
             return {
                 ...state,
               data: ""
                 };
+                case ActionType.ONLINE_ORDER_COD:
+                  return {
+                      ...state,
+                    data: ""
+                      };
+                      case ActionType.ONLINE_ORDER_MULTIPLE_COD:
+                        return {
+                            ...state,
+                          data: ""
+                            };
           case ActionType.GET_MY_ORDERS:
             return {
                 ...state,

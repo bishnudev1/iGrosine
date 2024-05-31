@@ -57,7 +57,7 @@ const App = () => {
                       isAuthenticated={isAuth}
                       redirect="/login"
                     >
-                      <CheckOut />
+                      <CheckOut user={data}/>
                     </ProtectedRoute>}/>
       <Route exact path='/view-item' element={<ViewItem />}/>
       <Route

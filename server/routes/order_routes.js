@@ -1,6 +1,6 @@
 const express = require('express');
 const {ensureAuth, ensureGuest} = require("../middleware/auth");
-const { orderItem, verifyPayment,getMyOrders, makeEmptyOrders, cancelOrder, addToCart, removeFromCart, getMyCarts, makeEmptyCarts, orderItemByCarts, getAllOrders, removeOrders, signupAdmin, loginAdmin, getAdmin, updateOrderStatus } = require('../controllers/order_controllers');
+const { orderItem, verifyPayment,getMyOrders, makeEmptyOrders, cancelOrder, addToCart, removeFromCart, getMyCarts, makeEmptyCarts, orderItemByCarts, getAllOrders, removeOrders, signupAdmin, loginAdmin, getAdmin, updateOrderStatus, orderItemCOD, orderItemByCartsCOD } = require('../controllers/order_controllers');
 const extractAdminFromCookie = require('../middleware/adminAuth');
 
 const router = express.Router();
@@ -9,8 +9,11 @@ router.route('/get-my-orders').get(ensureAuth, getMyOrders);
 
 router.route('/order-item').post(ensureAuth, orderItem);
 
+router.route('/order-item-cod').post(ensureAuth, orderItemCOD);
 
 router.route('/order-item-cart').post(ensureAuth, orderItemByCarts);
+
+router.route('/order-item-cart-cod').post(ensureAuth, orderItemByCartsCOD);
 
 router.route('/verify-payment').post(ensureAuth, verifyPayment);
 
