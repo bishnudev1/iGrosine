@@ -342,7 +342,8 @@ exports.cancelOrder = async (req, res) => {
             year: 'numeric'
         });
         user.orders[orderIndex].status = `Cancelled by you on ${currentDate}`;
-        user.orders[orderIndex].deliveredDate = "You'll get 50% money within 5-7 days.";
+        user.orders[orderIndex].isCancelled = true;
+        user.orders[orderIndex].deliveredDate = user.orders[orderIndex].orderedType === "online" ?  "You'll get 50% money within 5-7 days." : "Thanks for choosing us.";
 
         // Mark the 'orders' array as modified
         user.markModified('orders');
@@ -396,6 +397,7 @@ exports.orderItemByCarts = async (req, res) => {
             itemName,
             itemImage,
             buyerId,
+            orderedType:"online",
             buyerName,
             buyerEmail,
             itemId,
@@ -449,6 +451,7 @@ exports.orderItemByCartsCOD = async (req, res) => {
             itemName,
             itemImage,
             buyerId,
+            orderedType:"cod",
             buyerName,
             buyerEmail,
             itemId,
@@ -509,6 +512,7 @@ exports.orderItemCOD = async (req, res) => {
             itemName,
             itemImage,
             buyerId,
+            orderedType:"cod",
             buyerName,
             buyerEmail,
             itemId,
@@ -570,6 +574,7 @@ exports.orderItem = async (req, res) => {
             itemName,
             itemImage,
             buyerId,
+            orderedType:"online",
             buyerName,
             buyerEmail,
             itemId,

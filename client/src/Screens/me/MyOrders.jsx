@@ -189,10 +189,10 @@ const MyOrders = () => {
             }</p>
             <p className='right-order-card-delivary-done'>{item.status}</p>
      {
-      item.deliveredDate === "You'll get 50% money within 5-7 days." ? null :        <div className='right-order-card-cancel-review'>
+      item.deliveredDate === "You'll get 50% money within 5-7 days." || item.deliveredDate === "Thanks for choosing us."  ? null :        <div className='right-order-card-cancel-review'>
       <button className='right-order-card-review-btn'>⭐ Review</button>
       {
-        item.isDelivered ? null :  <button onClick={() => {cancelOrder(item._id, item.orderedDate)}} className='right-order-card-cancel-btn'>❌ Cancel</button>
+        item.isDelivered ? null :  <button onClick={() => {cancelOrder(item._id, item.orderedDate, item.orderedType)}} className='right-order-card-cancel-btn'>❌ Cancel</button>
       }
     </div>
      }

@@ -68,7 +68,7 @@ const AdminHome = () => {
             <td>{item.city}</td>
             <td>{item.state}</td>
             {
-              item.isDelivered ? <td>Delivered</td> :             <td>
+              item.isDelivered ? <td>Delivered</td> : item.deliveredDate === "You'll get 50% money within 5-7 days." || item.deliveredDate === "Thanks for choosing us."  ? <td>Cancelled by user</td>:             <td>
               <select value={orderStatus[item.buyerId] || ''} onChange={(e) => handleStatusChange(e, item.buyerId, item)}>
                 <option value="">Select Status</option>
                 <option value="Shipped">Shipped</option>
@@ -86,3 +86,6 @@ const AdminHome = () => {
 };
 
 export default AdminHome;
+
+
+// "You'll get 50% money within 5-7 days." : "Thanks for choosing us."
