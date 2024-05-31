@@ -463,7 +463,7 @@ exports.orderItemByCartsCOD = async (req, res) => {
 
         await user.save()
 
-        console.log(`req.user._id$`,order);
+        // console.log(`req.user._id$`,order);
 
         sendEmail('Order Confirmation - iGrosine',`
         <p>Dear ${buyerName},</p>

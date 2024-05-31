@@ -260,8 +260,10 @@ export const onlineOrderMultipleCOD = (buyerId,buyerName, buyerEmail, number, ci
                 withCredentials: true
             });
 
-            if (response.data && response.data.order) {
-                const order = response.data.order;
+            console.log(response.data.order);
+
+            if (response.data) {
+                const order = response.data;
                 orders.push(order);
                 console.log("Order placed for:", order);
             } else {
