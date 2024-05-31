@@ -173,7 +173,7 @@ Safety information:  -
   ];
 
   const dummyGroceryData = [
-    { id:7,
+    { id:12,
       image: 'https://www.jiomart.com/images/product/original/rvduzcik7k/goodness-grocery-premium-flax-seeds-for-hair-growth-seeds-for-eating-alsi-seeds-250gm-product-images-orvduzcik7k-p595135258-0-202211080844.jpg?im=Resize=(420,420)',
       name: 'Flex Seeds',
       price: '228',
@@ -183,7 +183,7 @@ Safety information:  -
       desc:`
       Flax seeds, also known as linseeds, are tiny nutritional powerhouses packed with omega-3 fatty acids, fiber, and essential nutrients. These small seeds offer a plethora of health benefits, including supporting heart health by lowering cholesterol and blood pressure levels. Rich in lignans, flax seeds possess antioxidant properties that may reduce the risk of cancer and promote hormonal balance. Additionally, their high fiber content aids in digestion and promotes regular bowel movements. Flax seeds can be easily incorporated into various dishes, such as smoothies, salads, yogurt, or baked goods, adding a nutty flavor and a nutritional boost to your diet.`
     },
-    { id:8,
+    { id:13,
       image: 'https://m.media-amazon.com/images/I/61XnH090DJS._AC_UF1000,1000_QL80_.jpg',
       name: 'Soya Chunk',
       price: '65',
@@ -194,7 +194,7 @@ Safety information:  -
 
       Soya chunks are incredibly versatile and can be used in a variety of dishes such as curries, stir-fries, soups, stews, and salads. They readily absorb flavors, making them a great addition to dishes with rich sauces or spices. Soya chunks are also easy to prepare, requiring just a brief soak in hot water or broth before use. Whether you're looking to add protein to your diet or exploring plant-based alternatives, soya chunks offer a convenient and nutritious option.`
     },
-    { id:9,
+    { id:14,
       image: 'https://cdn.zeptonow.com/production///tr:w-600,ar-3000-3000,pr-true,f-auto,q-80/cms/product_variant/0106346e-a7ef-497b-a9ff-18da5cb8d602.jpeg',
       name: 'Ladies Finger',
       price: '75',
@@ -209,7 +209,7 @@ Safety information:  -
       
       Whether you enjoy it as a crunchy snack, a flavorful addition to a curry, or a pickled condiment, ladies' finger is a nutritious and delicious vegetable that adds both flavor and health benefits to your meals.`
     },
-    { id:10,
+    { id:15,
       image: 'https://5.imimg.com/data5/QX/FQ/MY-68428614/lemon.jpeg',
       name: 'Green Lemon',
       price: '8',
@@ -226,7 +226,7 @@ Safety information:  -
       
       Whether you're squeezing lime juice over your favorite dish, mixing up a refreshing beverage, or using it in your skincare routine, green lemon adds a burst of flavor and freshness to a wide array of experiences.`
     },
-    { id:11,
+    { id:16,
       image: 'https://5.imimg.com/data5/AN/TT/YF/SELLER-107321628/gram-flour.jpg',
       name: 'Gram Flour',
       price: '239',
@@ -239,7 +239,7 @@ Safety information:  -
       
       If "ram flour" refers to something else, please provide more context, and I'd be happy to assist further.`
     },
-    { id:12,
+    { id:17,
       image: 'https://cdn.britannica.com/08/194708-050-56FF816A/potatoes.jpg',
       name: 'Fresh Potato',
       price: '48',
@@ -254,7 +254,7 @@ Safety information:  -
       
       Whether enjoyed as a side dish, incorporated into main courses, or used as the star ingredient in a variety of recipes, fresh potatoes are a versatile and nutritious addition to any diet.`
     },
-    { id:13,
+    { id:18,
       image: 'https://d1z88p83zuviay.cloudfront.net/ProductVariantThumbnailImages/70726a6d-f35e-480c-ba42-c95e808e3ec1_425x425.jpg',
       name: 'Apple Red Delicious Washington (1 Kg)',
       price: '209',
@@ -263,7 +263,7 @@ Safety information:  -
       off:'8',
       desc:`Washingtons Red Delicious apple is an iconic fruit, beloved for its striking crimson skin and classic shape. Its deep red hue and glossy sheen make it instantly recognizable and popular for both fresh consumption and decoration. Beneath its vibrant exterior lies a crisp, juicy flesh with a predominantly sweet flavor and a hint of tartness, providing a refreshing experience.Renowned for its versatility, the Red Delicious apple is enjoyed as a convenient snack and adds sweetness and crunch to salads or cheese platters. Its also used in baking, adding natural sweetness and texture to pies and desserts. Nutritionally, its a good source of fiber, aiding digestion, and offering essential vitamins and minerals like vitamin C and potassium.Despite recent criticism, the Red Delicious remains a cherished classic in the Pacific Northwest, symbolizing the regions apple-growing heritage and commitment to quality. Whether fresh or in culinary creations, it continues to be a staple, appreciated for its rich history, vibrant appearance, and delightful taste.`
     },
-    { id:14,
+    { id:19,
       image: 'https://d1z88p83zuviay.cloudfront.net/ProductVariantThumbnailImages/b384f72b-a5bc-4d54-971a-1261239206a0_425x425.jpg',
       name: 'Indian Gooseberry (1 Kg)',
       price: '120',

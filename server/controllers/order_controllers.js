@@ -34,7 +34,11 @@ exports.updateOrderStatus = async (req, res) => {
     try {
         const { buyerId, status, item } = req.body;
 
+        console.log(buyerId);
+
         console.log("Calling updateOrderStatus");
+
+        console.log(item);
 
         // Validate input fields
         if (!buyerId || !status || !item) {
@@ -69,6 +73,7 @@ exports.updateOrderStatus = async (req, res) => {
                 break;
             case "Delivered":
                 order.status = `Your item is delivered successfully at ${currentDate}`;
+                order.isDelivered = true;
                 break;
             default:
                 return res.status(400).json({ success: false, message: "Invalid status" });
@@ -91,7 +96,7 @@ exports.updateOrderStatus = async (req, res) => {
         const userOrder = user.orders.find(order => order.buyerId.toString() === buyerId.toString());
         if (userOrder) {
             userOrder.status = order.status;
-            userOrder.isDelivered = true;
+            userOrder.isDelivered = status === "Delivered" ? true : false;
             user.markModified('orders');
             await user.save();
         }
