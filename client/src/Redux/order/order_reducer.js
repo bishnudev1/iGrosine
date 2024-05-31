@@ -3,6 +3,7 @@ import * as ActionType from "./order_types";
 
 const initialState = {
   myOrders:[],
+  userLocation: {}
 };
 
 export const orderReducer = (state = initialState, action) => {
@@ -38,6 +39,12 @@ export const orderReducer = (state = initialState, action) => {
                       ...state,
                     data: ""
                       };
+                      case ActionType.GET_LOCATION:
+                        console.log("action.payload",action.payload);
+                        return {
+                            ...state,
+                          userLocation: action.payload
+                            };
     default:
       return state;
   }

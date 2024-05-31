@@ -17,18 +17,23 @@ import Footer from './Components/Footer';
 import ViewItem from './Screens/ViewItem';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { getMyOrdersAction } from './Redux/order/order_action';
+import { getCityStateFromCoordinates, getMyOrdersAction } from './Redux/order/order_action';
 import AdminLogin from './Admin/AdminLogin';
 import AdminRegister from './Admin/AdminRegister';
 import AdminHome from './Admin/AdminHome';
+import axios from 'axios';
 // import { ProtectedRoute } from 'protected-route-react';
 
 const App = () => {
 
   const {user, isAuth} = useSelector(state => state.user);
 
+  // const [userLocation, setUserLocation] = useState(null);
+
   const [data, setData] = useState({});
   const dispatch = useDispatch();
+
+  // console.log(userLocation);
 
   useEffect(() => {
     dispatch(getUserData());
@@ -41,7 +46,35 @@ const App = () => {
   useEffect(() => {
     setData(user);
   }, [user]);
+
+  useEffect(() => {
+    // Check if geolocation is supported
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          // setUserLocation({ latitude, longitude });
+          // dispatch(getCityStateFromCoordinates(latitude,longitude))
+        },
+        (error) => {
+          console.error("Error getting user location:", error);
+          // Handle errors here
+        }
+      );
+    } else {
+      console.error("Geolocation is not supported by this browser.");
+      // Handle unsupported browser scenario
+    }
+  }, []);
   
+  useEffect(async() =>{
+    try {
+      dispatch(getCityStateFromCoordinates())
+    } catch (error) {
+        console.log(error.message);
+        toast("Error getting your location...")
+    }
+  },[])
 
   return (
     <BrowserRouter>

@@ -1,20 +1,28 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { onlineOrder, emptyOrder, onlineOrderMultiple, onlineOrderCOD, onlineOrderMultipleCOD} from '../../Redux/order/order_action';
+import { useDispatch,useSelector } from 'react-redux';
+import { onlineOrder, emptyOrder, onlineOrderMultiple, onlineOrderCOD, onlineOrderMultipleCOD, getCityStateFromCoordinates} from '../../Redux/order/order_action';
 import { toast } from 'react-toastify';
 const { v4: uuidv4 } = require('uuid');
 
 
 const CheckOut = ({user}) => {
 
+  const { userLocation } = useSelector(state => state.order);
+
+  console.log("userLocatiom",userLocation);
+
   const dispatch = useDispatch()
+
+  // useEffect(() => {
+  //   dispatch(getCityStateFromCoordinates())
+  // },[dispatch])
 
   const location = useLocation();
   const [selectedPayment, setSelectedPayment] = useState('');
   const [selectedFullName, setSelectedFullName] = useState(user.displayName ?? "");
-  const [selectedState, setSelectedState] = useState('');
-  const [selectedCity, setSelectedCity] = useState('');
+  const [selectedState, setSelectedState] = useState(userLocation.regionName ?? "");
+  const [selectedCity, setSelectedCity] = useState(userLocation.city ?? "");
   const [selectedEmail, setSelectedEmail] = useState(user.email ?? "");
   const [mobileNo, setMobileNo] = useState('');
 
@@ -25,6 +33,8 @@ const CheckOut = ({user}) => {
   console.log(items);
 
   console.log("User: ", user);
+
+  // console.log(myLocation);
 
   console.log(name,price,id);
 

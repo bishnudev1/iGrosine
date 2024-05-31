@@ -298,3 +298,20 @@ export const onlineOrderMultipleCOD = (buyerId,buyerName, buyerEmail, number, ci
     }
 };
 
+export const getCityStateFromCoordinates =  () => async(dispatch) => {
+    try {
+        const resp1 = await axios.get(`https://api.ipify.org`);
+        console.log(resp1);
+        const resp = await axios.get(`http://ip-api.com/json/${resp1.data}`);
+        console.log(resp.data);
+
+     dispatch({
+        type: ActionType.GET_LOCATION,
+        payload: resp.data
+    });
+    } catch (error) {
+      console.error("Error retrieving city and state:", error);
+      return null;
+    }
+  };
+
