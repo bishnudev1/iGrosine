@@ -3,7 +3,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a lo
 import { Carousel } from 'react-responsive-carousel';
 import Picture1 from '../Assets/picture1.jpg';
 import Picture2 from '../Assets/picture2.jpg';
-import Picture3 from '../Assets/picture3.png';
+import Picture3 from '../Assets/picture3.jpg';
 import { useNavigate } from 'react-router-dom';
 import { addToCart, getMyCartsAction, removeCartItem } from '../Redux/user/user_action';
 import {useDispatch} from 'react-redux'
@@ -268,44 +268,108 @@ Safety information:  -
       desc:`Sugar-Free Natura Low-Calorie Sweetener is made from Aspartame, a protein derivative. It is a nutritious, safe & ideal low-calorie sugar substitute, giving you the sweetness and taste of sugar but with negligible calories to worry about! Sugar-Free Gold helps you cut down on excess sugar calories to keep you fit. While an hour of the walk may help you to lose 350 calories (approx), by making Sugar-Free a part of your fitness plan, you can avoid 500 calories a day. Burning calories is difficult; avoiding them is easy with Sugar-Free Gold.  `
     },
     {
-      id:5,
-      image: 'https://www.pharmavends.com/userspics/2d6860a07cc0d2a10ab0883e35371317.jpg',
-      name: 'BELOVIT-A Tablets',
-      seller: "Apollo Farmacy",
-      realPrice:'70',
-      price: '36',
-      off:'48',
-      desc:`Belovit-A tablets are a comprehensive multivitamin supplement tailored to support overall health and well-being. With a blend of essential vitamins and minerals, including Vitamin A, Vitamin D, Vitamin E, Vitamin C, and B-complex vitamins, these tablets offer a holistic approach to nutritional support. They are meticulously formulated to address potential deficiencies, boost immune function, promote healthy skin, support bone health, and enhance energy levels. Whether for everyday health maintenance or to address specific nutritional needs, Belovit-A tablets serve as a convenient and effective way to ensure your body receives the vital nutrients it requires for optimal functioning.`
+      id:15,
+      image: 'https://res.fkhealthplus.com/incom/images/product/Glucon-D-Regular-Powder-Jar-Free-Glucon-D-Tangy-Orange-250-g-1596254804-10058018-2.jpg',
+      name: 'Glucon D Instant Energy Health Drink Regular Jar (Free Glucon D Tangy Orange 250 g) 1 kg',
+      seller: "Flipkart Health+",
+      realPrice:'300',
+      price: '280',
+      off:'14',
+      desc:`Product Information - 
+
+      Glucon-D contains glucose that helps replenish body glucose and fills you with the energy required to stay active. It is easily absorbed by the body, thus giving out an instant energy boost and refreshment. During summers, mix this powder in a glass of cold water or normal water and consume for best results. Glucon-D energizes you to fight tiredness and fatigue caused by summer heat.
+      
+      Summers can be daunting and especially when there's an enormous scorching sun always ready to drain out your energy and stop you from being the best of you. But thank god there is Glucon-D! Glucon-D contains glucose that helps replenish body glucose and fills you with the energy required to stay active. It is easily absorbed by the body, thus giving out an instant energy boost and refreshment. Enriched with Vitamin-C and Minerals, including Calcium and Phosphorus, this glucose drink helps charge you up to fight tiredness and promotes mental alertness. What's better? Added Orange flavour makes it loved by children as well as adults. Add Glucon-D to a glass of water every day to provide growing active children the energy that keeps them going and adults, refreshment after a long day.
+      
+      •Glucon D fills you with the energy required to stay active
+      •Kick away tiredness and feel rejuvenated with Glucon-D, the preferred choice in summer when the scorching heat drains out body glucose
+      •Glucon D helps to provide instant energy
+      •Available in Regular as well as Delicious Lime, Orange and Mango flavours
+      •It contains Vitamin C which improves the mental alertness that helps you to concentrate better while doing various daily tasks
+      
+      Ingredients -   Glucose (99.4%), Minerals (Calcium Phosphates) And Vitamin D2.
+      
+      Nutritional Information Per 100 g
+      
+      Energy - 360 Kcal
+      
+      Protein - 0 g
+      
+      Fat & all types of fatty acids - 0 g
+      
+      Carbohydrate - 90 g
+      
+      Calcium - 170 mg
+      
+      Sugar - 0 g
+      
+      Phosphorous - 100 mg
+      
+      Vitamin D2 - 300 IU
+      
+      Storage Instruction - Store in a cool, dry and hygienic place.`
     },
     {
-      id:5,
-      image: 'https://www.pharmavends.com/userspics/2d6860a07cc0d2a10ab0883e35371317.jpg',
-      name: 'BELOVIT-A Tablets',
-      seller: "Apollo Farmacy",
-      realPrice:'70',
-      price: '36',
-      off:'48',
-      desc:`Belovit-A tablets are a comprehensive multivitamin supplement tailored to support overall health and well-being. With a blend of essential vitamins and minerals, including Vitamin A, Vitamin D, Vitamin E, Vitamin C, and B-complex vitamins, these tablets offer a holistic approach to nutritional support. They are meticulously formulated to address potential deficiencies, boost immune function, promote healthy skin, support bone health, and enhance energy levels. Whether for everyday health maintenance or to address specific nutritional needs, Belovit-A tablets serve as a convenient and effective way to ensure your body receives the vital nutrients it requires for optimal functioning.`
+      id:16,
+      image: 'https://res.fkhealthplus.com/incom/images/product/Dabur-Honitus-Cough-Remedy-1592297916-10004575-1.jpg',
+      name: 'Dabur Honitus Cough Remedy 100 ml',
+      seller: "Flipkart Health+",
+      realPrice:'115',
+      price: '98',
+      off:'15',
+      desc:`Dabur's honitus cough syrup provides effective relief from cough, without side-effects. Dabur honitus cough syrup is honey-based herbal syrup that is fortified with tulsi, mulethi and banapsha and other powerful scientifically proven herbs. The formulation is clinically proven and provides fast relief against acute cough and throat irritation
+
+ 
+
+      Ingredients :- Each teaspoonful (5ml) of Dabur Honitus contains extract derived from:  
+      
+       
+      
+        Tulsi                                            50.0 mg
+        Mulethi                                        50.0 mg
+        Banaphsa                                   50.0 mg
+        Kantkari                                      50.0 mg
+        Talispatra                                    50.0 mg
+        Sunthi                                         25.0 mg
+        Pippali                                        25.0 mg
+        Vasaka                                       25.0 mg
+        Shati                                          25.0 mg
+        Pudina Satva                             03.0 mg
+        Shudha Madhu                          01.75 g
+       
+      
+      How to use :-
+      
+        For adults: Take 2 teaspoons 3-4 times a day.
+        For children: Take 1 teaspoon 3-4 times a day.
+      
+      Storage Instruction:- Store in cool, dry & hygienic place.`
     },
     {
-      id:5,
-      image: 'https://www.pharmavends.com/userspics/2d6860a07cc0d2a10ab0883e35371317.jpg',
-      name: 'BELOVIT-A Tablets',
+      id:17,
+      image: 'https://res.fkhealthplus.com/incom/images/product/Horlicks-Lite-Badam-Refill-Powder-1532350175-10014778-1.jpg',
+      name: 'Horlicks Lite Badam Powder Refill 450 g',
       seller: "Apollo Farmacy",
-      realPrice:'70',
-      price: '36',
-      off:'48',
-      desc:`Belovit-A tablets are a comprehensive multivitamin supplement tailored to support overall health and well-being. With a blend of essential vitamins and minerals, including Vitamin A, Vitamin D, Vitamin E, Vitamin C, and B-complex vitamins, these tablets offer a holistic approach to nutritional support. They are meticulously formulated to address potential deficiencies, boost immune function, promote healthy skin, support bone health, and enhance energy levels. Whether for everyday health maintenance or to address specific nutritional needs, Belovit-A tablets serve as a convenient and effective way to ensure your body receives the vital nutrients it requires for optimal functioning.`
+      realPrice:'350',
+      price: '320',
+      off:'8',
+      desc:`Horlicks is clinically proven to improve 5 signs of growth and is clinically proven to make kids taller, stronger and sharper. Horlicks is scientifically proven to improve power of milk. Horlicks is a Health Drink that has nutrients to support immunity. Horlicks is now available in 4 exciting and yummy flavors - Classic malt, Chocolate, Elaichi, Kesar Badam. Enjoy with a cup of hot milk or a glass of cold milk.`
     },
     {
-      id:5,
-      image: 'https://www.pharmavends.com/userspics/2d6860a07cc0d2a10ab0883e35371317.jpg',
-      name: 'BELOVIT-A Tablets',
+      id:18,
+      image: 'https://res.fkhealthplus.com/incom/images/product/Listerine-Cavity-Fighter-Mouthwash-1687426946-10009831-1.jpg',
+      name: 'Listerine Cavity Fighter Mouthwash 500 ml',
       seller: "Apollo Farmacy",
-      realPrice:'70',
-      price: '36',
-      off:'48',
-      desc:`Belovit-A tablets are a comprehensive multivitamin supplement tailored to support overall health and well-being. With a blend of essential vitamins and minerals, including Vitamin A, Vitamin D, Vitamin E, Vitamin C, and B-complex vitamins, these tablets offer a holistic approach to nutritional support. They are meticulously formulated to address potential deficiencies, boost immune function, promote healthy skin, support bone health, and enhance energy levels. Whether for everyday health maintenance or to address specific nutritional needs, Belovit-A tablets serve as a convenient and effective way to ensure your body receives the vital nutrients it requires for optimal functioning.`
+      realPrice:'385',
+      price: '325',
+      off:'16',
+      desc:`Product Information - Did you know? Brushing cleans only 25% of your mouth. Germs left behind in your mouth may cause bad breath, plaque and gum problems. LISTERINE® Cavity Fighter Mouthwash reaches all parts of your mouth to remove 99.9% germs and reduce gum problems in 2 weeks. Our unique formula with 4 Essential Oils (Menthol, Thymol, Eucalpytol, Oil of Wintergreen) deeply penetrates to remove the bacteria in the plaque biofilm. LISTERINE® Cavity Fighter Mouthwash forms a protective fluoride layer, protecting teeth from cavities.
+
+      Ingredients - Menthol, Thymol, Eucalpytol, Oil of Wintergreen.
+      
+      How to Use - For best results, rinse with undiluted 20ml twice a day for 30 seconds. Don't rinse mouth with water or eat and drink anything for 30 minutes post rinse.
+      Best Before: Jun 2026
+      `
     },
   ];
 
