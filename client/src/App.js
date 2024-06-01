@@ -22,21 +22,26 @@ import AdminLogin from './Admin/AdminLogin';
 import AdminRegister from './Admin/AdminRegister';
 import AdminHome from './Admin/AdminHome';
 import axios from 'axios';
+import AdminAddItem from './Admin/AdminAddItem';
+import { getAdminData } from './Redux/admin/admin_action';
 // import { ProtectedRoute } from 'protected-route-react';
 
 const App = () => {
 
   const {user, isAuth} = useSelector(state => state.user);
+  const { admin } = useSelector(state => state.admin);
 
   // const [userLocation, setUserLocation] = useState(null);
 
   const [data, setData] = useState({});
   const dispatch = useDispatch();
 
-  // console.log(userLocation);
+  console.log("admin",admin);
+  console.log("user",user);
 
   useEffect(() => {
     dispatch(getUserData());
+    dispatch(getAdminData())
   },[dispatch]);
 
   // useEffect(() => {
@@ -82,9 +87,27 @@ const App = () => {
       <Routes>
       <Route exact path='/' element={<Home />}/>
       <Route exact path='/my-carts' element={<MyCart />}/>
-      <Route exact path='/admin/home' element={<AdminHome />}/>
-      <Route exact path='/admin/login' element={<AdminLogin />}/>
-      <Route exact path='/admin/signup' element={<AdminRegister />}/>
+      <Route exact path='/admin/home' element={
+        <ProtectedRoute isAuthenticated={admin !== null} redirect='/admin/login'>
+          <AdminHome />
+        </ProtectedRoute>
+      }/>
+      <Route exact path='/admin/login' element={
+        <ProtectedRoute isAuthenticated={(admin === null)} redirect='/admin/home'>
+          <AdminLogin />
+        </ProtectedRoute>
+      }/>
+      <Route exact path='/admin/add' element={
+        <ProtectedRoute isAuthenticated={admin !== null} redirect='/admin/login'>
+          <AdminAddItem />
+        </ProtectedRoute>
+      }/>
+      <Route exact path='/admin/signup' element={
+        <ProtectedRoute isAuthenticated={(admin === null)} redirect='/admin/home'>
+          <AdminRegister />
+        </ProtectedRoute>
+      }/>
+       {/* <Route exact path='/admin/add' element={<AdminAddItem />}/> */}
       <Route exact path='/order-success' element={ <OrderSuccess />}/>
       <Route exact path='/checkout-order' element={  <ProtectedRoute
                       isAuthenticated={isAuth}

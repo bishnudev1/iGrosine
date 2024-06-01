@@ -15,3 +15,7 @@ export const GET_LOCATION = 'GET_LOCATION';
 export const LOADING_START = 'LOADING_START';
 
 export const LOADING_END = 'LOADING_END';
+
+export const GET_ITEMS = 'GET_ITEMS';
+
+export const ADD_ITEM = 'ADD_ITEM';

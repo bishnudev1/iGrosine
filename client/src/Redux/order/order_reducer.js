@@ -1,3 +1,4 @@
+// import { items } from "../../../../server/server";
 import * as ActionType from "./order_types";
 
 
@@ -5,6 +6,7 @@ const initialState = {
   myOrders:[],
   userLocation: {},
   loading: false,
+  items:[]
 };
 
 export const orderReducer = (state = initialState, action) => {
@@ -47,6 +49,16 @@ export const orderReducer = (state = initialState, action) => {
                 ...state,
               myOrders: action.payload
                 };
+                case ActionType.GET_ITEMS:
+                  return {
+                      ...state,
+                    items: action.payload
+                      };
+                      case ActionType.ADD_ITEM:
+                        return {
+                            ...state,
+                          // items: action.payload
+                            };
                 case ActionType.CANCEL_ORDER:
                   return {
                       ...state,

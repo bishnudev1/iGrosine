@@ -20,6 +20,34 @@ exports.getItems = async (req, res) => {
     }
 };
 
+exports.deleteItem = async (req, res) => {
+    try {
+        const { _id } = req.body; // Assuming the item ID is passed as a route parameter
+
+        // Find the item by ID and delete it
+        const deletedItem = await Item.findByIdAndDelete(_id);
+
+        if (!deletedItem) {
+            return res.status(404).json({
+                success: false,
+                message: "Item not found"
+            });
+        }
+
+        res.status(200).json({
+            success: true,
+            message: "Item deleted successfully",
+            data: deletedItem
+        });
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).json({
+            success: false,
+            message: "Internal Server Error"
+        });
+    }
+};
+
 exports.addItem = async (req, res) => {
     try {
         const { id,category, image, name, seller, price, realPrice, off, desc } = req.body; // Assuming the item data is sent in the request body

@@ -46,7 +46,8 @@ export const getAdminData = () => async(dispatch) => {
         })
         // toast('Admin Login has successfully...')
         } catch (error) {
-        toast(error.message)
+        // toast(error.message)
+        console.log(error.message);
         }   
     }
     

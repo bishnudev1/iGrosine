@@ -10,7 +10,7 @@ import { loginUser,logoutUser } from '../Redux/user/user_action';
 
 const Navbar = () => {
 
-  const {isAuth} = useSelector(state => state.user);
+  const {isAuth,user} = useSelector(state => state.user);
 
   const {admin} = useSelector(state => state.admin);
   const { carts } = useSelector(state => state.user);
@@ -19,14 +19,33 @@ const Navbar = () => {
 
   console.log(admin);
 
-  if (Object.keys(admin).length !== 0) {
+  // if (Object.keys(admin).length !== 0) {
+  //   return (
+  //     <nav className="navbar">
+  //       <div className="navbar-center">
+  //         <span className="admin-text">iGrosine Admin</span>
+  //       </div>
+  //     </nav>
+  //   );
+  // }
+
+  if (admin !== null) {
     return (
       <nav className="navbar">
-        <div className="navbar-center">
-          <span className="admin-text">Admin</span>
+        <div style={{
+          position: "relative"
+        }} className="navbar-center">
+          <span className="admin-text">iGrosine Admin</span>
+          <Link style={{
+            position: "absolute",
+            right: 0,
+            textAlign: "right",
+            paddingRight:"25px"
+          }} to='/admin/add'>Add Product</Link>
         </div>
       </nav>
     );
+    
   }
 
   return (

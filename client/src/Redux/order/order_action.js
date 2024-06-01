@@ -4,6 +4,53 @@ import { toast } from "react-toastify";
 const { v4: uuidv4 } = require('uuid');
 
 
+export const getItems = () => async (dispatch) => {
+
+    console.log("calling getItems");
+    try {
+        dispatch({type: ActionType.LOADING_START})
+        let resp = await axios.get(`http://localhost:5000/api/get-items`);
+
+        console.log("Action orders",resp.data.items);
+
+        dispatch({
+            type: ActionType.GET_ITEMS,
+            payload: resp.data.items
+        })
+        dispatch({type: ActionType.LOADING_END})
+    } catch (error) {
+        dispatch({type: ActionType.LOADING_END})
+        toast(error.message)
+    }
+}
+
+export const addItemAdmin = (id,category, image, name, seller, price, realPrice, off, desc) => async (dispatch) => {
+
+    console.log("calling getItems");
+    try {
+        dispatch({type: ActionType.LOADING_START})
+        let resp = await axios.post(`http://localhost:5000/api/add-item`,{
+            id,category, image, name, seller, price, realPrice, off, desc
+        },{
+            withCredentials:true
+        });
+
+        console.log("Action orders",resp.data.items);
+
+        dispatch({
+            type: ActionType.ADD_ITEM,
+            // payload: resp.data.items
+        })
+        toast("Item has been added...")
+        getItems();
+        dispatch({type: ActionType.LOADING_END})
+    } catch (error) {
+        dispatch({type: ActionType.LOADING_END})
+        toast(error.message)
+    }
+}
+
+
 export const getMyOrdersAction = () => async (dispatch) => {
     try {
         dispatch({type: ActionType.LOADING_START})

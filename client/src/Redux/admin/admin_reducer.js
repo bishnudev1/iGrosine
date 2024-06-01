@@ -3,7 +3,7 @@ import * as ActionType from "./admin_types";
 
 const initialState = {
     auth: false,
-  admin:{},
+  admin:null,
   allOrders: []
 };
 
