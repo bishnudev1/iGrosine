@@ -162,7 +162,7 @@ export const onlineOrderMultiple = (buyerId,buyerName, buyerEmail, number, city,
             // Make a request to create an order for each item
             const response = await axios.post(`http://localhost:5000/api/order-item-cart`, {
                 price,
-                buyerId,
+                buyerId: uuidv4(),
                 itemName: name,
                 itemImage: image,
                 buyerName,
@@ -247,7 +247,7 @@ export const onlineOrderMultipleCOD = (buyerId,buyerName, buyerEmail, number, ci
             // Make a request to create an order for each item
             const response = await axios.post(`http://localhost:5000/api/order-item-cart-cod`, {
                 price,
-                buyerId,
+                buyerId:uuidv4(),
                 itemName: name,
                 itemImage: image,
                 buyerName,

@@ -64,6 +64,16 @@ const CheckOut = ({user}) => {
     setMobileNo(event.target.value);
   };
 
+  function generateRandomId(length) {
+    var result = '';
+    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for (var i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+  }
+
   const handleConfirmOrder = () => {
     // Check if any field is empty
     if (!selectedFullName || !selectedState || !selectedCity || !mobileNo) {
@@ -81,7 +91,7 @@ const CheckOut = ({user}) => {
         dispatch(
           onlineOrderCOD(
             price,
-            uuidv4(),
+            generateRandomId(10),
             selectedFullName,
             name,
             image,
@@ -94,7 +104,7 @@ const CheckOut = ({user}) => {
         );
       }
       else{
-        dispatch(onlineOrderMultipleCOD( uuidv4(),selectedFullName,selectedEmail,mobileNo,selectedCity,selectedState,items, Number(calculateTotal())))
+        dispatch(onlineOrderMultipleCOD( generateRandomId(10),selectedFullName,selectedEmail,mobileNo,selectedCity,selectedState,items, Number(calculateTotal())))
       }
     }
     else if(selectedPayment === "cod"){
@@ -103,7 +113,7 @@ const CheckOut = ({user}) => {
         dispatch(
           onlineOrder(
             price,
-            uuidv4(),
+            generateRandomId(10),
             selectedFullName,
             name,
             image,
@@ -116,7 +126,7 @@ const CheckOut = ({user}) => {
         );
       }
       else{
-        dispatch(onlineOrderMultiple( uuidv4(),selectedFullName,selectedEmail,mobileNo,selectedCity,selectedState,items, calculateTotal()))
+        dispatch(onlineOrderMultiple( generateRandomId(10),selectedFullName,selectedEmail,mobileNo,selectedCity,selectedState,items, calculateTotal()))
       }
     }
     else{
