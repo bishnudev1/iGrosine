@@ -16,6 +16,28 @@ export const getUserData = () => (dispatch) => {
             payload: user
         })
         dispatch({type: ActionType.LOADING_END})
+        // window.location.href = "http://localhost:3000/login";
+    })
+    .catch(err => {
+        dispatch({type: ActionType.LOADING_END})
+        console.log(err);
+    })
+}
+
+export const deleteProfile = () => (dispatch) => {
+    dispatch({type: ActionType.LOADING_START})
+    axios.delete(`${backendURL}/api/delete-my-profile`,
+    {
+        withCredentials: true
+    })
+    .then(res => {
+        const user = res.data.data;
+        dispatch({
+            type: ActionType.DELETE_USER,
+            // payload: user
+        })
+        dispatch({type: ActionType.LOADING_END})
+        // window.location.href = "http://localhost:3000/login";
     })
     .catch(err => {
         dispatch({type: ActionType.LOADING_END})

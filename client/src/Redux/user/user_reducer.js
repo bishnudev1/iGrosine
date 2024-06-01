@@ -36,7 +36,12 @@ export const userReducer = (state = initialState, action) => {
           ...state,
           loading: false
       };
-
+      case ActionType.DELETE_USER:
+        return {
+            ...state,
+            user: null,
+            isAuth: false,
+            };
     case ActionType.LOGIN_USER:
       return {
           ...state,

@@ -3,10 +3,33 @@ import { useNavigate } from 'react-router-dom';
 import { FaCartPlus } from 'react-icons/fa';
 import {FaSignOutAlt} from 'react-icons/fa';
 import { FaSellcast } from 'react-icons/fa';
+import { useDispatch, useSelector } from 'react-redux';
+import Modal from 'react-modal';
+import { toast } from 'react-toastify';
+import Loader from '../../Components/Loading';
+import { deleteProfile } from '../../Redux/user/user_action';
+
+const customStyles = {
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)',
+    width: '400px', // Adjust width as needed
+    padding: '20px',
+  },
+};
+
 
 const Profile = ({user}) => {
 
   console.log("User: ", user);
+
+  const { loading } = useSelector(state => state.user);
+  const [modalIsOpen, setIsOpen] = useState(false);
+  const dispatch = useDispatch();
 
   const navigate = useNavigate();
 
@@ -17,7 +40,29 @@ const Profile = ({user}) => {
       </div>
     );
   }
+ 
 
+  function openModal() {
+    setIsOpen(true);
+  }
+
+  // function afterOpenModal() {
+  //   // references are now sync'd and can be accessed.
+  //   subtitle.style.color = '#f00';
+  // }
+
+  function closeModal() {
+    setIsOpen(false);
+  }
+
+  const deleteAccount = () => {
+    openModal();
+  }
+  
+
+  const confirmDeleteAccount =() =>{
+    dispatch(deleteProfile());
+  }
 
   const faqQuestions = [
     {
@@ -32,6 +77,23 @@ const Profile = ({user}) => {
 
     return (
         <div className='profile-container'>
+                <Loader loading={loading}/>
+    <Modal
+      isOpen={modalIsOpen}
+      onRequestClose={closeModal}
+      style={customStyles}
+      contentLabel="Warning! Account Deletation"
+    >
+      <div style={{ display: 'flex', alignItems: 'center', marginBottom: '20px' }}>
+        <img src="https://atlas-content-cdn.pixelsquid.com/stock-images/red-exclamation-mark-symbols-mr72XN2-600.jpg" alt="Exclamation" style={{ width: '30px', marginRight: '10px' }} />
+        <h2>This action can't be undone.</h2>
+      </div>
+      <p>Are you sure you want to delete your account?</p>
+      <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '20px' }}>
+        <button onClick={closeModal} style={{ padding: '10px 20px', borderRadius: '5px', border: 'none', cursor: 'pointer' }}>No</button>
+        <button onClick={() => confirmDeleteAccount()}style={{ padding: '10px 20px', borderRadius: '5px', border: 'none', cursor: 'pointer', backgroundColor: 'red', color: 'white' }}>Yes, Delete</button>
+      </div>
+    </Modal>
           <div className='sub-left-profile-container'>
           <div className='image-container'>
            {
@@ -69,7 +131,7 @@ const Profile = ({user}) => {
               })
             }
           </div>
-          <button className='deactive-account'>Deactive Account</button>
+          <button onClick={() => deleteAccount()} className='deactive-account'>Delete Account</button>
           </div>
         </div>
       );

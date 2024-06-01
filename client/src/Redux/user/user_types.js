@@ -12,3 +12,5 @@ export const REMOVE_CART = 'REMOVE_CART';
 export const LOADING_START = 'LOADING_START';
 
 export const LOADING_END = 'LOADING_END';
+
+export const DELETE_USER = 'DELETE_USER';
