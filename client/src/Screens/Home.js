@@ -8,10 +8,11 @@ import { useNavigate } from 'react-router-dom';
 import { addToCart, getMyCartsAction, removeCartItem } from '../Redux/user/user_action';
 import {useDispatch} from 'react-redux'
 import { useSelector } from 'react-redux';
+import Loader from '../Components/Loading';
 
 const Home = () => {
 
-  const { carts } = useSelector(state => state.user);
+  const { carts,loading } = useSelector(state => state.user);
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
@@ -508,8 +509,10 @@ Safety information:  -
     dispatch(removeCartItem(id))
   }
 
+
   return (
     <div className='home-container'>
+      <Loader loading={loading}/>
       <div className='carousel-container'>
         <Carousel autoPlay infiniteLoop dynamicHeight="100px">
           <img src={Picture1} alt='picture1' />

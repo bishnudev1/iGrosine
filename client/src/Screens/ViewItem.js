@@ -3,10 +3,11 @@ import { FaCartPlus, FaBuyNLarge, FaCheckCircle } from 'react-icons/fa'
 import {useNavigate, useLocation} from 'react-router-dom'
 import { useSelector,useDispatch } from 'react-redux';
 import { addToCart,removeCartItem } from '../Redux/user/user_action';
+import Loader from '../Components/Loading';
 
 const ViewItem = () => {
 
-    const { carts } = useSelector(state => state.user);
+    const { carts,loading } = useSelector(state => state.user);
    
     const navigate = useNavigate();
     const location = useLocation();
@@ -36,6 +37,7 @@ const ViewItem = () => {
 
   return (
     <div className='view-item-container'>
+        <Loader loading={loading}/>
         <div className='sub-left-view-item-container'>
             <div className='sub-left-view-sub-item-container'>
             <img src={image ?? ""} className='sub-left-view-item-image' />

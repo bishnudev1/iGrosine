@@ -6,6 +6,7 @@ const { v4: uuidv4 } = require('uuid');
 
 export const getMyOrdersAction = () => async (dispatch) => {
     try {
+        dispatch({type: ActionType.LOADING_START})
         let resp = await axios.get(`http://localhost:5000/api/get-my-orders`,{
             withCredentials:true
         });
@@ -16,8 +17,9 @@ export const getMyOrdersAction = () => async (dispatch) => {
             type: ActionType.GET_MY_ORDERS,
             payload: resp.data.data
         })
-
+        dispatch({type: ActionType.LOADING_END})
     } catch (error) {
+        dispatch({type: ActionType.LOADING_END})
         toast(error.message)
     }
 }
@@ -47,6 +49,7 @@ export const emptyOrder = () => async (dispatch) => {
 
 export const cancelledOrder = (orderId) => async (dispatch) => {
     try {
+        dispatch({type: ActionType.LOADING_START})
         console.log('calling',orderId);
         const resp = await axios.post(`http://localhost:5000/api/cancel-order`,{
             orderId
@@ -62,15 +65,16 @@ export const cancelledOrder = (orderId) => async (dispatch) => {
             payload: 'message'
         })
         toast("Order has been cancelled.")
-
+        dispatch({type: ActionType.LOADING_END})
     } catch (error) {
+        dispatch({type: ActionType.LOADING_END})
         toast(error.message)
     }
 }
 
 export const onlineOrder = (price,buyerId, buyerName,itemName,itemImage, buyerEmail,itemId,number,city,state) => async (dispatch) => {
     try {
-
+        dispatch({type: ActionType.LOADING_START})
         const { data: { key } }
             = await axios.get('http://localhost:5000/api/get-key', {
                 withCredentials: true
@@ -114,15 +118,16 @@ export const onlineOrder = (price,buyerId, buyerName,itemName,itemImage, buyerEm
             type: ActionType.ONLINE_ORDER,
             payload: order
         })
-
+        dispatch({type: ActionType.LOADING_END})
     } catch (error) {
+        dispatch({type: ActionType.LOADING_END})
         toast(error.message)
     }
 }
 
 export const onlineOrderCOD = (price,buyerId, buyerName,itemName,itemImage, buyerEmail,itemId,number,city,state) => async (dispatch) => {
     try {
-
+        dispatch({type: ActionType.LOADING_START})
         const { data: { order } } = await axios.post(`http://localhost:5000/api/order-item-cod`, {
             price, buyerId,itemName,itemImage, buyerName, buyerEmail,itemId,number,city,state
             
@@ -136,17 +141,19 @@ export const onlineOrderCOD = (price,buyerId, buyerName,itemName,itemImage, buye
             type: ActionType.ONLINE_ORDER_COD,
             payload: order
         })
-
+        dispatch({type: ActionType.LOADING_END})
         toast("Order has placed successfully...")
         window.location.href = `order-success?reference=${uuidv4()}`
 
     } catch (error) {
+        dispatch({type: ActionType.LOADING_END})
         toast(error.message)
     }
 }
 
 export const onlineOrderMultiple = (buyerId,buyerName, buyerEmail, number, city, state, items,total) => async (dispatch) => {
     try {
+        dispatch({type: ActionType.LOADING_START})
         const { data: { key } } = await axios.get('http://localhost:5000/api/get-key', {
             withCredentials: true
         });
@@ -223,19 +230,21 @@ export const onlineOrderMultiple = (buyerId,buyerName, buyerEmail, number, city,
                 type: ActionType.ONLINE_ORDER_MULTIPLE,
                 payload: orders
             });
+            dispatch({type: ActionType.LOADING_END})
         } else {
             console.log("No orders to process");
         }
     } catch (error) {
         console.error(error.message);
         // Handle errors appropriately
+        dispatch({type: ActionType.LOADING_END})
         toast(error.message);
     }
 };
 
 export const onlineOrderMultipleCOD = (buyerId,buyerName, buyerEmail, number, city, state, items,total) => async (dispatch) => {
     try {
-
+        dispatch({type: ActionType.LOADING_START})
         const orders = [];
 
         console.log(total);
@@ -290,18 +299,20 @@ export const onlineOrderMultipleCOD = (buyerId,buyerName, buyerEmail, number, ci
         } else {
             console.log("No orders to process");
         }
-
+        dispatch({type: ActionType.LOADING_END})
         toast("Order has placed successfully...")
         window.location.href = `order-success?reference=${uuidv4()}`
     } catch (error) {
         console.error(error.message);
         // Handle errors appropriately
+        dispatch({type: ActionType.LOADING_END})
         toast(error.message);
     }
 };
 
 export const getCityStateFromCoordinates =  () => async(dispatch) => {
     try {
+        dispatch({type: ActionType.LOADING_START})
         const resp1 = await axios.get(`https://api.ipify.org`);
         console.log(resp1);
         const resp = await axios.get(`http://ip-api.com/json/${resp1.data}`);
@@ -311,8 +322,10 @@ export const getCityStateFromCoordinates =  () => async(dispatch) => {
         type: ActionType.GET_LOCATION,
         payload: resp.data
     });
+    dispatch({type: ActionType.LOADING_END})
     } catch (error) {
       console.error("Error retrieving city and state:", error);
+      dispatch({type: ActionType.LOADING_END})
       return null;
     }
   };

@@ -1303,3 +1303,13 @@ tr:hover {
   font-weight: bold; /* Example font weight */
   padding: 10px; /* Example padding */
 }
+
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

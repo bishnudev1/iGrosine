@@ -4,6 +4,7 @@ import { cancelledOrder, getMyOrdersAction } from '../../Redux/order/order_actio
 
 import Modal from 'react-modal';
 import { toast } from 'react-toastify';
+import Loader from '../../Components/Loading';
 
 const customStyles = {
   content: {
@@ -22,7 +23,8 @@ const customStyles = {
 const MyOrders = () => {
 
 
-  const {myOrders} = useSelector(state => state.order);
+  const {myOrders,loading} = useSelector(state => state.order);
+  
   const dispatch = useDispatch();
 
   const [searchTerm, setSearchTerm] = useState('');
@@ -140,6 +142,7 @@ const MyOrders = () => {
   
   return (
     <div className='my-orders-container'>
+      <Loader loading={loading}/>
     <Modal
       isOpen={modalIsOpen}
       onRequestClose={closeModal}

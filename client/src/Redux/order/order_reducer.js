@@ -3,11 +3,24 @@ import * as ActionType from "./order_types";
 
 const initialState = {
   myOrders:[],
-  userLocation: {}
+  userLocation: {},
+  loading: false,
 };
 
 export const orderReducer = (state = initialState, action) => {
   switch (action.type) {
+
+    case ActionType.LOADING_START:
+      return {
+          ...state,
+          loading: true
+      };
+
+  case ActionType.LOADING_END:
+      return {
+          ...state,
+          loading: false
+      };
 
     case ActionType.ONLINE_ORDER:
       return {

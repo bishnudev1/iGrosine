@@ -25,6 +25,18 @@ const initialState = {
 export const userReducer = (state = initialState, action) => {
   switch (action.type) {
 
+    case ActionType.LOADING_START:
+      return {
+          ...state,
+          loading: true
+      };
+
+  case ActionType.LOADING_END:
+      return {
+          ...state,
+          loading: false
+      };
+
     case ActionType.LOGIN_USER:
       return {
           ...state,

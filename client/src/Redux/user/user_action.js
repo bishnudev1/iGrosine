@@ -4,6 +4,7 @@ import * as ActionType from "./user_types";
 import { toast } from "react-toastify";
 
 export const getUserData = () => (dispatch) => {
+    dispatch({type: ActionType.LOADING_START})
     axios.get(`${backendURL}/log`,
     {
         withCredentials: true
@@ -14,71 +15,52 @@ export const getUserData = () => (dispatch) => {
             type: ActionType.GET_USER,
             payload: user
         })
+        dispatch({type: ActionType.LOADING_END})
     })
     .catch(err => {
+        dispatch({type: ActionType.LOADING_END})
         console.log(err);
     })
 }
 
 export const loginUser = () => (dispatch) => {
-    // axios.get(`${backendURL}/auth/google`,
-    // {
-    //     withCredentials: true
-    // })
-    // .then(res => {
-    //     // const user = res.data.data;
-    //     dispatch({
-    //         type: ActionType.LOGIN_USER,
-    //         payload: res.data
-    //     })
-    //     toast('Login has successfully...')
-    // })
-    // .catch(err => {
-    //     toast(err.message);
-    //     console.log(err);
-    // })
 
 try {
+    dispatch({type: ActionType.LOADING_START})
     window.location.href = `${backendURL}/auth/google`;
     dispatch({
     type: ActionType.LOGIN_USER,
     // payload: res.data
 })
+dispatch({type: ActionType.LOADING_END})
 toast('Login has successfully...')
 } catch (error) {
+    dispatch({type: ActionType.LOADING_END})
     toast(error.message)
 }
 }
 
 export const logoutUser = () => (dispatch) => {
-    // axios.get(`${backendURL}/auth/logout`)
-    // .then(res => {
-    //     // const user = res.data.data;
-    //     dispatch({
-    //         type: ActionType.LOGOUT_USER,
-    //         payload: res.data
-    //     })
-    //     toast('Logout has successfully...')
-    // })
-    // .catch(err => {
-    //     toast(err.message);
-    //     console.log(err);
-    // })
     try {
+        dispatch({type: ActionType.LOADING_START})
         window.location.href = `${backendURL}/auth/logout`;
         dispatch({
         type: ActionType.LOGOUT_USER,
         // payload: res.data
     })
     toast('Logout has successfully...')
+    dispatch({type: ActionType.LOADING_END})
     } catch (error) {
+        dispatch({type: ActionType.LOADING_END})
         toast(error.message)
+
     }
 }
 
 export const addToCart = ({id,name,price,image,seller}) => async(dispatch) => {
 
       try {
+        dispatch({type: ActionType.LOADING_START})
         console.log(`Item name:${name}`);
         const item = {
             id:id,
@@ -100,38 +82,48 @@ export const addToCart = ({id,name,price,image,seller}) => async(dispatch) => {
             type: ActionType.ADD_TO_CART,
             payload: resp.data.data
         })
+        dispatch({type: ActionType.LOADING_END})
         toast('Added into cart...',{
             autoClose:1500
         })
 
     } catch (error) {
+        dispatch({type: ActionType.LOADING_END})
         toast(error.message)
     }
 
 }
 
 export const removeCartItem = (id) => async(dispatch) => {
-    console.log(`id in action ${id}`);
-    const resp = await axios.post(`http://localhost:5000/api/remove-cart`,{
-        id
-    },{
-        withCredentials:true,
+    try {
+        dispatch({type: ActionType.LOADING_START})
+        console.log(`id in action ${id}`);
+        const resp = await axios.post(`http://localhost:5000/api/remove-cart`,{
+            id
+        },{
+            withCredentials:true,
+        }
+    );console.log('calling 2');
+    
+        console.log(resp.data.data);
+        dispatch({
+            type: ActionType.REMOVE_CART,
+            payload: id
+        })
+        dispatch({type: ActionType.LOADING_END})
+        toast('Removed from cart...',{
+            autoClose:1500
+        })
+    } catch (error) {
+        dispatch({type: ActionType.LOADING_END})
+        toast(error.message);
     }
-);console.log('calling 2');
-
-    console.log(resp.data.data);
-    dispatch({
-        type: ActionType.REMOVE_CART,
-        payload: id
-    })
-    toast('Removed from cart...',{
-        autoClose:1500
-    })
 }
 
 export const getMyCartsAction = () => async (dispatch) => {
     console.log('calling');
     try {
+        dispatch({type: ActionType.LOADING_START})
         let resp = await axios.get(`http://localhost:5000/api/get-my-carts`,{
             withCredentials:true
         });
@@ -148,8 +140,10 @@ export const getMyCartsAction = () => async (dispatch) => {
             type: ActionType.GET_MY_CARTS,
             payload: resp.data.data
         })
+        dispatch({type: ActionType.LOADING_END})
 
     } catch (error) {
+        dispatch({type: ActionType.LOADING_END})
         toast("You're not signed in. Please login.")
     }
 }

@@ -3,11 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector,useDispatch } from 'react-redux';
 import { getMyCartsAction, getUserData, removeCartItem } from '../../Redux/user/user_action';
 import EmptyCart from '../../Assets/empty_cart.svg'
+import Loader from '../../Components/Loading';
 
 
 const MyCart = () => {
 
-  const { carts } = useSelector(state => state.user);
+  const { carts,loading } = useSelector(state => state.user);
+
+  // const { loading } = useSelector(state => state.order);
 
   console.log("Carts:", carts);
 
@@ -79,6 +82,7 @@ const MyCart = () => {
 
   return (
     <div className="cart-container">
+      <Loader loading={loading}/>
       <div className="items-container">
         {carts.length === 0 ? (
           <div className='empty-cart'>

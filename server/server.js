@@ -61,6 +61,9 @@ app.use("/auth",AuthRoute);
 const OrderRoutes = require('./routes/order_routes.js')
 app.use('/api',OrderRoutes)
 
+const ItemRoutes = require('./routes/item_routes.js')
+app.use('/api',ItemRoutes)
+
 
 const Razorpay = require('razorpay');
 

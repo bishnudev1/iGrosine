@@ -3,12 +3,13 @@ import { useLocation } from 'react-router-dom';
 import { useDispatch,useSelector } from 'react-redux';
 import { onlineOrder, emptyOrder, onlineOrderMultiple, onlineOrderCOD, onlineOrderMultipleCOD, getCityStateFromCoordinates} from '../../Redux/order/order_action';
 import { toast } from 'react-toastify';
+import Loader from '../../Components/Loading';
 const { v4: uuidv4 } = require('uuid');
 
 
 const CheckOut = ({user}) => {
 
-  const { userLocation } = useSelector(state => state.order);
+  const { userLocation,loading } = useSelector(state => state.order);
 
   console.log("userLocatiom",userLocation);
 
@@ -146,6 +147,7 @@ const CheckOut = ({user}) => {
 
   return (
     <div className='checkout-container'>
+      <Loader loading={loading}/>
       <div className='sub-checkout-container'>
       <div className='payment-options'>
       <p className='choose-payment-option'>Choose Payment Details</p>
