@@ -288,7 +288,7 @@ exports.getMyOrders = async (req, res) => {
 
 exports.makeEmptyOrders = async (req, res) => {
     try {
-        const user = await User.findById("653fcba5adb8838ece0d6cea");
+        const user = await User.findById("665b408d8d3bb344da20cbc2");
         user.orders = [];
         await user.save();
         res.status(200).json({

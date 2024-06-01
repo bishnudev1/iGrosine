@@ -87,7 +87,7 @@ export const registerAdmin = (name,email,password) => async(dispatch) => {
             }
         );console.log('calling 2');
         
-            console.log(resp.data.data);
+            console.log("resp.data.data",resp.data.data);
         
             dispatch({
                 type: ActionType.GET_ALL_ORDERS,
