@@ -24,6 +24,35 @@ export const getItems = () => async (dispatch) => {
     }
 }
 
+
+export const deleteItem = (_id) => async (dispatch) => {
+
+    console.log("calling getItems");
+    try {
+        dispatch({type: ActionType.LOADING_START})
+        let resp = await axios.post(`http://localhost:5000/api/delete-item`,{
+            _id
+        },{
+            withCredentials:true,
+        });
+
+        console.log("Action orders",resp.data.items);
+
+        dispatch({
+            type: ActionType.DELETE_ITEM,
+            // payload: resp.data.items
+        })
+
+        getItems()
+
+        dispatch({type: ActionType.LOADING_END})
+        toast("Item has been deleted...")
+    } catch (error) {
+        dispatch({type: ActionType.LOADING_END})
+        toast(error.message)
+    }
+}
+
 export const addItemAdmin = (id,category, image, name, seller, price, realPrice, off, desc) => async (dispatch) => {
 
     console.log("calling getItems");

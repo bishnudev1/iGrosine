@@ -38,10 +38,22 @@ const Navbar = () => {
           <span className="admin-text">iGrosine Admin</span>
           <Link style={{
             position: "absolute",
-            right: 0,
+            right: 205,
+            textAlign: "right",
+            paddingRight:"25px"
+          }} to='/admin/home'>Home</Link>
+          <Link style={{
+            position: "absolute",
+            right: 100,
             textAlign: "right",
             paddingRight:"25px"
           }} to='/admin/add'>Add Product</Link>
+                    <Link style={{
+            position: "absolute",
+            right: 0,
+            textAlign: "right",
+            paddingRight:"25px"
+          }} to='/admin/items'>All Products</Link>
         </div>
       </nav>
     );

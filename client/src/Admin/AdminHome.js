@@ -41,7 +41,8 @@ const AdminHome = () => {
   }
 
   return (
-    <table>
+    <div className='admin-home-container'>
+          <table>
       <thead>
         <tr>
           <th>Item ID</th>
@@ -69,12 +70,26 @@ const AdminHome = () => {
             <td>{item.state}</td>
             {
               item.isDelivered ? <td>Delivered</td> : item.deliveredDate === "You'll get 50% money within 5-7 days." || item.deliveredDate === "Thanks for choosing us."  ? <td>Cancelled by user</td>:             <td>
-              <select value={orderStatus[item.buyerId] || ''} onChange={(e) => handleStatusChange(e, item.buyerId, item)}>
-                <option value="">Select Status</option>
-                <option value="Shipped">Shipped</option>
-                <option value="Out of Delivery">Out of Delivery</option>
-                <option value="Delivered">Delivered</option>
-              </select>
+    <select 
+  value={orderStatus[item.buyerId] || ''} 
+  onChange={(e) => handleStatusChange(e, item.buyerId, item)}
+  style={{ 
+    width: '150px', 
+    padding: '5px', 
+    borderRadius: '5px', 
+    border: '1px solid #ccc', 
+    backgroundColor: '#fff',
+    color: '#333',
+    fontFamily: 'Arial, sans-serif',
+    fontSize: '14px'
+  }}
+>
+  <option value="">Select Status</option>
+  <option value="Shipped">Shipped</option>
+  <option value="Out of Delivery">Out of Delivery</option>
+  <option value="Delivered">Delivered</option>
+</select>
+
             </td>
             }
             <td>{item.orderedDate}</td>
@@ -82,6 +97,7 @@ const AdminHome = () => {
         ))}
       </tbody>
     </table>
+    </div>
   );
 };
 

@@ -24,6 +24,8 @@ exports.deleteItem = async (req, res) => {
     try {
         const { _id } = req.body; // Assuming the item ID is passed as a route parameter
 
+
+        console.log("_id",_id);
         // Find the item by ID and delete it
         const deletedItem = await Item.findByIdAndDelete(_id);
 

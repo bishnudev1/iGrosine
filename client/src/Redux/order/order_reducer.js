@@ -54,6 +54,11 @@ export const orderReducer = (state = initialState, action) => {
                       ...state,
                     items: action.payload
                       };
+                      case ActionType.DELETE_ITEM:
+                        return {
+                            ...state,
+                          // items: action.payload
+                            };
                       case ActionType.ADD_ITEM:
                         return {
                             ...state,

@@ -24,6 +24,7 @@ import AdminHome from './Admin/AdminHome';
 import axios from 'axios';
 import AdminAddItem from './Admin/AdminAddItem';
 import { getAdminData } from './Redux/admin/admin_action';
+import AdminItems from './Admin/AdminItems';
 // import { ProtectedRoute } from 'protected-route-react';
 
 const App = () => {
@@ -105,6 +106,11 @@ const App = () => {
       <Route exact path='/admin/signup' element={
         <ProtectedRoute isAuthenticated={(admin === null)} redirect='/admin/home'>
           <AdminRegister />
+        </ProtectedRoute>
+      }/>
+            <Route exact path='/admin/items' element={
+        <ProtectedRoute isAuthenticated={(admin !== null)} redirect='/admin/login'>
+          <AdminItems />
         </ProtectedRoute>
       }/>
        {/* <Route exact path='/admin/add' element={<AdminAddItem />}/> */}

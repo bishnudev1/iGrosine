@@ -447,8 +447,8 @@ a{
 .cart-container {
   display: flex;
   height: 100vh;
-  padding-inline: 40px;
-  padding-block: 15px;
+  padding-inline: 140px;
+  padding-block: 45px;
 }
 .checkout-container {
   display: flex;
@@ -1312,4 +1312,14 @@ tr:hover {
   100% {
     transform: rotate(360deg);
   }
+}
+
+.admin-home-container{
+  height: 100vh;
+  padding: 20px;
+}
+
+.admin-item-container{
+  height: 100vh;
+  padding: 20px;
 }
