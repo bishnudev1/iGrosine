@@ -51,15 +51,15 @@ const AdminAddItem = () => {
         desc
     ))
     // Reset form fields
-    // setCategory('');
-    // setId('');
-    // setImage('');
-    // setName('');
-    // setSeller('');
-    // setPrice('');
-    // setRealPrice('');
-    // setOff('');
-    // setDesc('');
+    setCategory('');
+    setId('');
+    setImage('');
+    setName('');
+    setSeller('');
+    setPrice('');
+    setRealPrice('');
+    setOff('');
+    setDesc('');
   };
 
   return (
