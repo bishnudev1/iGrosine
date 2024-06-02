@@ -686,6 +686,7 @@ exports.getMyCarts = async (req, res) => {
 
 const User = require('../models/User'); // Import the User model if it's not already imported
 const { sendEmail } = require('../utils/sendEmail');
+const Item = require('../models/Item');
 
 exports.removeFromCart = async (req, res) => {
     try {
@@ -716,3 +717,55 @@ exports.removeFromCart = async (req, res) => {
         });
     }
 }
+
+
+const mongoose = require('mongoose');
+
+exports.reviewOrder = async (req, res) => {
+    try {
+        const { orderId, desc, buyerName, reviewDate } = req.body;
+
+        console.log(buyerName);
+
+        // Check if orderId is a valid ObjectId
+        if (!mongoose.Types.ObjectId.isValid(orderId)) {
+            return res.status(400).json({
+                success: false,
+                message: "Invalid orderId"
+            });
+        }
+
+        // Create and save the order using the Order model
+        const myOrder = await Item.findById(orderId);
+
+        if (!myOrder) {
+            return res.status(404).json({
+                success: false,
+                message: "Order not found"
+            });
+        }
+
+        const newReview = {
+            buyerName: buyerName,
+            reviewDate: reviewDate,
+            desc: desc
+        };
+
+        myOrder.reviews.push(newReview);
+
+        myOrder.markModified("reviews");
+        await myOrder.save();
+
+        res.status(200).json({
+            success: true,
+            myOrder
+        });
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).json({
+            success: false,
+            message: "Internal Server Error!"
+        });
+    }
+};
+

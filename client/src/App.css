@@ -969,6 +969,59 @@ a{
   padding-right: 10px;
 }
 
+/* Styles for the add review input container */
+.add-review-container {
+  margin-bottom: 20px;
+}
+
+.add-review-container input[type="text"] {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.add-review-container button {
+  padding: 8px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.add-review-container button:hover {
+  background-color: #0056b3;
+}
+
+/* Styles for the existing reviews */
+.sub-right-view-item-container-product-reviews-sub-map {
+  margin-bottom: 20px;
+}
+
+.sub-right-view-item-container-product-reviews-title {
+  font-weight: bold;
+}
+
+.sub-right-view-item-container-product-reviews-buyers-details {
+  display: flex;
+  align-items: center;
+}
+
+.sub-right-view-item-container-product-reviews-buyers-details-name {
+  margin-right: 5px;
+}
+
+.sub-right-view-item-container-product-reviews-buyers-details-name svg {
+  color: green;
+}
+
+.sub-right-view-item-container-product-reviews-buyers-details-date {
+  color: #888;
+}
+
+
 .percent-off{
   font-size: 19px;
   color: green;

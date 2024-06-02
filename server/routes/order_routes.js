@@ -1,6 +1,6 @@
 const express = require('express');
 const {ensureAuth, ensureGuest} = require("../middleware/auth");
-const { orderItem, verifyPayment,getMyOrders, makeEmptyOrders, cancelOrder, addToCart, removeFromCart, getMyCarts, makeEmptyCarts, orderItemByCarts, getAllOrders, removeOrders, signupAdmin, loginAdmin, getAdmin, updateOrderStatus, orderItemCOD, orderItemByCartsCOD } = require('../controllers/order_controllers');
+const { orderItem, verifyPayment,getMyOrders, makeEmptyOrders, cancelOrder, addToCart, removeFromCart, getMyCarts, makeEmptyCarts, orderItemByCarts, getAllOrders, removeOrders, signupAdmin, loginAdmin, getAdmin, updateOrderStatus, orderItemCOD, orderItemByCartsCOD, reviewOrder } = require('../controllers/order_controllers');
 const extractAdminFromCookie = require('../middleware/adminAuth');
 
 const router = express.Router();
@@ -38,6 +38,8 @@ router.route('/admin-login').post(loginAdmin);
 router.route('/admin-me').get(extractAdminFromCookie, getAdmin);
 
 router.route('/admin-update-order').post(extractAdminFromCookie, updateOrderStatus);
+
+router.route('/post-review').post(ensureAuth, reviewOrder);
 
 
 module.exports = router;

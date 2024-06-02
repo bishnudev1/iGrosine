@@ -406,3 +406,27 @@ export const getCityStateFromCoordinates =  () => async(dispatch) => {
     }
   };
 
+  export const reviewItem = (orderId, desc, buyerName, reviewDate) => async (dispatch) => {
+    try {
+        dispatch({type: ActionType.LOADING_START})
+        console.log('calling',orderId);
+        const resp = await axios.post(`http://localhost:5000/api/post-review`,{
+            orderId, desc, buyerName, reviewDate
+        },{
+            withCredentials:true,
+        }
+    );console.log('calling 2');
+
+        console.log(resp.data);
+
+        dispatch({
+            type: ActionType.REVIEW_ITEM,
+            payload: 'message'
+        })
+        toast("Thanks for your review.")
+        dispatch({type: ActionType.LOADING_END})
+    } catch (error) {
+        dispatch({type: ActionType.LOADING_END})
+        toast(error.message)
+    }
+}

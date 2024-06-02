@@ -42,22 +42,23 @@ const Home = () => {
     // console.log(item.name);
 
     if(item.name !== undefined){
-      navigate('/view-item',{state:{id:item.id,name: item.name, price: item.price,
+      navigate('/view-item',{state:{id:item._id,name: item.name, price: item.price,
         realPrice:item.realPrice,
         off:item.off,desc:item.desc, seller:item.seller,
+        reviews: item.reviews,
         image: item.image}})
     }
   }
 
   const addToCartItem = (item) => {
     if(item.name !== undefined){
-      console.log(`Item in home ${item.name}`);
+      console.log(`Item in home ${item}`);
       dispatch(addToCart({
         id:item.id,
         name: item.name,
         price: item.price,
         image: item.image,
-        seller: item.seller,
+        seller: item.seller
       }));
     }
   }
