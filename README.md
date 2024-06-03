@@ -3,6 +3,7 @@
 ## Installation
 ### Prerequisites
 - Node.js
+- Go
 - MongoDB
 - Google Cloud Platform Account (for Google Maps API)
 - Razorpay Account (for payment integration)
@@ -10,9 +11,14 @@
 ### Steps
 1. **Backend Setup:**
    ```bash
-   cd server
+   cd server/js
    npm install
    npm run dev
+    ```
+   ```bash
+   cd server/go
+   go get
+   go run server.go
     ```
 2. **Frontend Setup:**
    ```bash
@@ -25,9 +31,10 @@
 http://localhost:3000
 ```
 
-4. Get the server at
+4. Get the servers at
 ```bash
 http://localhost:5000/api
+http://localhost:8000/api
 ```
 
 
