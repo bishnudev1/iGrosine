@@ -203,6 +203,7 @@ export const onlineOrder = (price,realPrice,off, reviews, seller, buyerId, buyer
 
 export const onlineOrderCOD = (price,realPrice,off, reviews, seller,buyerId, buyerName,itemName,itemImage, buyerEmail,itemId,number,city,state,desc ) => async (dispatch) => {
     try {
+        console.log("realPrice",realPrice);
         dispatch({type: ActionType.LOADING_START})
         const { data: { order } } = await axios.post(`http://localhost:5000/api/order-item-cod`, {
             price,realPrice,off, reviews, seller, buyerId,itemName,itemImage, buyerName, buyerEmail,itemId,number,city,state,desc 
@@ -227,8 +228,9 @@ export const onlineOrderCOD = (price,realPrice,off, reviews, seller,buyerId, buy
     }
 }
 
-export const onlineOrderMultiple = (buyerId,buyerName, buyerEmail, number, city, state, items,total,realPrice,off, reviews, seller,desc ) => async (dispatch) => {
+export const onlineOrderMultiple = (buyerId,buyerName, buyerEmail, number, city, state, items,total) => async (dispatch) => {
     try {
+        // console.log("realPrice",realPrice);
         dispatch({type: ActionType.LOADING_START})
         const { data: { key } } = await axios.get('http://localhost:5000/api/get-key', {
             withCredentials: true
@@ -236,11 +238,17 @@ export const onlineOrderMultiple = (buyerId,buyerName, buyerEmail, number, city,
 
         const orders = [];
 
-        console.log(total);
+        // console.log(total);
 
         // Iterate over each item in the items array
         for (const item of items) {
             const { id, name, price, image } = item;
+
+            const realPrice = item.realPrice;
+            const off = item.off;
+            const reviews = item.reviews;
+            const seller = item.seller;
+            const desc = item.desc;
 
             // Make a request to create an order for each item
             const response = await axios.post(`http://localhost:5000/api/order-item-cart`, {
@@ -318,7 +326,7 @@ export const onlineOrderMultiple = (buyerId,buyerName, buyerEmail, number, city,
     }
 };
 
-export const onlineOrderMultipleCOD = (buyerId,buyerName, buyerEmail, number, city, state, items,total,realPrice,off, reviews, seller,desc ) => async (dispatch) => {
+export const onlineOrderMultipleCOD = (buyerId,buyerName, buyerEmail, number, city, state, items,total ) => async (dispatch) => {
     try {
         dispatch({type: ActionType.LOADING_START})
         const orders = [];
@@ -328,6 +336,12 @@ export const onlineOrderMultipleCOD = (buyerId,buyerName, buyerEmail, number, ci
         // Iterate over each item in the items array
         for (const item of items) {
             const { id, name, price, image } = item;
+
+            const realPrice = item.realPrice;
+            const off = item.off;
+            const reviews = item.reviews;
+            const seller = item.seller;
+            const desc = item.desc;
 
             // Make a request to create an order for each item
             const response = await axios.post(`http://localhost:5000/api/order-item-cart-cod`, {

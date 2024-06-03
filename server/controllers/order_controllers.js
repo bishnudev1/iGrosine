@@ -444,7 +444,7 @@ exports.orderItemByCartsCOD = async (req, res) => {
     try {
         const { price, itemName,itemImage,buyerId, buyerName, buyerEmail,itemId,number,city,state,realPrice,off, reviews, seller,desc  } = req.body;
 
-        console.log(buyerName);
+        console.log(realPrice);
 
         // Create and save the order using the Order model
         const myOrder = await Order.create({

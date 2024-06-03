@@ -28,6 +28,7 @@ const MyCart = () => {
   const navigate = useNavigate();
 
   const placeOrderCall = () => {
+    console.log("carts",carts);
     navigate('/checkout-order',{state:{items:carts}})
   }
 

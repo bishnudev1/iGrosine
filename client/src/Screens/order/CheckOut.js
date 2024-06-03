@@ -106,7 +106,8 @@ const CheckOut = ({user}) => {
         );
       }
       else{
-        dispatch(onlineOrderMultipleCOD( generateRandomId(10),selectedFullName,selectedEmail,mobileNo,selectedCity,selectedState,items, Number(calculateTotal()),realPrice,off, reviews, seller,desc))
+        console.log(realPrice,off, reviews, seller,desc);
+        dispatch(onlineOrderMultipleCOD( generateRandomId(10),selectedFullName,selectedEmail,mobileNo,selectedCity,selectedState,items, Number(calculateTotal())))
       }
     }
     else if(selectedPayment === "cod"){
@@ -129,7 +130,9 @@ const CheckOut = ({user}) => {
         );
       }
       else{
-        dispatch(onlineOrderMultiple( generateRandomId(10),selectedFullName,selectedEmail,mobileNo,selectedCity,selectedState,items, calculateTotal(),realPrice,off, reviews, seller,desc))
+        // console.log("items",items);
+        // console.log(items.realPrice,items.off, items.reviews, items.seller,items.desc);
+        dispatch(onlineOrderMultiple( generateRandomId(10),selectedFullName,selectedEmail,mobileNo,selectedCity,selectedState,items, calculateTotal()))
       }
     }
     else{
