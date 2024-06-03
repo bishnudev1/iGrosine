@@ -7,7 +7,7 @@ export const loginAdmin = (email,password) => async(dispatch) => {
 
 try {
     console.log(email,password);
-    const resp = await axios.post(`http://localhost:5000/api/admin-login`,{
+    const resp = await axios.post(`http://localhost:8000/api/admin-login`,{
         email,
         password
     },{
@@ -33,7 +33,7 @@ export const getAdminData = () => async(dispatch) => {
 
     try {
         // console.log(email,password);
-        const resp = await axios.get(`http://localhost:5000/api/admin-me`,{
+        const resp = await axios.get(`http://localhost:8000/api/admin-me`,{
             withCredentials:true,
         }
     );console.log('calling 2');
@@ -57,7 +57,7 @@ export const registerAdmin = (name,email,password) => async(dispatch) => {
     try {
 
         console.log(name,email,password);
-        const resp = await axios.post(`http://localhost:5000/api/admin-signup`,{
+        const resp = await axios.post(`http://localhost:8000/api/admin-signup`,{
             name,
         email,
         password
