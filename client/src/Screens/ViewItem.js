@@ -89,7 +89,9 @@ const ViewItem = () => {
                                         id: id,
                                         name: name,
                                         price: price,
-                                        image: image
+                                        desc:desc,
+                                        image: image,
+                                        realPrice:realPrice, off:off, desc:desc, seller:seller, reviews:reviews
                                     }
                                 });
                             }}

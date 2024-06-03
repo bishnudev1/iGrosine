@@ -14,11 +14,23 @@ const orderSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    realPrice:{        type: String,
+        required: true},off:{        type: String,
+            required: true},   reviews: [
+                {
+                    type: Object,
+                    default: {}
+                }
+              ],seller:{        type: String,
+                    required: true},
     itemImage: {
         type: String,
         required: true
     },
     itemPrice: {
+        type: String,
+        required: true
+    },    desc: {
         type: String,
         required: true
     },

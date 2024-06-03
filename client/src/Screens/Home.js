@@ -57,8 +57,11 @@ const Home = () => {
         id:item.id,
         name: item.name,
         price: item.price,
+        desc:item.desc,
         image: item.image,
-        seller: item.seller
+        seller: item.seller,
+        realPrice: item.realPrice
+        ,off:item.off, reviews:item.reviews
       }));
     }
   }

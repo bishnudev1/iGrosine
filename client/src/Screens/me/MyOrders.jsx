@@ -1,6 +1,7 @@
 import React,{useEffect,useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { cancelledOrder, getMyOrdersAction } from '../../Redux/order/order_action';
+import { useNavigate } from 'react-router-dom';
 
 import Modal from 'react-modal';
 import { toast } from 'react-toastify';
@@ -26,6 +27,8 @@ const MyOrders = () => {
   const {myOrders,loading} = useSelector(state => state.order);
   
   const dispatch = useDispatch();
+
+  const navigate = useNavigate()
 
   const [searchTerm, setSearchTerm] = useState('');
   const [data, setData] = useState([]);
@@ -108,6 +111,19 @@ const MyOrders = () => {
       closeModal()
     }
     window.location.reload()
+  }
+
+  const reviewItem = (item) => {
+
+    // console.log(item.name);
+
+    if(item.itemName !== undefined){
+      navigate('/view-item',{state:{id:item._id,name: item.itemName, price: item.itemPrice,
+        realPrice:item.realPrice,
+        off:item.off,desc:item.desc, seller:item.seller,
+        reviews: item.reviews,
+        image: item.itemImage}})
+    }
   }
   
 
@@ -193,7 +209,7 @@ const MyOrders = () => {
             <p className='right-order-card-delivary-done'>{item.status}</p>
      {
       item.deliveredDate === "You'll get 50% money within 5-7 days." || item.deliveredDate === "Thanks for choosing us."  ? null :        <div className='right-order-card-cancel-review'>
-      <button className='right-order-card-review-btn'>⭐ Review</button>
+      <button onClick={() => reviewItem(item)} className='right-order-card-review-btn'>⭐ Review</button>
       {
         item.isDelivered ? null :  <button onClick={() => {cancelOrder(item._id, item.orderedDate, item.orderedType)}} className='right-order-card-cancel-btn'>❌ Cancel</button>
       }

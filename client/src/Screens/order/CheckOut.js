@@ -27,7 +27,7 @@ const CheckOut = ({user}) => {
   const [selectedEmail, setSelectedEmail] = useState(user.email ?? "");
   const [mobileNo, setMobileNo] = useState('');
 
-  const { id,name, price, image } = location.state || {};
+  const { id,name, price, image,realPrice,off, reviews, seller,desc } = location.state || {};
 
   const {items} = location.state || [];
 
@@ -92,6 +92,7 @@ const CheckOut = ({user}) => {
         dispatch(
           onlineOrderCOD(
             price,
+            realPrice,off, reviews, seller,
             generateRandomId(10),
             selectedFullName,
             name,
@@ -100,12 +101,12 @@ const CheckOut = ({user}) => {
             id,
             mobileNo,
             selectedCity,
-            selectedState
+            selectedState,desc
           )
         );
       }
       else{
-        dispatch(onlineOrderMultipleCOD( generateRandomId(10),selectedFullName,selectedEmail,mobileNo,selectedCity,selectedState,items, Number(calculateTotal())))
+        dispatch(onlineOrderMultipleCOD( generateRandomId(10),selectedFullName,selectedEmail,mobileNo,selectedCity,selectedState,items, Number(calculateTotal()),realPrice,off, reviews, seller,desc))
       }
     }
     else if(selectedPayment === "cod"){
@@ -114,6 +115,7 @@ const CheckOut = ({user}) => {
         dispatch(
           onlineOrder(
             price,
+            realPrice,off, reviews, seller,
             generateRandomId(10),
             selectedFullName,
             name,
@@ -122,12 +124,12 @@ const CheckOut = ({user}) => {
             id,
             mobileNo,
             selectedCity,
-            selectedState
+            selectedState,desc
           )
         );
       }
       else{
-        dispatch(onlineOrderMultiple( generateRandomId(10),selectedFullName,selectedEmail,mobileNo,selectedCity,selectedState,items, calculateTotal()))
+        dispatch(onlineOrderMultiple( generateRandomId(10),selectedFullName,selectedEmail,mobileNo,selectedCity,selectedState,items, calculateTotal(),realPrice,off, reviews, seller,desc))
       }
     }
     else{

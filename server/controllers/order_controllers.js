@@ -378,7 +378,7 @@ exports.cancelOrder = async (req, res) => {
 
 exports.orderItemByCarts = async (req, res) => {
     try {
-        const { price, itemName,itemImage,buyerId, buyerName, buyerEmail,itemId,number,city,state } = req.body;
+        const { price, itemName,itemImage,buyerId, buyerName, buyerEmail,itemId,number,city,state,realPrice,off, reviews, seller,desc } = req.body;
 
         console.log(buyerName);
 
@@ -403,7 +403,7 @@ exports.orderItemByCarts = async (req, res) => {
             buyerEmail,
             itemId,
             number,
-            city,state,
+            city,state,realPrice,off, reviews, seller,desc 
         });
 
         // Retrieve the user based on the authenticated user's ID
@@ -442,7 +442,7 @@ exports.orderItemByCarts = async (req, res) => {
 
 exports.orderItemByCartsCOD = async (req, res) => {
     try {
-        const { price, itemName,itemImage,buyerId, buyerName, buyerEmail,itemId,number,city,state } = req.body;
+        const { price, itemName,itemImage,buyerId, buyerName, buyerEmail,itemId,number,city,state,realPrice,off, reviews, seller,desc  } = req.body;
 
         console.log(buyerName);
 
@@ -458,6 +458,7 @@ exports.orderItemByCartsCOD = async (req, res) => {
             itemId,
             number,
             city,state,
+            realPrice,off, reviews, seller,desc 
         });
 
         // Retrieve the user based on the authenticated user's ID
@@ -497,7 +498,7 @@ exports.orderItemByCartsCOD = async (req, res) => {
 
 exports.orderItemCOD = async (req, res) => {
     try {
-        const { price, itemName,itemImage,buyerId, buyerName, buyerEmail,itemId,number,city,state } = req.body;
+        const { price, itemName,itemImage,buyerId, buyerName, buyerEmail,itemId,number,city,state,realPrice,off, reviews, seller,desc  } = req.body;
 
         console.log(buyerName);
 
@@ -518,7 +519,7 @@ exports.orderItemCOD = async (req, res) => {
             buyerEmail,
             itemId,
             number,
-            city,state,
+            city,state,realPrice,off, reviews, seller,desc 
         });
 
         // Retrieve the user based on the authenticated user's ID
@@ -555,7 +556,7 @@ exports.orderItemCOD = async (req, res) => {
 
 exports.orderItem = async (req, res) => {
     try {
-        const { price, itemName,itemImage,buyerId, buyerName, buyerEmail,itemId,number,city,state } = req.body;
+        const { price, itemName,itemImage,buyerId, buyerName, buyerEmail,itemId,number,city,state,realPrice,off, reviews, seller,desc  } = req.body;
 
         console.log(buyerName);
 
@@ -580,7 +581,8 @@ exports.orderItem = async (req, res) => {
             buyerEmail,
             itemId,
             number,
-            city,state,
+            realPrice,off, reviews, seller,
+            city,state,desc 
         });
 
         // Retrieve the user based on the authenticated user's ID

@@ -79,7 +79,7 @@ export const logoutUser = () => (dispatch) => {
     }
 }
 
-export const addToCart = ({id,name,price,image,seller}) => async(dispatch) => {
+export const addToCart = ({id,name,price,image,seller,realPrice,off, reviews,desc }) => async(dispatch) => {
 
       try {
         dispatch({type: ActionType.LOADING_START})
@@ -90,6 +90,7 @@ export const addToCart = ({id,name,price,image,seller}) => async(dispatch) => {
             price: price,
             seller: seller,
             image: image,
+            realPrice:realPrice,off:off, reviews:reviews,desc:desc 
           };
         const resp = await axios.post(`http://localhost:5000/api/add-to-cart`,{
             item

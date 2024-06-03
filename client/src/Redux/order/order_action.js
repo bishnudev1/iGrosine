@@ -148,7 +148,7 @@ export const cancelledOrder = (orderId) => async (dispatch) => {
     }
 }
 
-export const onlineOrder = (price,buyerId, buyerName,itemName,itemImage, buyerEmail,itemId,number,city,state) => async (dispatch) => {
+export const onlineOrder = (price,realPrice,off, reviews, seller, buyerId, buyerName,itemName,itemImage, buyerEmail,itemId,number,city,state,desc ) => async (dispatch) => {
     try {
         dispatch({type: ActionType.LOADING_START})
         const { data: { key } }
@@ -157,7 +157,7 @@ export const onlineOrder = (price,buyerId, buyerName,itemName,itemImage, buyerEm
             });
 
         const { data: { order } } = await axios.post(`http://localhost:5000/api/order-item`, {
-            price, buyerId,itemName,itemImage, buyerName, buyerEmail,itemId,number,city,state
+            price, realPrice,off, reviews, seller, buyerId,itemName,itemImage, buyerName, buyerEmail,itemId,number,city,state,desc 
             
         }, {
             withCredentials: true
@@ -201,11 +201,11 @@ export const onlineOrder = (price,buyerId, buyerName,itemName,itemImage, buyerEm
     }
 }
 
-export const onlineOrderCOD = (price,buyerId, buyerName,itemName,itemImage, buyerEmail,itemId,number,city,state) => async (dispatch) => {
+export const onlineOrderCOD = (price,realPrice,off, reviews, seller,buyerId, buyerName,itemName,itemImage, buyerEmail,itemId,number,city,state,desc ) => async (dispatch) => {
     try {
         dispatch({type: ActionType.LOADING_START})
         const { data: { order } } = await axios.post(`http://localhost:5000/api/order-item-cod`, {
-            price, buyerId,itemName,itemImage, buyerName, buyerEmail,itemId,number,city,state
+            price,realPrice,off, reviews, seller, buyerId,itemName,itemImage, buyerName, buyerEmail,itemId,number,city,state,desc 
             
         }, {
             withCredentials: true
@@ -227,7 +227,7 @@ export const onlineOrderCOD = (price,buyerId, buyerName,itemName,itemImage, buye
     }
 }
 
-export const onlineOrderMultiple = (buyerId,buyerName, buyerEmail, number, city, state, items,total) => async (dispatch) => {
+export const onlineOrderMultiple = (buyerId,buyerName, buyerEmail, number, city, state, items,total,realPrice,off, reviews, seller,desc ) => async (dispatch) => {
     try {
         dispatch({type: ActionType.LOADING_START})
         const { data: { key } } = await axios.get('http://localhost:5000/api/get-key', {
@@ -253,7 +253,7 @@ export const onlineOrderMultiple = (buyerId,buyerName, buyerEmail, number, city,
                 itemId: id,
                 number,
                 city,
-                state
+                state,realPrice,off, reviews, seller,desc 
             }, {
                 withCredentials: true
             });
@@ -318,7 +318,7 @@ export const onlineOrderMultiple = (buyerId,buyerName, buyerEmail, number, city,
     }
 };
 
-export const onlineOrderMultipleCOD = (buyerId,buyerName, buyerEmail, number, city, state, items,total) => async (dispatch) => {
+export const onlineOrderMultipleCOD = (buyerId,buyerName, buyerEmail, number, city, state, items,total,realPrice,off, reviews, seller,desc ) => async (dispatch) => {
     try {
         dispatch({type: ActionType.LOADING_START})
         const orders = [];
@@ -340,7 +340,7 @@ export const onlineOrderMultipleCOD = (buyerId,buyerName, buyerEmail, number, ci
                 itemId: id,
                 number,
                 city,
-                state
+                state,realPrice,off, reviews, seller,desc 
             }, {
                 withCredentials: true
             });
