@@ -121,7 +121,7 @@ const App = () => {
                     >
                       <CheckOut user={data}/>
                     </ProtectedRoute>}/>
-      <Route exact path='/view-item' element={<ViewItem />}/>
+      <Route exact path='/view-item/:id' element={<ViewItem />}/>
       <Route
                   exact
                   path="/my-orders"

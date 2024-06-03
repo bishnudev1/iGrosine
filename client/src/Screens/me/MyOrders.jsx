@@ -118,7 +118,7 @@ const MyOrders = () => {
     // console.log(item.name);
 
     if(item.itemName !== undefined){
-      navigate('/view-item',{state:{id:item._id,name: item.itemName, price: item.itemPrice,
+      navigate(`/view-item/${item._id}`,{state:{id:item._id,name: item.itemName, price: item.itemPrice,
         realPrice:item.realPrice,
         off:item.off,desc:item.desc, seller:item.seller,
         reviews: item.reviews,

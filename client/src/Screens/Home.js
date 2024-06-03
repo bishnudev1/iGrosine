@@ -42,7 +42,7 @@ const Home = () => {
     // console.log(item.name);
 
     if(item.name !== undefined){
-      navigate('/view-item',{state:{id:item._id,name: item.name, price: item.price,
+      navigate(`/view-item/${item._id}`,{state:{id:item._id,name: item.name, price: item.price,
         realPrice:item.realPrice,
         off:item.off,desc:item.desc, seller:item.seller,
         reviews: item.reviews,
