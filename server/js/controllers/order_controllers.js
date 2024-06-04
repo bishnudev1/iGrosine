@@ -141,131 +141,131 @@ exports.removeOrders = async (req, res) => {
     }
 }
 
-exports.loginAdmin = async (req, res) => {
-    try {
-        const { email, password } = req.body;
+// exports.loginAdmin = async (req, res) => {
+//     try {
+//         const { email, password } = req.body;
 
-        console.log(email,password);
+//         console.log(email,password);
 
-        // Check if the provided email exists in the database
-        const admin = await Admin.findOne({ email });
+//         // Check if the provided email exists in the database
+//         const admin = await Admin.findOne({ email });
 
-        if (!admin) {
-            return res.status(401).json({
-                success: false,
-                message: "Invalid email or password"
-            });
-        }
+//         if (!admin) {
+//             return res.status(401).json({
+//                 success: false,
+//                 message: "Invalid email or password"
+//             });
+//         }
 
-        // Compare the provided password with the hashed password stored in the database
+//         // Compare the provided password with the hashed password stored in the database
 
-        console.log(admin.password);
-        const passwordMatch = await bcrypt.compare(password, admin.password);
+//         console.log(admin.password);
+//         const passwordMatch = await bcrypt.compare(password, admin.password);
 
-        if (!passwordMatch) {
-            return res.status(401).json({
-                success: false,
-                message: "Invalid email or password"
-            });
-        }
+//         if (!passwordMatch) {
+//             return res.status(401).json({
+//                 success: false,
+//                 message: "Invalid email or password"
+//             });
+//         }
 
-        // If email and password are correct, generate JWT token
-        const token = jwt.sign({ id: admin._id }, "process.env.JWT_SECRET", {
-            expiresIn: '1h' // Token expires in 1 hour
-        });
+//         // If email and password are correct, generate JWT token
+//         const token = jwt.sign({ id: admin._id }, "process.env.JWT_SECRET", {
+//             expiresIn: '1h' // Token expires in 1 hour
+//         });
 
-        // Set the token in a cookie
-        res.cookie('adminToken', token, { 
-            httpOnly: true, // Cookie is only accessible via HTTP(S) and not JavaScript
-            expires: new Date(Date.now() + 3600000) // Cookie expires in 1 hour (3600000 milliseconds)
-        });
+//         // Set the token in a cookie
+//         res.cookie('adminToken', token, { 
+//             httpOnly: true, // Cookie is only accessible via HTTP(S) and not JavaScript
+//             expires: new Date(Date.now() + 3600000) // Cookie expires in 1 hour (3600000 milliseconds)
+//         });
 
-        // Send the token in the response
-        res.status(200).json({
-            success: true,
-            message: "Login successful",
-            token:token
-        });
-    } catch (error) {
-        console.error(error.message);
-        res.status(500).json({
-            success: false,
-            message: "Internal Server Error"
-        });
-    }
-};
-
-
-exports.getAdmin = async (req, res) => {
-    try {
-
-        const admin = await Admin.findById(req.admin.id);
-
-        console.log(req.admin.id);
-
-        // Return the admin information in the response
-        res.status(200).json({
-            success: true,
-            data: admin
-        });
-    } catch (error) {
-        console.error(error.message);
-        res.status(500).json({
-            success: false,
-            message: "Internal Server Error"
-        });
-    }
-}
+//         // Send the token in the response
+//         res.status(200).json({
+//             success: true,
+//             message: "Login successful",
+//             token:token
+//         });
+//     } catch (error) {
+//         console.error(error.message);
+//         res.status(500).json({
+//             success: false,
+//             message: "Internal Server Error"
+//         });
+//     }
+// };
 
 
+// exports.getAdmin = async (req, res) => {
+//     try {
+
+//         const admin = await Admin.findById(req.admin.id);
+
+//         console.log(req.admin.id);
+
+//         // Return the admin information in the response
+//         res.status(200).json({
+//             success: true,
+//             data: admin
+//         });
+//     } catch (error) {
+//         console.error(error.message);
+//         res.status(500).json({
+//             success: false,
+//             message: "Internal Server Error"
+//         });
+//     }
+// }
 
 
-exports.signupAdmin = async (req, res) => {
-    try {
-        const { name, email, password } = req.body;
 
-        // Check if the email already exists in the database
-        const existingAdmin = await Admin.findOne({ email });
 
-        if (existingAdmin) {
-            return res.status(400).json({
-                success: false,
-                message: "Email already exists"
-            });
-        }
+// exports.signupAdmin = async (req, res) => {
+//     try {
+//         const { name, email, password } = req.body;
 
-        // Hash the password
-        const hashedPassword = await bcrypt.hash(password, 10);
+//         // Check if the email already exists in the database
+//         const existingAdmin = await Admin.findOne({ email });
 
-        // Create a new admin
-        const newAdmin = new Admin({
-            name,
-            email,
-            password: hashedPassword
-        });
+//         if (existingAdmin) {
+//             return res.status(400).json({
+//                 success: false,
+//                 message: "Email already exists"
+//             });
+//         }
 
-        // Save the new admin to the database
-        await newAdmin.save();
+//         // Hash the password
+//         const hashedPassword = await bcrypt.hash(password, 10);
 
-        // Generate JWT token
-        const token = jwt.sign({ id: newAdmin._id, email: newAdmin.email }, "process.env.JWT_SECRET", {
-            expiresIn: '1h' // Token expires in 1 hour
-        });
+//         // Create a new admin
+//         const newAdmin = new Admin({
+//             name,
+//             email,
+//             password: hashedPassword
+//         });
 
-        // Send the token in the response
-        res.status(201).json({
-            success: true,
-            message: "Signup successful",
-            token
-        });
-    } catch (error) {
-        console.error(error.message);
-        res.status(500).json({
-            success: false,
-            message: "Internal Server Error"
-        });
-    }
-};
+//         // Save the new admin to the database
+//         await newAdmin.save();
+
+//         // Generate JWT token
+//         const token = jwt.sign({ id: newAdmin._id, email: newAdmin.email }, "process.env.JWT_SECRET", {
+//             expiresIn: '1h' // Token expires in 1 hour
+//         });
+
+//         // Send the token in the response
+//         res.status(201).json({
+//             success: true,
+//             message: "Signup successful",
+//             token
+//         });
+//     } catch (error) {
+//         console.error(error.message);
+//         res.status(500).json({
+//             success: false,
+//             message: "Internal Server Error"
+//         });
+//     }
+// };
 
 
 exports.getMyOrders = async (req, res) => {

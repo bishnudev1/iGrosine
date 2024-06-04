@@ -31,11 +31,11 @@ router.route('/get-all-orders').get( getAllOrders);
 
 router.route('/remove-orders').delete( removeOrders);
 
-router.route('/admin-signup').post(signupAdmin);
+// router.route('/admin-signup').post(signupAdmin);
 
-router.route('/admin-login').post(loginAdmin);
+// router.route('/admin-login').post(loginAdmin);
 
-router.route('/admin-me').get(extractAdminFromCookie, getAdmin);
+// router.route('/admin-me').get(extractAdminFromCookie, getAdmin);
 
 router.route('/admin-update-order').post(extractAdminFromCookie, updateOrderStatus);
 
