@@ -45,6 +45,7 @@ http://localhost:8000/api
   - CSS
 ### Backend
   - NodeJS
+  - GoFiber
 ### Database
   - MongoDB
 ### State Management
