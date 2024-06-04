@@ -2,7 +2,7 @@
 
 const express = require ('express');
 const { connectDB } = require ("./db/conn.js");
-const mongoose=require('mongoose');
+// const mongoose=require('mongoose');
 const dotenv = require('dotenv')
 const passport = require('passport')
 const session = require('express-session');
@@ -61,8 +61,8 @@ app.use("/auth",AuthRoute);
 const OrderRoutes = require('./routes/order_routes.js')
 app.use('/api',OrderRoutes)
 
-const ItemRoutes = require('./routes/item_routes.js')
-app.use('/api',ItemRoutes)
+// const ItemRoutes = require('./routes/item_routes.js')
+// app.use('/api',ItemRoutes)
 
 const UserRoutes = require('./routes/user_routes.js')
 app.use('/api',UserRoutes)
