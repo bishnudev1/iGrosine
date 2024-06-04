@@ -108,53 +108,58 @@ func DeleteItem(c *fiber.Ctx) error {
 	})
 
 }
-func AddItem(c *fiber.Ctx) error {
-			// Parse request body
-			var item models.Item
-			if err := c.BodyParser(&item); err != nil {
-				return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
-					"success": false,
-					"message": err,
-				})
-			}
 
-			fmt.Println(item)
-		
-			// Validate if all required fields are provided
-			if item.ID == "" || item.Category == "" || item.Image == "" || item.Name == "" || item.Seller == "" || item.Price == "" || item.RealPrice == "" || item.Off == "" || item.Desc == "" {
-				return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
-					"success": false,
-					"message": "All fields are required",
-				})
-			}
-		
-			// Check if item with the same ID already exists
-			filter := bson.M{"id": item.ID}
-			count, err := db.MI.DB.Collection("items").CountDocuments(context.Background(), filter)
-			if err != nil {
-				return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
-					"success": false,
-					"message": "Failed to check existing item",
-				})
-			}
-			if count > 0 {
-				return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
-					"success": false,
-					"message": "Item with the same ID already exists",
-				})
-			}
-		
-			// Insert the new item into the database
-			if _, err := db.MI.DB.Collection("items").InsertOne(context.Background(), item); err != nil {
-				return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
-					"success": false,
-					"message": "Failed to add item",
-				})
-			}
-		
-			return c.Status(fiber.StatusCreated).JSON(fiber.Map{
-				"success": true,
-				"message": "Item added successfully",
-				// "item":    item,
-			})
+
+func AddItem(c *fiber.Ctx) error {
+    // Parse request body
+    var item models.Item
+    if err := c.BodyParser(&item); err != nil {
+        return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+            "success": false,
+            "message": err,
+        })
+    }
+
+    // Initialize Reviews as an empty array
+    item.Reviews = []struct{}{}
+
+    fmt.Println(item)
+
+    // Validate if all required fields are provided
+    if item.ID == "" || item.Category == "" || item.Image == "" || item.Name == "" || item.Seller == "" || item.Price == "" || item.RealPrice == "" || item.Off == "" || item.Desc == "" {
+        return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+            "success": false,
+            "message": "All fields are required",
+        })
+    }
+
+    // Check if item with the same ID already exists
+    filter := bson.M{"id": item.ID}
+    count, err := db.MI.DB.Collection("items").CountDocuments(context.Background(), filter)
+    if err != nil {
+        return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+            "success": false,
+            "message": "Failed to check existing item",
+        })
+    }
+    if count > 0 {
+        return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+            "success": false,
+            "message": "Item with the same ID already exists",
+        })
+    }
+
+    // Insert the new item into the database
+    if _, err := db.MI.DB.Collection("items").InsertOne(context.Background(), item); err != nil {
+        return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+            "success": false,
+            "message": "Failed to add item",
+        })
+    }
+
+    return c.Status(fiber.StatusCreated).JSON(fiber.Map{
+        "success": true,
+        "message": "Item added successfully",
+        "item":    item,
+    })
 }
