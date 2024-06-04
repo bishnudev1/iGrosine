@@ -1,9 +1,0 @@
-export const REGISTER_ADMIN = 'REGISTER_ADMIN';
-
-export const LOGIN_ADMIN = 'LOGIN_ADMIN';
-
-export const GET_ADMIN = 'GET_ADMIN';
-
-export const GET_ALL_ORDERS = 'GET_ALL_ORDERS';
-
-export const CHANGE_ORDER_STATUS = 'CHANGE_ORDER_STATUS';
