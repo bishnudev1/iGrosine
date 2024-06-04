@@ -22,6 +22,7 @@ func main() {
 		fmt.Println("Fiber server is running")
 		db.ConnectDB()
 		routes.AdminRoutes(app)
+		routes.ItemRoutes(app)
 	}
 
 	app.Get("/", func(c *fiber.Ctx) error {

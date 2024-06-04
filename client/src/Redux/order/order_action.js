@@ -9,7 +9,7 @@ export const getItems = () => async (dispatch) => {
     console.log("calling getItems");
     try {
         dispatch({type: ActionType.LOADING_START})
-        let resp = await axios.get(`http://localhost:5000/api/get-items`);
+        let resp = await axios.get(`http://localhost:8000/api/get-items`);
 
         console.log("Action orders",resp.data.items);
 
@@ -27,10 +27,12 @@ export const getItems = () => async (dispatch) => {
 
 export const deleteItem = (_id) => async (dispatch) => {
 
-    console.log("calling getItems");
+    console.log("calling deleteItem");
+
+    console.log("_id LOL",_id);
     try {
         dispatch({type: ActionType.LOADING_START})
-        let resp = await axios.post(`http://localhost:5000/api/delete-item`,{
+        let resp = await axios.post(`http://localhost:8000/api/delete-item`,{
             _id
         },{
             withCredentials:true,
@@ -55,10 +57,12 @@ export const deleteItem = (_id) => async (dispatch) => {
 
 export const addItemAdmin = (id,category, image, name, seller, price, realPrice, off, desc) => async (dispatch) => {
 
+    console.log(id,category, image, name, seller, price, realPrice, off, desc);
+
     console.log("calling getItems");
     try {
         dispatch({type: ActionType.LOADING_START})
-        let resp = await axios.post(`http://localhost:5000/api/add-item`,{
+        let resp = await axios.post(`http://localhost:8000/api/add-item`,{
             id,category, image, name, seller, price, realPrice, off, desc
         },{
             withCredentials:true

@@ -17,7 +17,7 @@ const AdminItems = () => {
 
 
     const handleDelete = async(id) => {
-        console.log(id);
+        console.log("handleDelete",id);
         dispatch(deleteItem(id));
     }
 
