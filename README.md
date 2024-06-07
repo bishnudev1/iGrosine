@@ -11,9 +11,10 @@
 ### Steps
 1. **Backend Setup:**
    ```bash
-   cd server/js
+   cd server/ts
    npm install
-   npm run dev
+   npx tsc
+   node dist/index.js
     ```
    ```bash
    cd server/go
