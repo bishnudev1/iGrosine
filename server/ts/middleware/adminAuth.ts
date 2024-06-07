@@ -1,8 +1,13 @@
-const jwt = require('jsonwebtoken');
+import { Request, Response, NextFunction } from 'express';
+import jwt, { JwtPayload } from 'jsonwebtoken';
 
-const extractAdminFromCookie = (req, res, next) => {
+interface CustomRequest extends Request {
+  admin?: JwtPayload;
+}
+
+const extractAdminFromCookie = (req: CustomRequest, res: Response, next: NextFunction) => {
   // Extract the token from the cookie
-  const token = req.cookies.adminToken;
+  const token = req.cookies.adminToken as string;
 
   if (!token) {
     return res.status(401).json({
@@ -13,10 +18,10 @@ const extractAdminFromCookie = (req, res, next) => {
 
   try {
     // Verify the token and extract admin information
-    const decoded = jwt.verify(token, "process.env.JWT_SECRET");
+    const decoded = jwt.verify(token, "process.env.JWT_SECRET") as JwtPayload;
     req.admin = decoded; // Attach admin information to the request object
     next();
-  } catch (error) {
+  } catch (error: any) {
     console.error('Token verification failed:', error.message);
     return res.status(401).json({
       success: false,
@@ -25,4 +30,4 @@ const extractAdminFromCookie = (req, res, next) => {
   }
 };
 
-module.exports = extractAdminFromCookie;
+export default extractAdminFromCookie;

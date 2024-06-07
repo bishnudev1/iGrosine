@@ -1,6 +1,6 @@
-const nodemailer = require('nodemailer');
+import nodemailer,{SendMailOptions} from 'nodemailer';
 
-exports.sendEmail = (head, html,buyerEmail) => {
+export const sendEmail = async (head:string,html:any,buyerEmail:string) => {
     const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
@@ -9,7 +9,7 @@ exports.sendEmail = (head, html,buyerEmail) => {
         }
     });
 
-    const mailOptions = {
+    const mailOptions:SendMailOptions = {
         from: 'bishnudevkhutia26@gmail.com', // Sender address
         to: buyerEmail, // List of recipients
         subject: head, // Subject line

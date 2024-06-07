@@ -1,7 +1,24 @@
-const express = require('express');
-const {ensureAuth, ensureGuest} = require("../middleware/auth");
-const { orderItem, verifyPayment,getMyOrders, makeEmptyOrders, cancelOrder, addToCart, removeFromCart, getMyCarts, makeEmptyCarts, orderItemByCarts, getAllOrders, removeOrders, signupAdmin, loginAdmin, getAdmin, updateOrderStatus, orderItemCOD, orderItemByCartsCOD, reviewOrder } = require('../controllers/order_controllers');
-const extractAdminFromCookie = require('../middleware/adminAuth');
+import express from 'express';
+import { ensureAuth, ensureGuest } from '../middleware/auth';
+import {
+    orderItem,
+    verifyPayment,
+    getMyOrders,
+    makeEmptyOrders,
+    cancelOrder,
+    addToCart,
+    removeFromCart,
+    getMyCarts,
+    makeEmptyCarts,
+    orderItemByCarts,
+    getAllOrders,
+    removeOrders,
+    updateOrderStatus,
+    orderItemCOD,
+    orderItemByCartsCOD,
+    reviewOrder
+} from '../controllers/order_controllers';
+import extractAdminFromCookie from '../middleware/adminAuth';
 
 const router = express.Router();
 
@@ -27,9 +44,9 @@ router.route('/remove-cart').post(ensureAuth, removeFromCart);
 
 router.route('/get-my-carts').get(ensureAuth, getMyCarts);
 
-router.route('/get-all-orders').get( getAllOrders);
+router.route('/get-all-orders').get(getAllOrders);
 
-router.route('/remove-orders').delete( removeOrders);
+router.route('/remove-orders').delete(removeOrders);
 
 // router.route('/admin-signup').post(signupAdmin);
 
@@ -41,5 +58,4 @@ router.route('/admin-update-order').post(extractAdminFromCookie, updateOrderStat
 
 router.route('/post-review').post(ensureAuth, reviewOrder);
 
-
-module.exports = router;
+export default router;
