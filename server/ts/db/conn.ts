@@ -2,7 +2,7 @@ import mongoose, {ConnectOptions} from "mongoose";
 
 export default async function connect() {
     try {
-        await mongoose.connect("mongodb://localhost:27017/igrocine", {
+        await mongoose.connect(process.env.MONGO_URI as string, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
         } as ConnectOptions);

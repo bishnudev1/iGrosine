@@ -1,38 +1,7 @@
-import { Document, Schema, Model, model } from 'mongoose';
-
-interface Review {
-    // Define your Review interface here
-    rating: string;
-    feedback: string;
-}
-
-interface OrderDocument extends Document {
-    _id: string;
-    itemId: string;
-    itemName: string;
-    realPrice: string;
-    off: string;
-    reviews: Review[];
-    seller: string;
-    itemImage: string;
-    itemPrice: string;
-    desc: string;
-    number: number;
-    buyerId: string;
-    buyerName: string;
-    buyerEmail: string;
-    city: string;
-    state: string;
-    status: string;
-    orderedType: string;
-    orderedDate: Date;
-    isDelivered?: boolean;
-    isCancelled?: boolean;
-    deliveredDate: string;
-    // reviews: Review[];
-}
-
-const orderSchema = new Schema<OrderDocument>({
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const mongoose_1 = require("mongoose");
+const orderSchema = new mongoose_1.Schema({
     itemId: {
         type: String,
         required: true,
@@ -104,7 +73,6 @@ const orderSchema = new Schema<OrderDocument>({
         type: String,
         required: true,
     },
-    
     reviews: [
         {
             rating: { type: Number, required: true },
@@ -128,9 +96,5 @@ const orderSchema = new Schema<OrderDocument>({
         default: `Will be delivered by ${new Date().toDateString()}`,
     },
 });
-
-const Order: Model<OrderDocument> = model<OrderDocument>('Order', orderSchema);
-
-export default Order;
-
-export { OrderDocument, Review };
+const Order = (0, mongoose_1.model)('Order', orderSchema);
+exports.default = Order;

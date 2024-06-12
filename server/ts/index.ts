@@ -1,5 +1,5 @@
 import express from 'express';
-import { connectDB } from './db/conn';
+import  connectDB  from './db/conn';
 import dotenv from 'dotenv';
 import passport from 'passport';
 import session from 'express-session';
@@ -7,10 +7,10 @@ import MongoStore from 'connect-mongo';
 import { loginWithGoogle } from './auth/passport';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
-import { IndexRoute } from './routes/index';
-import { AuthRoute } from './routes/auth';
-import { OrderRoutes } from './routes/order_routes';
-import { UserRoutes } from './routes/user_routes';
+import  IndexRoute  from './routes/index';
+import  AuthRoute  from './routes/auth';
+import  OrderRoutes  from './routes/order_routes';
+import  UserRoutes  from './routes/user_routes';
 import Razorpay from 'razorpay';
 
 dotenv.config({ path: '.env' });

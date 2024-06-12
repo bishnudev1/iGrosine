@@ -1,58 +1,63 @@
-import { Request, Response } from 'express';
-import Razorpay from 'razorpay';
-import crypto from 'crypto';
-import User,{UserDocument} from '../models/User';
-import Order, {OrderDocument, Review} from '../models/Order';
-import { sendEmail } from '../utils/sendEmail';
-
-export const getAllOrders = async (req: Request, res: Response): Promise<void> => {
+"use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.reviewOrder = exports.removeFromCart = exports.getMyCarts = exports.addToCart = exports.verifyPayment = exports.orderItem = exports.orderItemCOD = exports.orderItemByCartsCOD = exports.orderItemByCarts = exports.cancelOrder = exports.makeEmptyCarts = exports.makeEmptyOrders = exports.getMyOrders = exports.removeOrders = exports.updateOrderStatus = exports.getAllOrders = void 0;
+const razorpay_1 = __importDefault(require("razorpay"));
+const crypto_1 = __importDefault(require("crypto"));
+const User_1 = __importDefault(require("../models/User"));
+const Order_1 = __importDefault(require("../models/Order"));
+const sendEmail_1 = require("../utils/sendEmail");
+const getAllOrders = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const orders = await Order.find();
-
+        const orders = yield Order_1.default.find();
         res.status(200).json({
             success: true,
             data: orders
         });
-    } catch (error:any) {
+    }
+    catch (error) {
         console.error(error.message);
         res.status(500).json({
             success: false,
             message: "Internal Server Error!"
         });
     }
-};
-
-export const updateOrderStatus = async (req: Request, res: Response): Promise<void> => {
+});
+exports.getAllOrders = getAllOrders;
+const updateOrderStatus = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { buyerId, status, item } = req.body;
-
         console.log(buyerId);
         console.log("Calling updateOrderStatus");
         console.log("item", item);
-
         // Validate input fields
         if (!buyerId || !status || !item) {
-             res.status(400).json({ success: false, message: "Missing required fields" });
-             return;
+            res.status(400).json({ success: false, message: "Missing required fields" });
+            return;
         }
-
-        const orders = await Order.find({ buyerId });
-
+        const orders = yield Order_1.default.find({ buyerId });
         const order = orders[0];
-
         console.log("order", order);
-
         if (!order) {
             res.status(404).json({ success: false, message: "Order not found" });
             return;
         }
-
         const currentDate = new Date().toLocaleDateString('en-US', {
             day: 'numeric',
             month: 'long',
             year: 'numeric'
         });
-
         // Update order status based on the provided status
         switch (status) {
             case "Shipped":
@@ -66,129 +71,121 @@ export const updateOrderStatus = async (req: Request, res: Response): Promise<vo
                 order.isDelivered = true;
                 break;
             default:
-                 res.status(400).json({ success: false, message: "Invalid status" });
-                 return;
+                res.status(400).json({ success: false, message: "Invalid status" });
+                return;
         }
-
-        await order.save();
-
+        yield order.save();
         console.log(item.buyerEmail);
-
-        const user = await User.findOne({ email: item.buyerEmail });
-
+        const user = yield User_1.default.findOne({ email: item.buyerEmail });
         if (!user) {
             res.status(404).json({ success: false, message: "User not found" });
             return;
         }
-
         const userOrder = user.orders.find(order => order.buyerId.toString() === buyerId.toString());
         if (userOrder) {
             console.log("userOrder", userOrder);
             userOrder.status = order.status;
             userOrder.isDelivered = status === "Delivered" ? true : false;
             user.markModified('orders');
-            await user.save();
+            yield user.save();
         }
-
         // Send email notification
-        sendEmail(`Delivery update - iGrosine`,
-            `<p>Dear ${item.buyerName},</p>
+        (0, sendEmail_1.sendEmail)(`Delivery update - iGrosine`, `<p>Dear ${item.buyerName},</p>
             <img src="${item.itemImage}" alt="Shopping Image" style="height: 300px;" />
-            <p>Your order for ${item.itemName} has been ${status} successfully by our team at ${currentDate}.</p>`,
-            item.buyerEmail
-        );
-
+            <p>Your order for ${item.itemName} has been ${status} successfully by our team at ${currentDate}.</p>`, item.buyerEmail);
         res.status(200).json({
             success: true,
             data: order
         });
-    } catch (error:any) {
+    }
+    catch (error) {
         console.error(error.message);
         res.status(500).json({
             success: false,
             message: "Internal Server Error!"
         });
     }
-};
-
-export const removeOrders = async (req: Request, res: Response): Promise<void> => {
+});
+exports.updateOrderStatus = updateOrderStatus;
+const removeOrders = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const orders = await Order.deleteMany();
-
+        const orders = yield Order_1.default.deleteMany();
         res.status(200).json({
             success: true,
             data: orders
         });
-    } catch (error:any) {
+    }
+    catch (error) {
         console.error(error.message);
         res.status(500).json({
             success: false,
             message: "Internal Server Error!"
         });
     }
-};
-
-export const getMyOrders = async (req: Request, res: Response): Promise<void> => {
+});
+exports.removeOrders = removeOrders;
+const getMyOrders = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-
-        const user = await User.findById((req.user as UserDocument)._id);
-        const orders = user!.orders;
+        const user = yield User_1.default.findById(req.user._id);
+        const orders = user.orders;
         res.status(200).json({
             success: true,
             data: orders
         });
-    } catch (error:any) {
+    }
+    catch (error) {
         console.error(error.message);
         res.status(500).json({
             success: false,
             message: "Internal Server Error!"
         });
     }
-};
-
-export const makeEmptyOrders = async (req: Request, res: Response): Promise<void> => {
+});
+exports.getMyOrders = getMyOrders;
+const makeEmptyOrders = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const user = await User.findById("665b408d8d3bb344da20cbc2");
-        user!.orders = [];
-        await user!.save();
+        const user = yield User_1.default.findById("665b408d8d3bb344da20cbc2");
+        user.orders = [];
+        yield user.save();
         res.status(200).json({
             success: true,
             data: user
         });
-    } catch (error:any) {
+    }
+    catch (error) {
         console.error(error.message);
         res.status(500).json({
             success: false,
             message: "Internal Server Error!"
         });
     }
-};
-
-export const makeEmptyCarts = async (req: Request, res: Response): Promise<void> => {
+});
+exports.makeEmptyOrders = makeEmptyOrders;
+const makeEmptyCarts = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const user = await User.findById((req.user as UserDocument)._id);
-        user!.carts = [];
-        await user!.save();
+        const user = yield User_1.default.findById(req.user._id);
+        user.carts = [];
+        yield user.save();
         res.status(200).json({
             success: true,
             data: user
         });
-    } catch (error:any) {
+    }
+    catch (error) {
         console.error(error.message);
         res.status(500).json({
             success: false,
             message: "Internal Server Error!"
         });
     }
-};
-
-export const cancelOrder = async (req: Request, res: Response): Promise<void> => {
+});
+exports.makeEmptyCarts = makeEmptyCarts;
+const cancelOrder = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const user = await User.findById((req.user as UserDocument)._id);
+        const user = yield User_1.default.findById(req.user._id);
         const { orderId } = req.body;
-
         // Find the order by its ID in the user's orders array
-        const orderIndex = user!.orders.findIndex(order => order._id.toString() === orderId);
+        const orderIndex = user.orders.findIndex(order => order._id.toString() === orderId);
         if (orderIndex === -1) {
             res.status(404).json({
                 success: false,
@@ -196,60 +193,53 @@ export const cancelOrder = async (req: Request, res: Response): Promise<void> =>
             });
             return;
         }
-
         // Update the status of the order to "Cancelled by you"
         const currentDate = new Date().toLocaleDateString('en-US', {
             day: 'numeric',
             month: 'long',
             year: 'numeric'
         });
-        user!.orders[orderIndex].status = `Cancelled by you on ${currentDate}`;
-        user!.orders[orderIndex].isCancelled = true;
-        user!.orders[orderIndex].deliveredDate = user!.orders[orderIndex].orderedType === "online" ? "You'll get 50% money within 5-7 days." : "Thanks for choosing us.";
-
+        user.orders[orderIndex].status = `Cancelled by you on ${currentDate}`;
+        user.orders[orderIndex].isCancelled = true;
+        user.orders[orderIndex].deliveredDate = user.orders[orderIndex].orderedType === "online" ? "You'll get 50% money within 5-7 days." : "Thanks for choosing us.";
         // Mark the 'orders' array as modified
-        user!.markModified('orders');
-
+        user.markModified('orders');
         // Save the updated user document
-        await user!.save();
-
-        sendEmail('Order Cancellation Confirmation - iGrosine', `
-        <p>Dear ${user!.displayName},</p>
-        <img src="${user!.orders[orderIndex].itemImage}" alt="Shopping Image" style="height: 300px;" />
-        <p>Your order for ${user!.orders[orderIndex].itemName} has been cancelled successfully by you at ${currentDate}.</p>
+        yield user.save();
+        (0, sendEmail_1.sendEmail)('Order Cancellation Confirmation - iGrosine', `
+        <p>Dear ${user.displayName},</p>
+        <img src="${user.orders[orderIndex].itemImage}" alt="Shopping Image" style="height: 300px;" />
+        <p>Your order for ${user.orders[orderIndex].itemName} has been cancelled successfully by you at ${currentDate}.</p>
         <p>You'll get 50% money within 5-7 days.</p>
         <p>Thank you for considering us!</p>
-    `, user!.email);
-
+    `, user.email);
         res.status(200).json({
             success: true,
             message: "Order cancelled successfully",
         });
-    } catch (error:any) {
+    }
+    catch (error) {
         console.error(error.message);
         res.status(500).json({
             success: false,
             message: "Internal Server Error!"
         });
     }
-};
-
-export const orderItemByCarts = async (req: Request, res: Response): Promise<void> => {
+});
+exports.cancelOrder = cancelOrder;
+const orderItemByCarts = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { price, itemName, itemImage, buyerId, buyerName, buyerEmail, itemId, number, city, state, realPrice, off, reviews, seller, desc } = req.body;
-
-        const razorpayInstance = new Razorpay({
+        const razorpayInstance = new razorpay_1.default({
             key_id: 'rzp_test_NH7DutCORAH6gm',
             key_secret: 'ON7sNQcvMc1YaNXdBFjd4wTs'
         });
-
-        const order = await razorpayInstance.orders.create({
+        const order = yield razorpayInstance.orders.create({
             amount: Number(price) * 100,
             currency: "INR"
         });
-
         // Create and save the order using the Order model
-        const myOrder = await Order.create({
+        const myOrder = yield Order_1.default.create({
             itemPrice: price,
             itemName,
             itemImage,
@@ -267,45 +257,41 @@ export const orderItemByCarts = async (req: Request, res: Response): Promise<voi
             seller,
             desc
         });
-
         // Retrieve the user based on the authenticated user's ID
-        const user = await User.findById((req.user as UserDocument)._id);
-
-        user!.orders.push(myOrder);
-
-        await user!.save();
-
-        sendEmail('Order Confirmation - iGrosine', `
+        const user = yield User_1.default.findById(req.user._id);
+        user.orders.push(myOrder);
+        yield user.save();
+        (0, sendEmail_1.sendEmail)('Order Confirmation - iGrosine', `
         <p>Dear ${buyerName},</p>
         <img src="${itemImage}" alt="Shopping Image" style="height: 300px;" />
         <p>Your order for ${itemName} has been placed successfully.</p>
         <p>Thank you for shopping with us!</p>
         <p>You can cancel the order within 24 hours, but only 50% of the amount will be refunded.</p>
     `, buyerEmail);
-
         res.status(200).json({
             success: true,
             order
         });
-    } catch (error:any) {
+    }
+    catch (error) {
         console.error(error.message);
         res.status(500).json({
             success: false,
             message: "Internal Server Error!"
         });
-    } finally {
-        const user = await User.findById((req.user as UserDocument)._id);
-        user!.carts = [];
-        await user!.save();
     }
-};
-
-export const orderItemByCartsCOD = async (req: Request, res: Response): Promise<void> => {
+    finally {
+        const user = yield User_1.default.findById(req.user._id);
+        user.carts = [];
+        yield user.save();
+    }
+});
+exports.orderItemByCarts = orderItemByCarts;
+const orderItemByCartsCOD = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { price, itemName, itemImage, buyerId, buyerName, buyerEmail, itemId, number, city, state, realPrice, off, reviews, seller, desc } = req.body;
-
         // Create and save the order using the Order model
-        const myOrder = await Order.create({
+        const myOrder = yield Order_1.default.create({
             itemPrice: Number(price) + 99,
             itemName,
             itemImage,
@@ -323,45 +309,41 @@ export const orderItemByCartsCOD = async (req: Request, res: Response): Promise<
             seller,
             desc
         });
-
         // Retrieve the user based on the authenticated user's ID
-        const user = await User.findById((req.user as UserDocument)._id);
-
-        user!.orders.push(myOrder);
-
-        await user!.save();
-
-        sendEmail('Order Confirmation - iGrosine', `
+        const user = yield User_1.default.findById(req.user._id);
+        user.orders.push(myOrder);
+        yield user.save();
+        (0, sendEmail_1.sendEmail)('Order Confirmation - iGrosine', `
         <p>Dear ${buyerName},</p>
         <img src="${itemImage}" alt="Shopping Image" style="height: 300px;" />
         <p>Your order for ${itemName} has been placed successfully.</p>
         <p>Thank you for shopping with us!</p>
         <p>You can cancel the order within 24 hours, but only 50% of the amount will be refunded.</p>
     `, buyerEmail);
-
         res.status(200).json({
             success: true,
             myOrder
         });
-    } catch (error:any) {
+    }
+    catch (error) {
         console.error(error.message);
         res.status(500).json({
             success: false,
             message: "Internal Server Error!"
         });
-    } finally {
-        const user = await User.findById((req.user as UserDocument)._id);
-        user!.carts = [];
-        await user!.save();
     }
-};
-
-export const orderItemCOD = async (req: Request, res: Response): Promise<void> => {
+    finally {
+        const user = yield User_1.default.findById(req.user._id);
+        user.carts = [];
+        yield user.save();
+    }
+});
+exports.orderItemByCartsCOD = orderItemByCartsCOD;
+const orderItemCOD = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { price, itemName, itemImage, buyerId, buyerName, buyerEmail, itemId, number, city, state, realPrice, off, reviews, seller, desc } = req.body;
-
         // Create and save the order using the Order model
-        const myOrder = await Order.create({
+        const myOrder = yield Order_1.default.create({
             itemPrice: Number(price) + 99,
             itemName,
             itemImage,
@@ -379,51 +361,44 @@ export const orderItemCOD = async (req: Request, res: Response): Promise<void> =
             seller,
             desc
         });
-
         // Retrieve the user based on the authenticated user's ID
-        const user = await User.findById((req.user as UserDocument)._id);
-
-        user!.orders.push(myOrder);
-
-        await user!.save();
-
-        sendEmail('Order Confirmation - iGrosine', `
+        const user = yield User_1.default.findById(req.user._id);
+        user.orders.push(myOrder);
+        yield user.save();
+        (0, sendEmail_1.sendEmail)('Order Confirmation - iGrosine', `
         <p>Dear ${buyerName},</p>
         <img src="${itemImage}" alt="Shopping Image" style="height: 300px;" />
         <p>Your order for ${itemName} has been placed successfully.</p>
         <p>Thank you for shopping with us!</p>
         <p>You can cancel the order within 24 hours, but only 50% of the amount will be refunded.</p>
     `, buyerEmail);
-
         res.status(200).json({
             success: true,
             myOrder
         });
-    } catch (error:any) {
+    }
+    catch (error) {
         console.error(error.message);
         res.status(500).json({
             success: false,
             message: "Internal Server Error!"
         });
     }
-};
-
-export const orderItem = async (req: Request, res: Response): Promise<void> => {
+});
+exports.orderItemCOD = orderItemCOD;
+const orderItem = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { price, itemName, itemImage, buyerId, buyerName, buyerEmail, itemId, number, city, state, realPrice, off, reviews, seller, desc } = req.body;
-
-        const razorpayInstance = new Razorpay({
+        const razorpayInstance = new razorpay_1.default({
             key_id: 'rzp_test_NH7DutCORAH6gm',
             key_secret: 'ON7sNQcvMc1YaNXdBFjd4wTs'
         });
-
-        const order = await razorpayInstance.orders.create({
+        const order = yield razorpayInstance.orders.create({
             amount: Number(price) * 100,
             currency: "INR"
         });
-
         // Create and save the order using the Order model
-        const myOrder = await Order.create({
+        const myOrder = yield Order_1.default.create({
             itemPrice: price,
             itemName,
             itemImage,
@@ -441,134 +416,117 @@ export const orderItem = async (req: Request, res: Response): Promise<void> => {
             state,
             desc
         });
-
         // Retrieve the user based on the authenticated user's ID
-        const user = await User.findById((req.user as UserDocument)._id);
-
-        user!.orders.push(myOrder);
-
-        await user!.save();
-
-        sendEmail('Order Confirmation - iGrosine', `
+        const user = yield User_1.default.findById(req.user._id);
+        user.orders.push(myOrder);
+        yield user.save();
+        (0, sendEmail_1.sendEmail)('Order Confirmation - iGrosine', `
         <p>Dear ${buyerName},</p>
         <img src="${itemImage}" alt="Shopping Image" style="height: 300px;" />
         <p>Your order for ${itemName} has been placed successfully.</p>
         <p>Thank you for shopping with us!</p>
         <p>You can cancel the order within 24 hours, but only 50% of the amount will be refunded.</p>
     `, buyerEmail);
-
         res.status(200).json({
             success: true,
             order
         });
-    } catch (error:any) {
+    }
+    catch (error) {
         console.error(error.message);
         res.status(500).json({
             success: false,
             message: "Internal Server Error!"
         });
     }
-};
-
-export const verifyPayment = async (req: Request, res: Response): Promise<void> => {
+});
+exports.orderItem = orderItem;
+const verifyPayment = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { razorpay_order_id, razorpay_payment_id, razorpay_signature } = req.body;
-
     let body = razorpay_order_id + "|" + razorpay_payment_id;
-
-    var expectedSignature = crypto.createHmac('sha256', "ON7sNQcvMc1YaNXdBFjd4wTs")
+    var expectedSignature = crypto_1.default.createHmac('sha256', "ON7sNQcvMc1YaNXdBFjd4wTs")
         .update(body.toString())
         .digest('hex');
-
     const isAuthentic = expectedSignature === razorpay_signature;
-
     if (isAuthentic) {
         res.redirect(`http://localhost:3000/order-success?reference=${razorpay_payment_id}`);
-    } else {
+    }
+    else {
         res.status(404).json({
             success: false,
             message: "We couldn't verify your order."
         });
         return;
     }
-};
-
-export const addToCart = async (req: Request, res: Response): Promise<void> => {
+});
+exports.verifyPayment = verifyPayment;
+const addToCart = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { item } = req.body;
-
-        const user = await User.findById((req.user as UserDocument)._id);
-        user!.carts.push(item);
-
-        const carts = user!.carts;
-
-        await user!.save();
-
+        const user = yield User_1.default.findById(req.user._id);
+        user.carts.push(item);
+        const carts = user.carts;
+        yield user.save();
         res.status(201).json({
             success: true,
             data: carts
         });
-
-    } catch (error:any) {
+    }
+    catch (error) {
         console.error(error.message);
         res.status(500).json({
             success: false,
             message: "Internal Server Error!"
         });
     }
-};
-
-export const getMyCarts = async (req: Request, res: Response): Promise<void> => {
+});
+exports.addToCart = addToCart;
+const getMyCarts = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const user = await User.findById((req.user as UserDocument)._id);
-        const carts = user!.carts;
+        const user = yield User_1.default.findById(req.user._id);
+        const carts = user.carts;
         res.status(200).json({
             success: true,
             data: carts
         });
-    } catch (error:any) {
+    }
+    catch (error) {
         console.error(error.message);
         res.status(500).json({
             success: false,
             message: "Internal Server Error!"
         });
     }
-};
-
-export const removeFromCart = async (req: Request, res: Response): Promise<void> => {
+});
+exports.getMyCarts = getMyCarts;
+const removeFromCart = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const user = await User.findById((req.user as UserDocument)._id);
+        const user = yield User_1.default.findById(req.user._id);
         const { id } = req.body;
-
-        user!.carts = user!.carts.filter(cartItem => cartItem.id !== id);
-
-        await user!.save();
-
-        const carts = user!.carts;
-
+        user.carts = user.carts.filter(cartItem => cartItem.id !== id);
+        yield user.save();
+        const carts = user.carts;
         res.status(200).json({
             success: true,
             data: carts
         });
-    } catch (error:any) {
+    }
+    catch (error) {
         console.error(error.message);
         res.status(500).json({
             success: false,
             message: "Internal Server Error!"
         });
     }
-};
-
-export const reviewOrder = async (req: Request, res: Response): Promise<void> => {
+});
+exports.removeFromCart = removeFromCart;
+const reviewOrder = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { orderId, rating, feedback } = req.body;
-
-        const user = await User.findById((req.user as UserDocument)._id);
-
-        const orders = user!.orders as OrderDocument[];
-
+        const user = yield User_1.default.findById(req.user._id);
+        const orders = user.orders;
         // Find the order by ID
         const orderIndex = orders.findIndex(order => order._id.toString() === orderId);
-
         if (orderIndex === -1) {
             res.status(404).json({
                 success: false,
@@ -576,28 +534,25 @@ export const reviewOrder = async (req: Request, res: Response): Promise<void> =>
             });
             return;
         }
-
-        const review: Review = {
+        const review = {
             rating,
             feedback
         };
-
         // Ensure the order has a reviews array and push the review
         orders[orderIndex].reviews.push(review);
-
-        user!.markModified('orders');
-
-        await user!.save();
-
+        user.markModified('orders');
+        yield user.save();
         res.status(200).json({
             success: true,
             message: "Review submitted successfully"
         });
-    } catch (error:any) {
+    }
+    catch (error) {
         console.error(error.message);
         res.status(500).json({
             success: false,
             message: "Internal Server Error!"
         });
     }
-};
+});
+exports.reviewOrder = reviewOrder;

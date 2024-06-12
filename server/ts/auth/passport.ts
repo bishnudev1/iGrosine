@@ -1,9 +1,9 @@
 import { Strategy as GoogleStrategy, Profile } from 'passport-google-oauth20';
 import { PassportStatic } from 'passport';
-import User, { UserDocument } from '../models/user'; // Assuming you have a User model with a UserDocument interface
+import User,  {UserDocument}  from '../models/User';
 
 interface ExtendedProfile extends Profile {
-    emails?: Array<{ value: string }>;
+    emails?: Array<{ value: string, verified: boolean }>;
     photos?: Array<{ value: string }>;
 }
 
@@ -35,14 +35,14 @@ export const loginWithGoogle = (passport: PassportStatic) => {
                 }
             } catch (error) {
                 console.log(error);
-                done(error, null);
+                done(error, false);
             }
         })
     );
     
     // used to serialize the user for the session
-    passport.serializeUser((user: UserDocument, done) => {
-        done(null, user.id);
+    passport.serializeUser((user, done) => {
+        done(null, (user as UserDocument).id);
     });
 
     // used to deserialize the user

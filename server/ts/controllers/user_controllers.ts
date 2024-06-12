@@ -10,7 +10,7 @@ export const deleteUsers = async (req: Request, res: Response): Promise<void> =>
             success: true,
             message: "User profiles deleted successfully"
         });
-    } catch (error) {
+    } catch (error:any) {
         console.error(error.message);
         res.status(500).json({
             success: false,
@@ -22,16 +22,17 @@ export const deleteUsers = async (req: Request, res: Response): Promise<void> =>
 export const deleteMyProfile = async (req: Request, res: Response): Promise<void> => {
     try {
         // Extract user ID from request parameters or authentication token
-        const userId: string = req.user._id; // Adjust this based on your authentication logic
+        const userId = (req.user as UserDocument)._id; // Adjust this based on your authentication logic
 
         // Delete the user from the database
         const deletedUser: UserDocument | null = await User.findByIdAndDelete(userId);
 
         if (!deletedUser) {
-            return res.status(404).json({
+            res.status(404).json({
                 success: false,
                 message: "User not found"
             });
+            return;
         }
 
         // Respond with success message

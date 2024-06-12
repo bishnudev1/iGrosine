@@ -12,20 +12,29 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const mongoose_1 = __importDefault(require("mongoose"));
-function connect() {
-    return __awaiter(this, void 0, void 0, function* () {
-        try {
-            yield mongoose_1.default.connect(process.env.MONGO_URI, {
-                useNewUrlParser: true,
-                useUnifiedTopology: true,
-            });
-            console.log("MongoDB has connected to Node.ts Server");
-        }
-        catch (error) {
-            console.error("MongoDB connection error: ", error);
+exports.sendEmail = void 0;
+const nodemailer_1 = __importDefault(require("nodemailer"));
+const sendEmail = (head, html, buyerEmail) => __awaiter(void 0, void 0, void 0, function* () {
+    const transporter = nodemailer_1.default.createTransport({
+        service: 'gmail',
+        auth: {
+            user: 'bishnudevkhutia26@gmail.com', // Your Gmail email address
+            pass: 'jfzf mzts devg akpc' // Your Gmail password
         }
     });
-}
-exports.default = connect;
-;
+    const mailOptions = {
+        from: 'bishnudevkhutia26@gmail.com', // Sender address
+        to: buyerEmail, // List of recipients
+        subject: head, // Subject line
+        html: html
+    };
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            console.error('Error sending email:', error);
+        }
+        else {
+            console.log('Email sent:', info.response);
+        }
+    });
+});
+exports.sendEmail = sendEmail;
